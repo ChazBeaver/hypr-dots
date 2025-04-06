@@ -35,6 +35,7 @@ just stow      # Symlink all active dotfiles into ~/.config
 just unstow    # Remove all active symlinks
 just backup    # Save current configs into ~/backups
 just restore   # Restore configs from ~/backups into ~/.config
+```
 
 ## 🧪 Notes
 
