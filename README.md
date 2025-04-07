@@ -1,51 +1,40 @@
 # hypr-dotfiles
 
-Wayland desktop environment dotfiles for Hyprland and supporting applications.  
-Designed to be reproducible, stowable, and extensible for Hyprland-based setups.
+Wayland and Hyprland configuration files including Waybar, Rofi, SwayNC, Wallust, and other UI components specific to the Hyprland environment.
 
 ## 📂 Structure
 
-- `active/` – Config folders that are currently stowed into `~/.config`
-- `inactive/` – Alternative or archived configs not currently in use
-- `justfile` – Task automation using [just](https://github.com/casey/just) and [GNU stow](https://www.gnu.org/software/stow/)
+- `active/` – Dotfiles currently in use, symlinked via `stow`
+- `justfile` – Task runner for managing and verifying symlinks
 
 ## 🧰 Requirements
 
-- [`just`](https://github.com/casey/just) – Simple command runner
-- [`stow`](https://www.gnu.org/software/stow/) – Symlink farm manager for dotfiles
+- [just](https://github.com/casey/just)
+- [GNU stow](https://www.gnu.org/software/stow/)
 
-## 🧩 Active Configs
+## 🖥 Managed Configs
 
-These are the folders currently managed by `just stow`, each symlinked into `~/.config`:
+These live in `~/.config/` and are expected to be symlinked from `active/`:
 
-- `hypr/`, `waybar/`, `rofi/`, `swaync/`, `wallust/`
-- `wezterm/`, `kitty/`, `mpv/`, `qt5ct/`, `qt6ct/`
-- `btop/`, `cava/`, `fastfetch/`
-- `mono/`, `KDE_backup/`, `KeePass/`, `Kvantum/`, `Mousepad/`, `Thunar/`
-- `ags/`, `autostart/`, `dconf/`, `environment.d/`, `eog/`, `fontconfig/`
-- `gtk-3.0/`, `gtk-4.0/`, `home-manager/`, `ibus/`, `libaccounts-glib/`
-- `nwg-look/`, `pulse/`, `session/`, `swappy/`, `wlogout/`, `xfce4/`, `xsettingsd/`
-
-🛑 `nvim-backup-back-up_0915_1005/` is intentionally excluded.
+- `hypr/`
+- `waybar/`
+- `rofi/`
+- `swaync/`
+- `wallust/`
+- `wezterm/`, `kitty/`, `mpv/`, etc.
+- Support apps like `qt5ct/`, `qt6ct/`, `fastfetch/`, `swappy/`, and more
 
 ## 🚀 Usage
 
 ```bash
-just stow      # Symlink all active dotfiles into ~/.config
-just unstow    # Remove all active symlinks
-just backup    # Save current configs into ~/backups
-just restore   # Restore configs from ~/backups into ~/.config
+just stow      # Symlink configs from active/ into ~/.config
+just unstow    # Remove symlinks
+just check     # Confirm everything is properly symlinked
+just status    # Check that the expected directories exist
 ```
 
 ## 🧪 Notes
 
-  - Only folders in active/ are included in the stow/backup/restore process.
+- This project is tightly coupled to Wayland and Hyprland setups.
 
-  - Use inactive/ to archive unused or experimental configs.
-
-  - You can extend the justfile with custom recipes as needed (e.g., just edit, just theme, etc.).
-
-## 💾 Backup & Restore
-
-Backups are saved to ~/backups, preserving your real config in case you want to revert changes.
-Stowing/unstowing is safe and idempotent — ideal for tracking dotfiles with Git.
+- These dotfiles should not be reused in non-Wayland environments.
