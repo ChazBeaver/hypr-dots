@@ -28,6 +28,9 @@ menu(){
   printf "14. edit Waybar Modules\n"
   printf "15. edit Help Legend/Key Hints\n"
   printf "16. edit NixOS-Hyprland\n"
+  printf "17. edit app-dotfiles\n"
+  printf "18. edit hypr-dotfiles\n"
+  printf "19. yazi Projects\n"
 }
 
 main() {
@@ -80,6 +83,15 @@ main() {
             ;;
         16)
             $tty $editor "/home/chaz/Documents/Chaz_Hyprland/NixOS-Hyprland"
+            ;;
+        17)
+            $tty $editor "/home/chaz/Projects/app-dotfiles"
+            ;;
+        18)
+            $tty $editor "/home/chaz/Projects/hypr-dotfiles"
+            ;;
+        19)
+            $tty "yazi" "/home/chaz/Projects"
             ;;
         *)
             ;;
