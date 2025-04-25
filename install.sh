@@ -24,9 +24,17 @@ fi
 # Persist to ~/.dotfiles-env.sh
 ENV_FILE="$HOME/.dotfiles-env.sh"
 mkdir -p "$(dirname "$ENV_FILE")"
+
+# Save HYPR_DOTS_DIR to ENV file if missing
 if ! grep -q "$VAR_NAME=" "$ENV_FILE" 2>/dev/null; then
   echo "export $VAR_NAME=\"$SCRIPT_DIR\"" >> "$ENV_FILE"
   echo "Added $VAR_NAME to $ENV_FILE."
+fi
+
+# ✅ Add alias for hyprdots if not already there
+if ! grep -q 'alias hyprdots=' "$ENV_FILE" 2>/dev/null; then
+  echo 'alias hyprdots="cd \$HYPR_DOTS_DIR"' >> "$ENV_FILE"
+  echo "Added alias 'hyprdots' to $ENV_FILE."
 fi
 
 source "$ENV_FILE"
@@ -59,8 +67,8 @@ cat <<'EOF'
 
  _   ___   _____________      ______ _____ _____ _____ 
 | | | \ \ / / ___ \ ___ \     |  _  \  _  |_   _/  ___|
-| |_| |\ V /| |_/ / |_/ /_____| | | | | | | | | \ `--. 
-|  _  | \ / |  __/|    /______| | | | | | | | |  `--. \
+| |_| |\ V /| |_/ / |_/ /_____| | | | | | | | | \ --. 
+|  _  | \ / |  __/|    /______| | | | | | | | |  --. \
 | | | | | | | |   | |\ \      | |/ /\ \_/ / | | /\__/ /
 \_| |_/ \_/ \_|   \_| \_|     |___/  \___/  \_/ \____/ 
 
