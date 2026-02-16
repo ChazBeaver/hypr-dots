@@ -8,9 +8,9 @@ active/omarchy/.config/hypr/shaders/
 # Ignore all themes
 active/omarchy/.config/omarchy/themes/*
 # But do not ignore the mars directory
-!active/omarchy/.config/omarchy/themes/mars/
+!active/omarchy/.config/omarchy/themes/mars2/
 # And do not ignore anything inside mars
-!active/omarchy/.config/omarchy/themes/mars/**
+!active/omarchy/.config/omarchy/themes/mars2/**
 
 
 # Cava
