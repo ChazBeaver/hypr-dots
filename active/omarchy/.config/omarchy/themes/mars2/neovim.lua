@@ -1,12 +1,12 @@
 return {
 	{
 		"steve-lohmeyer/mars.nvim",
-		name = "mars",
+		name = "mars2",
 	},
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "mars",
+			colorscheme = "mars2",
 		},
 	},
 }
