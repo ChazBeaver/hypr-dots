@@ -1,6 +1,8 @@
 # Hyprland runtime state
 active/omarchy/.config/hypr/state/
 
+# KeePassXC Settings
+active/shared/.config/keepassxc/keepassxc.ini
 
 # Omarchy runtime/current state
 active/omarchy/.config/omarchy/current/
