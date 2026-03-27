@@ -1,0 +1,91 @@
+/*
+*
+* Clay Theme - Core Color Definitions
+*
+* Warm-first palette aligned to the current Clay theme direction.
+* Cool tones are kept only where they help compatibility and contrast.
+*
+*/
+
+@define-color background #1A1515;
+@define-color foreground #DCC9BC;
+@define-color cursor #DCC9BC;
+
+/* Core accents */
+@define-color accent #D99542;        /* primary clay/gold */
+@define-color accent_alt #F07342;    /* warm orange */
+@define-color accent_soft #959A6B;   /* olive */
+@define-color accent_dim #756D94;    /* muted purple */
+
+/* Extended warm roles */
+@define-color accent_red_deep #721A27;     /* deep wine red */
+@define-color accent_rose #CF223E;         /* vivid rose red */
+@define-color accent_rust #A3472F;         /* burnt clay */
+@define-color accent_ember #B8573C;        /* soft ember orange-red */
+
+@define-color accent_orange #F07342;       /* warm orange */
+@define-color accent_orange_soft #E58A5A;  /* softened orange */
+
+@define-color accent_gold #D99542;         /* clay gold */
+@define-color accent_amber #C27A2C;        /* deeper amber */
+@define-color accent_yellow #FAA616;       /* bright warm yellow */
+@define-color accent_yellow_soft #E6B95F;  /* muted warm yellow */
+
+@define-color accent_olive #959A6B;        /* dusty olive */
+@define-color accent_olive_deep #6F734E;   /* deeper grounded olive */
+@define-color accent_yellow_green #B0BF6A; /* yellow-green accent */
+
+@define-color accent_green #768F80;        /* muted green */
+@define-color accent_green_deep #136D2E;   /* strong green */
+@define-color accent_moss #4F6B58;         /* earthy moss */
+
+@define-color accent_purple #756D94;       /* muted purple */
+@define-color accent_violet #7B3D79;       /* warm violet */
+@define-color accent_violet_soft #A29FCE;  /* soft lavender-violet */
+@define-color accent_plum #5E3A5F;         /* deep plum */
+
+@define-color accent_magenta #AE3F82;      /* muted magenta */
+@define-color accent_rose_dust #C06A7A;    /* dusty rose */
+
+/* Controlled cool accents */
+@define-color accent_aqua #3D9AAE;         /* restrained aqua */
+@define-color accent_teal #2F8F8B;         /* muted teal */
+@define-color accent_cyan #5FA3A1;         /* softened cyan */
+@define-color accent_cyan_soft #7FAFAE;    /* pale cyan */
+
+@define-color accent_blue #2A6483;         /* muted blue */
+@define-color accent_blue_soft #4C7A94;    /* softened blue */
+@define-color accent_slate_blue #5B6C8B;   /* slate blue */
+
+@define-color accent_cyan_hot #6FAFBF;     /* toned-down hot cyan */
+@define-color accent_blue_hot #6D8FB5;     /* toned-down hot blue */
+@define-color accent_blue_neon #4FA3C4;    /* softened neon blue */
+
+@define-color accent_sky #7FA6B8;          /* muted sky */
+@define-color accent_lavender #A78FC0;     /* warm lavender */
+
+@define-color accent_pink #D67A9A;         /* softened pink */
+@define-color accent_pink_hot #C35A84;     /* warm pink accent */
+
+/* UI roles */
+@define-color selection_background #453636;
+@define-color selection_foreground #DCC9BC;
+
+/* Base terminal-style palette */
+@define-color color0  #1A1515; /* bg */
+@define-color color1  #F07342; /* orange */
+@define-color color2  #959A6B; /* olive */
+@define-color color3  #D99542; /* clay gold */
+@define-color color4  #756D94; /* muted purple */
+@define-color color5  #7B3D79; /* violet */
+@define-color color6  #768F80; /* muted green */
+@define-color color7  #DCC9BC; /* fg */
+
+@define-color color8  #453636; /* bright bg / surface emphasis */
+@define-color color9  #CF223E; /* rose red */
+@define-color color10 #A4B397; /* soft green */
+@define-color color11 #FAA616; /* warm yellow */
+@define-color color12 #A29FCE; /* soft violet instead of bright blue */
+@define-color color13 #AE3F82; /* muted magenta */
+@define-color color14 #5FA3A1; /* softened cyan */
+@define-color color15 #FFE9C7; /* highlight fg */

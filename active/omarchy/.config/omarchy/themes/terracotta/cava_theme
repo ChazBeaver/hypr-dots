@@ -1,0 +1,33 @@
+[general]
+bars = 0
+bar_width = 3
+bar_spacing = 1
+;lower_cutoff_freq = 30
+;higher_cutoff_freq = 9000
+
+[input]
+method = pipewire
+source = auto
+
+[output]
+method = noncurses
+channels = mono
+mono_option = average
+
+[color]
+background = '#1A1515'
+foreground = '#DCC9BC'
+
+gradient = 1
+gradient_count = 8
+gradient_color_1 = '#768F80' 
+gradient_color_2 = '#869678' 
+gradient_color_3 = '#959A6B' 
+gradient_color_4 = '#B08B57' 
+gradient_color_5 = '#D99542' 
+gradient_color_6 = '#E39C45' 
+gradient_color_7 = '#F07342' 
+gradient_color_8 = '#CF223E'
+
+[smoothing]
+noise_reduction = 82

@@ -1,0 +1,26 @@
+name: Clay
+accent: "#E39C45"
+cursor: "#DCC9BC"
+background: "#1A1515"
+foreground: "#DCC9BC"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#1A1515"
+    red:     "#F07342"
+    green:   "#959A6B"
+    yellow:  "#E39C45"
+    blue:    "#756D94"
+    magenta: "#7B3D79"
+    cyan:    "#768F80"
+    white:   "#DCC9BC"
+  bright:
+    black:   "#453636"
+    red:     "#CF223E"
+    green:   "#A4B397"
+    yellow:  "#FAA616"
+    blue:    "#78A9FF"
+    magenta: "#AE3F82"
+    cyan:    "#3DDBD9"
+    white:   "#FFE9C7"

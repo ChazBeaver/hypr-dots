@@ -1,0 +1,25 @@
+accent = "#E39C45"
+cursor = "#DCC9BC"
+foreground = "#DCC9BC"
+background = "#1A1515"
+
+selection_foreground = "#DCC9BC"
+selection_background = "#453636"
+
+color0  = "#1A1515" # Terminal background (default)
+color1  = "#A3472F" # Errors, failures, stderr
+color2  = "#4F6B58" # Success (git add, positive states - muted)
+color3  = "#E39C45" # Warnings, highlights, prompts (accent usage)
+color4  = "#756D94" # Commands, functions, executables (cool accent)
+color5  = "#959A6B" # Secondary emphasis (rare, special tokens)
+color6  = "#E6726A" # Terminal prompt text (PS1), primary success color
+color7  = "#DCC9BC" # Default terminal text (foreground)
+
+color8  = "#453636" # Secondary background (selection, panels, inactive UI)
+color9  = "#CF223E" # Critical errors, git delete, danger states
+color10 = "#A4B397" # Bright success (confirmed operations, git add bright)
+color11 = "#FAA616" # Strong warnings, active highlights
+color12 = "#78A9FF" # Links, paths, directories (info)
+color13 = "#AE3F82" # Special highlights (rare emphasis)
+color14 = "#3DDBD9" # Diff changes, secondary info (cyan usage)
+color15 = "#FFE9C7" # High-contrast text (headers, standout output)

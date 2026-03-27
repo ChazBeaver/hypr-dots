@@ -12,7 +12,9 @@ active/omarchy/.config/hypr/shaders/
 active/omarchy/.config/omarchy/themes/*
 # But do not ignore the custom default themes
 # And do not ignore anything inside custom default themes
-!active/omarchy/.config/omarchy/themes/mars/
+!active/omarchy/.config/omarchy/themes/terracotta/
+!active/omarchy/.config/omarchy/themes/terracotta/
+!active/omarchy/.config/omarchy/themes/mars/**
 !active/omarchy/.config/omarchy/themes/mars/**
 !active/omarchy/.config/omarchy/themes/batou/
 !active/omarchy/.config/omarchy/themes/batou/**
