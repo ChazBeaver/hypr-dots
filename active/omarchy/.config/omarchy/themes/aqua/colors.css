@@ -1,0 +1,88 @@
+/*
+*
+* Aqua Theme - Core Color Definitions
+*
+*/
+
+@define-color background #101214;
+@define-color foreground #EAE6E1;
+@define-color cursor #D7E0DA;
+
+/* Core accents */
+@define-color accent #7FAFAE;
+@define-color accent_alt #3F6B57;
+@define-color accent_soft #5F8F7A;
+@define-color accent_dim #7A8F6D;
+
+/* Extended warm/cool roles */
+@define-color accent_red_deep #365847;
+@define-color accent_rose #7C4D57;
+@define-color accent_rust #4A6F5D;
+@define-color accent_ember #5B7D6D;
+
+@define-color accent_orange #5FA3A1;
+@define-color accent_orange_soft #6CB1AE;
+
+@define-color accent_gold #7FAFAE;
+@define-color accent_amber #6F9B9A;
+@define-color accent_yellow #A9C77B;
+@define-color accent_yellow_soft #B9D391;
+
+@define-color accent_olive #7A8F6D;
+@define-color accent_olive_deep #65775A;
+@define-color accent_yellow_green #A9C77B;
+
+@define-color accent_green #5F8F7A;
+@define-color accent_green_deep #3F6B57;
+@define-color accent_moss #557765;
+
+@define-color accent_purple #8F7FB5;
+@define-color accent_violet #8F7FB5;
+@define-color accent_violet_soft #A497C3;
+@define-color accent_plum #6E6388;
+
+@define-color accent_magenta #8F7FB5;
+@define-color accent_rose_dust #9A7F8D;
+
+/* Controlled cool accents */
+@define-color accent_aqua #7FAFAE;
+@define-color accent_teal #5FA3A1;
+@define-color accent_cyan #6FC7C4;
+@define-color accent_cyan_soft #8BD3D1;
+
+@define-color accent_blue #4C7A94;
+@define-color accent_blue_soft #78A9C0;
+@define-color accent_slate_blue #64869D;
+
+@define-color accent_cyan_hot #6FC7C4;
+@define-color accent_blue_hot #78A9C0;
+@define-color accent_blue_neon #8EC0D6;
+
+@define-color accent_sky #78A9C0;
+@define-color accent_lavender #8F7FB5;
+
+@define-color accent_pink #7C4D57;
+@define-color accent_pink_hot #94606B;
+
+/* UI roles */
+@define-color selection_background #262A2D;
+@define-color selection_foreground #EAE6E1;
+
+/* Base terminal-style palette */
+@define-color color0  #141917;
+@define-color color1  #3F6B57;
+@define-color color2  #5F8F7A;
+@define-color color3  #7FAFAE;
+@define-color color4  #4C7A94;
+@define-color color5  #7A8F6D;
+@define-color color6  #5FA3A1;
+@define-color color7  #D7E0DA;
+
+@define-color color8  #2B3935;
+@define-color color9  #7C4D57;
+@define-color color10 #8FBFA7;
+@define-color color11 #A9C77B;
+@define-color color12 #78A9C0;
+@define-color color13 #8F7FB5;
+@define-color color14 #6FC7C4;
+@define-color color15 #F1F5EF;

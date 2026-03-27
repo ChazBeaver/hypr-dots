@@ -1,0 +1,104 @@
+@import url("./colors.css");
+
+@define-color clay-bg            #1A1515;
+@define-color clay-bg-alt        #2D2424;
+@define-color clay-bg-alt2       #453636;
+@define-color clay-panel         #171212;
+@define-color clay-accent-bg     #3E3030;
+
+@define-color clay-fg            #DCC9BC;
+@define-color clay-fg-alt        #D0D0D0;
+@define-color clay-fg-muted      #9C8181;
+@define-color clay-comment       #725A5A;
+
+@define-color clay-red           #F07342;
+@define-color clay-yellow        #E39C45;
+@define-color clay-olive         #959A6B;
+@define-color clay-purple        #756D94;
+
+@define-color clay-border        #453636;
+@define-color clay-border-strong #DCC9BC;
+
+/* Surrounding fullscreen area outside the menu */
+window {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: @clay-fg;
+}
+
+/* Main visible menu box */
+#outer-box {
+  margin: 14px;
+  padding: 12px;
+  background-color: alpha(@clay-panel, 0.97);
+  border: 2px solid @clay-border-strong;
+  border-radius: 14px;
+}
+
+#inner-box,
+#scroll {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+#input {
+  background-color: alpha(@clay-bg-alt, 0.96);
+  color: @clay-fg;
+  border: 1px solid @clay-border;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 0 0 12px 0;
+}
+
+#input:focus {
+  border: 1px solid @clay-yellow;
+}
+
+#entry {
+  background-color: transparent;
+  color: @clay-fg;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 4px 0;
+  border: 1px solid transparent;
+}
+
+#entry:hover {
+  background-color: alpha(@clay-bg-alt2, 0.78);
+  color: @clay-fg;
+}
+
+#entry:selected {
+  background-color: alpha(@clay-accent-bg, 0.98);
+  color: @clay-fg;
+  border: 1px solid @clay-yellow;
+}
+
+#entry:selected #text {
+  color: @clay-fg;
+}
+
+#text {
+  color: @clay-fg;
+}
+
+#img {
+  margin-right: 10px;
+}
+
+scrollbar {
+  background-color: transparent;
+}
+
+scrollbar slider {
+  background-color: @clay-bg-alt2;
+  border-radius: 999px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: @clay-olive;
+}

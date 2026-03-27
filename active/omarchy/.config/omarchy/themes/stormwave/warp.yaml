@@ -1,0 +1,26 @@
+name: Stormwave
+accent: "#6F8F92"
+cursor: "#DCE4E6"
+background: "#101214"
+foreground: "#DCE4E6"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#101214"
+    red:     "#7A5F66"
+    green:   "#5E7E78"
+    yellow:  "#8FA6A8"
+    blue:    "#5E748A"
+    magenta: "#6E7A84"
+    cyan:    "#6F8F92"
+    white:   "#DCE4E6"
+  bright:
+    black:   "#262A2D"
+    red:     "#9B737A"
+    green:   "#7FA29B"
+    yellow:  "#B8C9CB"
+    blue:    "#89A6C0"
+    magenta: "#96A5AF"
+    cyan:    "#A8C9C9"
+    white:   "#F2F6F6"

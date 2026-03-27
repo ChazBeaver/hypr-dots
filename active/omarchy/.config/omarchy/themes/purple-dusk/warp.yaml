@@ -1,0 +1,26 @@
+name: Purple-Dusk
+accent: "#F08A5D"
+cursor: "#EDEAF3"
+background: "#0F111A"
+foreground: "#EDEAF3"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#0F111A"
+    red:     "#C06C84"
+    green:   "#6A8CAF"
+    yellow:  "#893856"
+    blue:    "#5B6FA8"
+    magenta: "#8A76A6"
+    cyan:    "#F0A060"
+    white:   "#EDEAF3"
+  bright:
+    black:   "#262A36"
+    red:     "#E07A9A"
+    green:   "#88AFC1"
+    yellow:  "#F6C177"
+    blue:    "#7C93D1"
+    magenta: "#A78BD4"
+    cyan:    "#9FD3E6"
+    white:   "#FFFFFF"

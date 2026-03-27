@@ -1,0 +1,26 @@
+name: Green-Sky
+accent: "#5F8F6B"
+cursor: "#E8E8E6"
+background: "#101214"
+foreground: "#E8E8E6"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#0F1A14"
+    red:     "#B04039"
+    green:   "#21652A"
+    yellow:  "#F4A153"
+    blue:    "#AAD1EE"
+    magenta: "#7B6A96"
+    cyan:    "#9BAF5F"
+    white:   "#EAF3EC"
+  bright:
+    black:   "#262A2D"
+    red:     "#C75A52"
+    green:   "#2F7A3A"
+    yellow:  "#F6B97A"
+    blue:    "#8FC3B3"
+    magenta: "#9A88B5"
+    cyan:    "#9ED8F4"
+    white:   "#F5F5F2"

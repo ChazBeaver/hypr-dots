@@ -1,0 +1,39 @@
+# ============================================================
+# CORE UI COLORS (FIXED — NO GREEN TINT)
+# ============================================================
+
+accent = "#5F8F6B"
+
+cursor = "#E8E8E6"
+
+foreground = "#E8E8E6"
+background = "#101214"
+
+selection_foreground = "#E8E8E6"
+selection_background = "#262A2D"
+
+# ============================================================
+# TERMINAL PALETTE (YOUR COLORS — UNCHANGED)
+# ============================================================
+
+color0  = "#0F1A14" # deep forest background
+color1  = "#B04039" # error (muted red clay)
+color2  = "#21652A" # success (leaf green)
+color3  = "#F4A153" # warning (sunlit yellow-green)
+color4  = "#AAD1EE" # info (soft sky blue)
+color5  = "#7B6A96" # secondary accent (muted violet)
+color6  = "#9BAF5F" # prompt (green-teal)
+color7  = "#EAF3EC" # foreground
+
+# ============================================================
+# BRIGHT VARIANTS (BALANCED — NO GREEN WASH)
+# ============================================================
+
+color8  = "#262A2D" # neutral panel
+color9  = "#C75A52" # bright red
+color10 = "#2F7A3A" # bright green
+color11 = "#F6B97A" # bright yellow
+color12 = "#8FC3B3" # bright blue
+color13 = "#9A88B5" # bright violet
+color14 = "#9ED8F4" # bright cyan
+color15 = "#F5F5F2" # bright foreground

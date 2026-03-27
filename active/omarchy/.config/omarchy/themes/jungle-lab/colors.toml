@@ -1,0 +1,37 @@
+# ============================================================
+# VERDANT CIRCUIT (Neutralized)
+# Jungle lab WITHOUT green overlay
+# ============================================================
+
+[colors]
+
+# --- Core (neutralized)
+background            = "#0f1111"  # neutral dark (no green cast)
+foreground            = "#d6e2dc"  # slightly cool neutral
+
+cursor                = "#d6e2dc"
+
+selection_background  = "#1c1f1f"
+selection_foreground  = "#f0fffa"
+
+# --- Accent (still green, but controlled)
+accent                = "#3fa36b"
+
+# --- ANSI palette (balanced)
+color0  = "#0f1111"  # black (neutral)
+color1  = "#7a3e2b"  # wood
+color2  = "#3a6f73"  # desaturated teal (less neon)
+color3  = "#B08052"  # warm tan (IMPORTANT for balance)
+color4  = "#5B7B5C"  # green (main accent)
+color5  = "#5c6f66"  # neutral green-gray
+color6  = "#A6AC9F"  # bright accent
+color7  = "#d6e2dc"  # fg
+
+color8  = "#1c1f1f"
+color9  = "#a35a3a"
+color10 = "#4fd18f"
+color11 = "#c2a070"  # warmer highlight instead of greenish yellow
+color12 = "#4aa3a8"
+color13 = "#7a8f86"
+color14 = "#8cf5c4"
+color15 = "#f0fffa"

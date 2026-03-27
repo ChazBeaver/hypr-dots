@@ -1,0 +1,26 @@
+name: Campfire
+accent: "#E39A3B"
+cursor: "#F2E9DC"
+background: "#0F1113"
+foreground: "#F2E9DC"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#0F1113"
+    red:     "#A65A3A"
+    green:   "#5F7A52"
+    yellow:  "#7E8F78"
+    blue:    "#6C7A86"
+    magenta: "#8A6A5A"
+    cyan:    "#E39A3B"
+    white:   "#F2E9DC"
+  bright:
+    black:   "#262A2D"
+    red:     "#D0714A"
+    green:   "#7FA36B"
+    yellow:  "#F2C572"
+    blue:    "#9FB0BD"
+    magenta: "#A58A7B"
+    cyan:    "#B7C9B2"
+    white:   "#FFF8EE"

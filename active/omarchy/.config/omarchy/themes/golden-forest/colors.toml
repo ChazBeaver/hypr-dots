@@ -1,0 +1,25 @@
+accent = "#B8A15A"
+cursor = "#E9E6D8"
+foreground = "#E9E6D8"
+background = "#101214"
+
+selection_foreground = "#E9E6D8"
+selection_background = "#262A2D"
+
+color0  = "#101214" # neutral background
+color1  = "#7A5C4C" # muted bark error
+color2  = "#4F6F43" # forest green
+color3  = "#B8A15A" # sunlit gold / accent
+color4  = "#6F8878" # cool forest info
+color5  = "#7C6E63" # muted earthy special
+color6  = "#8EA06F" # moss prompt
+color7  = "#E9E6D8" # foreground
+
+color8  = "#262A2D" # secondary background
+color9  = "#9A7464" # bright bark danger
+color10 = "#6F925D" # bright success
+color11 = "#D4C27A" # active highlight
+color12 = "#9BB1A5" # bright info
+color13 = "#A08F84" # bright special
+color14 = "#B8C9A5" # soft moss-cyan
+color15 = "#F6F3E8" # bright foreground

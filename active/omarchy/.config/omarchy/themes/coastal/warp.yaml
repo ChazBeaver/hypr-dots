@@ -1,0 +1,26 @@
+name: Coastal
+accent: "#D8A33D"
+cursor: "#ECE7DF"
+background: "#101214"
+foreground: "#ECE7DF"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#101214"
+    red:     "#C96A4A"
+    green:   "#5E8A4B"
+    yellow:  "#D8A33D"
+    blue:    "#2FA7C8"
+    magenta: "#8A7A9C"
+    cyan:    "#5FC7C2"
+    white:   "#ECE7DF"
+  bright:
+    black:   "#262A2D"
+    red:     "#E08763"
+    green:   "#7EAD63"
+    yellow:  "#E7C15B"
+    blue:    "#73C7E6"
+    magenta: "#A99ABC"
+    cyan:    "#8EE3DA"
+    white:   "#F8F4EE"

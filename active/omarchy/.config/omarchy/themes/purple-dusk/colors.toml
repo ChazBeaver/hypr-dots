@@ -1,0 +1,25 @@
+accent = "#F08A5D"
+cursor = "#EDEAF3"
+foreground = "#EDEAF3"
+background = "#0F111A"
+
+selection_foreground = "#EDEAF3"
+selection_background = "#262A36"
+
+color0  = "#0F111A" # background
+color1  = "#C06C84" # dusk red
+color2  = "#6A8CAF" # cool blue-green
+color3  = "#893856" # brick red
+color4  = "#5B6FA8" # blue info
+color5  = "#8A76A6" # violet
+color6  = "#F0A060" # warm highlight
+color7  = "#EDEAF3" # foreground
+
+color8  = "#262A36" # secondary background
+color9  = "#E07A9A" # bright red/pink
+color10 = "#88AFC1" # bright cyan-green
+color11 = "#F6C177" # bright gold
+color12 = "#7C93D1" # bright blue
+color13 = "#A78BD4" # bright violet
+color14 = "#9FD3E6" # bright cyan
+color15 = "#FFFFFF" # bright foreground

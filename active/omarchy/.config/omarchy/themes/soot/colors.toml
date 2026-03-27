@@ -1,0 +1,25 @@
+accent = "#8E8576"
+cursor = "#CFC7BB"
+foreground = "#CFC7BB"
+background = "#111111"
+
+selection_foreground = "#CFC7BB"
+selection_background = "#2A2A2A"
+
+color0  = "#111111" # background
+color1  = "#6E4B45" # muted error
+color2  = "#5F6B60" # muted success
+color3  = "#8E8576" # warning / accent
+color4  = "#6C7482" # info
+color5  = "#7B6A72" # special
+color6  = "#8A7D74" # prompt
+color7  = "#CFC7BB" # foreground
+
+color8  = "#2A2A2A" # secondary background
+color9  = "#8A5A5A" # bright danger
+color10 = "#7C8A7D" # bright success
+color11 = "#B2A58A" # active highlight
+color12 = "#8A96A3" # bright info
+color13 = "#9B8792" # bright special
+color14 = "#8EA29C" # subtle cyan
+color15 = "#EEE7DC" # bright foreground

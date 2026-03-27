@@ -1,0 +1,26 @@
+accent = "#7FAFAE"
+cursor = "#D7E0DA"
+
+foreground = "#EAE6E1"
+background = "#101214"
+
+selection_foreground = "#EAE6E1"
+selection_background = "#262A2D"
+
+color0  = "#141917" # background
+color1  = "#3F6B57" # error / deep green-brown
+color2  = "#5F8F7A" # success
+color3  = "#7FAFAE" # accent / cyan-teal
+color4  = "#4C7A94" # blue info
+color5  = "#7A8F6D" # olive support
+color6  = "#5FA3A1" # prompt / teal
+color7  = "#D7E0DA" # default foreground
+
+color8  = "#2B3935" # secondary background
+color9  = "#7C4D57" # danger / muted rose-bark
+color10 = "#8FBFA7" # bright success
+color11 = "#A9C77B" # active highlight
+color12 = "#78A9C0" # link / path / directory
+color13 = "#8F7FB5" # special highlight
+color14 = "#6FC7C4" # change / cyan bright
+color15 = "#F1F5EF" # bright foreground

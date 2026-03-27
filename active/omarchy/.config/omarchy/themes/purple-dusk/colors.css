@@ -1,0 +1,88 @@
+/*
+*
+* Purple-Dusk Theme - Core Color Definitions
+*
+*/
+
+@define-color background #0F111A;
+@define-color foreground #EDEAF3;
+@define-color cursor #EDEAF3;
+
+/* Core accents */
+@define-color accent #F08A5D;
+@define-color accent_alt #C06C84;
+@define-color accent_soft #6A8CAF;
+@define-color accent_dim #8A76A6;
+
+/* Extended roles */
+@define-color accent_red_deep #984F65;
+@define-color accent_rose #E07A9A;
+@define-color accent_rust #B45F74;
+@define-color accent_ember #D37488;
+
+@define-color accent_orange #F0A060;
+@define-color accent_orange_soft #F6C177;
+
+@define-color accent_gold #F6C177;
+@define-color accent_amber #D99855;
+@define-color accent_yellow #F6C177;
+@define-color accent_yellow_soft #F8D69B;
+
+@define-color accent_olive #88AFC1;
+@define-color accent_olive_deep #6D92A3;
+@define-color accent_yellow_green #9FD3E6;
+
+@define-color accent_green #6A8CAF;
+@define-color accent_green_deep #55708B;
+@define-color accent_moss #7295A7;
+
+@define-color accent_purple #8A76A6;
+@define-color accent_violet #A78BD4;
+@define-color accent_violet_soft #B9A4DD;
+@define-color accent_plum #705F8B;
+
+@define-color accent_magenta #A78BD4;
+@define-color accent_rose_dust #C497B4;
+
+/* Controlled cool accents */
+@define-color accent_aqua #9FD3E6;
+@define-color accent_teal #88AFC1;
+@define-color accent_cyan #9FD3E6;
+@define-color accent_cyan_soft #B7DFEC;
+
+@define-color accent_blue #5B6FA8;
+@define-color accent_blue_soft #7C93D1;
+@define-color accent_slate_blue #7385BE;
+
+@define-color accent_cyan_hot #9FD3E6;
+@define-color accent_blue_hot #7C93D1;
+@define-color accent_blue_neon #A6B7E0;
+
+@define-color accent_sky #7C93D1;
+@define-color accent_lavender #A78BD4;
+
+@define-color accent_pink #E07A9A;
+@define-color accent_pink_hot #F08A5D;
+
+/* UI roles */
+@define-color selection_background #262A36;
+@define-color selection_foreground #EDEAF3;
+
+/* Base terminal-style palette */
+@define-color color0  #0F111A;
+@define-color color1  #C06C84;
+@define-color color2  #6A8CAF;
+@define-color color3  #893856;
+@define-color color4  #5B6FA8;
+@define-color color5  #8A76A6;
+@define-color color6  #F0A060;
+@define-color color7  #EDEAF3;
+
+@define-color color8  #262A36;
+@define-color color9  #E07A9A;
+@define-color color10 #88AFC1;
+@define-color color11 #F6C177;
+@define-color color12 #7C93D1;
+@define-color color13 #A78BD4;
+@define-color color14 #9FD3E6;
+@define-color color15 #FFFFFF;

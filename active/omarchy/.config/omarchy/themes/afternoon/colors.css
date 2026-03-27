@@ -1,0 +1,90 @@
+/*
+*
+* Afternoon Theme - Core Color Definitions
+*
+* Sunset café palette aligned to the current Afternoon theme direction.
+*
+*/
+
+@define-color background #101214;
+@define-color foreground #EAE6E1;
+@define-color cursor #EAE6E1;
+
+/* Core accents */
+@define-color accent #C89A56;        /* primary warm gold */
+@define-color accent_alt #B85C4A;    /* brick red */
+@define-color accent_soft #5F7A52;   /* leafy green */
+@define-color accent_dim #8F7A94;    /* dusty mauve-violet */
+
+/* Extended warm roles */
+@define-color accent_red_deep #8E4639;     /* deeper brick red */
+@define-color accent_rose #D67A67;         /* bright red */
+@define-color accent_rust #A85A45;         /* burnt rust */
+@define-color accent_ember #C46E57;        /* soft ember red */
+
+@define-color accent_orange #D8A37C;       /* warm peach-orange */
+@define-color accent_orange_soft #E3B08D;  /* softened peach */
+
+@define-color accent_gold #C89A56;         /* warm gold */
+@define-color accent_amber #B78645;        /* deeper amber */
+@define-color accent_yellow #E2B873;       /* bright warm yellow */
+@define-color accent_yellow_soft #DABD8E;  /* muted warm yellow */
+
+@define-color accent_olive #5F7A52;        /* leafy olive-green */
+@define-color accent_olive_deep #4E6544;   /* deeper grounded green */
+@define-color accent_yellow_green #7F9A6F; /* yellow-green accent */
+
+@define-color accent_green #5F7A52;        /* muted green */
+@define-color accent_green_deep #47603D;   /* stronger green */
+@define-color accent_moss #556B4A;         /* earthy moss */
+
+@define-color accent_purple #8F7A94;       /* dusty mauve */
+@define-color accent_violet #B39ABD;       /* bright violet */
+@define-color accent_violet_soft #C4B0CC;  /* soft lavender-violet */
+@define-color accent_plum #6F5C74;         /* deep plum */
+
+@define-color accent_magenta #A786B0;      /* muted magenta-violet */
+@define-color accent_rose_dust #C59187;    /* dusty rose */
+
+/* Controlled cool accents */
+@define-color accent_aqua #D8A37C;         /* warm aqua substitute from palette */
+@define-color accent_teal #7A92B8;         /* soft sky blue */
+@define-color accent_cyan #9CB7DE;         /* bright blue */
+@define-color accent_cyan_soft #B8CAE5;    /* pale cyan-blue */
+
+@define-color accent_blue #7A92B8;         /* soft sky blue */
+@define-color accent_blue_soft #9CB7DE;    /* softened blue */
+@define-color accent_slate_blue #7F8CA8;   /* slate blue */
+
+@define-color accent_cyan_hot #F0BE97;     /* hot peach highlight */
+@define-color accent_blue_hot #9CB7DE;     /* bright blue */
+@define-color accent_blue_neon #B4CAE8;    /* softened neon blue */
+
+@define-color accent_sky #9CB7DE;          /* muted sky */
+@define-color accent_lavender #B39ABD;     /* warm lavender */
+
+@define-color accent_pink #D67A67;         /* softened pink-red */
+@define-color accent_pink_hot #C96B76;     /* warm pink accent */
+
+/* UI roles */
+@define-color selection_background #262A2D;
+@define-color selection_foreground #EAE6E1;
+
+/* Base terminal-style palette */
+@define-color color0  #101214; /* bg */
+@define-color color1  #B85C4A; /* brick red */
+@define-color color2  #5F7A52; /* leafy green */
+@define-color color3  #C89A56; /* warm gold */
+@define-color color4  #7A92B8; /* soft sky blue */
+@define-color color5  #8F7A94; /* dusty mauve-violet */
+@define-color color6  #D8A37C; /* warm peach */
+@define-color color7  #EAE6E1; /* fg */
+
+@define-color color8  #262A2D; /* bright bg / surface emphasis */
+@define-color color9  #D67A67; /* bright red */
+@define-color color10 #7F9A6F; /* bright green */
+@define-color color11 #E2B873; /* bright gold */
+@define-color color12 #9CB7DE; /* bright blue */
+@define-color color13 #B39ABD; /* bright violet */
+@define-color color14 #F0BE97; /* bright peach */
+@define-color color15 #F7F3EE; /* highlight fg */

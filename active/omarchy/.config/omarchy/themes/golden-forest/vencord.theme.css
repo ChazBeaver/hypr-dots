@@ -1,0 +1,501 @@
+/**
+* @name Clay Vencord
+* @author Chaz Beaver
+* @version 0.1.0
+* @description Warm, earthy Clay palette for Vencord / Discord
+**/
+
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --base00: #1A1515;
+  --base01: #2D2424;
+  --base02: #453636;
+  --base03: #725A5A;
+  --base04: #9C8181;
+  --base05: #DCC9BC;
+  --base06: #FFE9C7;
+  --base07: #FFFFFF;
+  --base08: #F07342;
+  --base09: #D99542;
+  --base0A: #E39C45;
+  --base0B: #768F80;
+  --base0C: #959A6B;
+  --base0D: #756D94;
+  --base0E: #7B3D79;
+  --base0F: #CF223E;
+
+  --color00: var(--base00);
+  --color01: var(--base08);
+  --color02: var(--base0C);
+  --color03: var(--base0A);
+  --color04: var(--base0D);
+  --color05: var(--base0E);
+  --color06: var(--base0B);
+  --color07: var(--base05);
+  --color08: var(--base02);
+  --color09: var(--base0F);
+  --color10: #A4B397;
+  --color11: #FAA616;
+  --color12: #78A9FF;
+  --color13: #AE3F82;
+  --color14: #3DDBD9;
+  --color15: var(--base06);
+
+  --clay-ink: var(--color00);
+  --clay-ink-soft: color-mix(in srgb, var(--color00) 78%, var(--color08));
+  --clay-crumb: var(--color08);
+  --clay-cream: var(--color07);
+  --clay-cream-soft: var(--base04);
+  --clay-ember: var(--color01);
+  --clay-gold: var(--color03);
+  --clay-olive: var(--color02);
+  --clay-sage: var(--color06);
+  --clay-mauve: var(--color04);
+  --clay-plum: var(--color05);
+  --clay-danger: var(--color09);
+
+  --item-surface-0: var(--clay-ink);
+  --item-surface-1: var(--clay-ink-soft);
+  --item-surface-2: var(--clay-crumb);
+  --item-surface-3: var(--clay-cream-soft);
+  --item-surface-4: var(--clay-cream);
+
+  --item-text: var(--clay-cream);
+  --item-text-muted: var(--clay-cream-soft);
+  --item-text-contrast: var(--clay-cream);
+  --item-text-inverse: var(--clay-ink);
+
+  --item-accent: var(--clay-gold);
+  --item-accent-strong: var(--clay-ember);
+  --item-danger: var(--clay-danger);
+  --item-highlight: var(--clay-mauve);
+  --item-unread: var(--clay-olive);
+
+  --item-mention-glow-1: var(--clay-gold);
+  --item-mention-glow-2: var(--clay-ember);
+  --item-mention-glow-3: var(--clay-sage);
+
+  --item-message-text: var(--item-text);
+  --item-channel-name: var(--clay-cream-soft);
+  --item-channel-name-unread: var(--clay-cream);
+  --item-channel-name-selected: var(--clay-gold);
+  --item-username: var(--clay-olive);
+  --item-mention-foreground: var(--item-text);
+  --item-mention-text: var(--item-text-muted);
+
+  --item-border: color-mix(in srgb, var(--item-surface-4) 45%, transparent);
+  --item-accent-dim: color-mix(in srgb, var(--item-accent) 55%, var(--item-surface-1));
+
+  --eh-0: var(--item-surface-0);
+  --eh-1: var(--item-surface-1);
+  --eh-2: var(--item-surface-2);
+  --eh-3: var(--item-surface-3);
+  --eh-4: var(--item-surface-4);
+  --eh-border: var(--item-border);
+  --eh-gap: 12px;
+
+  --eh-accent: var(--item-accent);
+  --eh-accent-strong: var(--item-accent-strong);
+  --eh-danger: var(--item-danger);
+  --eh-accent-dim: var(--item-accent-dim);
+
+  --font-primary: "Figtree", "gg sans", sans-serif;
+  --font-display: "Figtree", "gg sans", sans-serif;
+  --eh-letter-spacing: 0.35px;
+}
+
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh {
+  /* Backgrounds */
+  --background-primary: var(--item-surface-1) !important;
+  --background-secondary: var(--item-surface-0) !important;
+  --background-secondary-alt: var(--item-surface-1) !important;
+  --background-tertiary: var(--item-surface-0) !important;
+  --background-accent: var(--item-surface-2) !important;
+  --background-floating: var(--item-surface-2) !important;
+
+  --background-base-lowest: var(--item-surface-0) !important;
+  --background-base-lower: var(--item-surface-0) !important;
+  --background-base-low: var(--item-surface-1) !important;
+  --background-base-tertiary: var(--item-surface-0) !important;
+
+  --background-surface-high: var(--item-surface-2) !important;
+  --background-surface-higher: var(--item-surface-2) !important;
+  --background-surface-highest: var(--item-surface-3) !important;
+  --bg-surface-raised: var(--item-surface-2) !important;
+  --bg-surface-overlay: var(--item-surface-1) !important;
+  --bg-base-secondary: var(--item-surface-0) !important;
+  --bg-base-tertiary: var(--item-surface-0) !important;
+  --bg-overlay-2: var(--item-surface-2) !important;
+  --bg-overlay-3: var(--item-surface-3) !important;
+
+  /* Modifiers */
+  --background-modifier-accent: color-mix(in srgb, var(--item-surface-3) 65%, transparent) !important;
+  --background-modifier-hover: color-mix(in srgb, var(--item-surface-3) 70%, transparent) !important;
+  --background-modifier-active: color-mix(in srgb, var(--item-surface-3) 82%, transparent) !important;
+  --background-modifier-selected: color-mix(in srgb, var(--item-surface-3) 90%, transparent) !important;
+  --background-mentioned: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 22%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --background-mentioned-hover: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 32%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --mention-background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 28%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --mention-foreground: var(--item-mention-foreground) !important;
+
+  /* Text */
+  --text-normal: var(--item-text) !important;
+  --text-muted: var(--item-text-muted) !important;
+  --text-primary: var(--item-text) !important;
+  --text-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
+  --header-primary: var(--item-text) !important;
+  --header-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
+  --interactive-normal: var(--item-text) !important;
+  --interactive-hover: var(--item-text-contrast) !important;
+  --interactive-active: var(--item-text-contrast) !important;
+  --interactive-muted: var(--item-text-muted) !important;
+
+  /* Channel list text */
+  --channels-default: var(--item-channel-name) !important;
+  --channels-default-muted: color-mix(in srgb, var(--item-channel-name) 55%, transparent) !important;
+  --channels-default-unread: var(--item-channel-name-unread) !important;
+
+  /* Accents */
+  --brand-500: var(--item-accent) !important;
+  --brand-560: color-mix(in srgb, var(--item-accent) 18%, var(--item-surface-1)) !important;
+  --text-link: var(--item-accent) !important;
+  --channel-icon: var(--item-accent) !important;
+  --focus-primary: var(--item-highlight) !important;
+  --input-border-focus: var(--item-highlight) !important;
+
+  /* Buttons */
+  --button-filled-brand-background: color-mix(in srgb, var(--item-accent) 65%, var(--item-surface-1)) !important;
+  --button-filled-brand-background-hover: color-mix(in srgb, var(--item-accent) 75%, var(--item-surface-1)) !important;
+  --button-filled-brand-text: var(--item-text-inverse) !important;
+
+  --button-positive-background: color-mix(in srgb, var(--item-accent) 65%, var(--item-surface-1)) !important;
+  --button-positive-background-hover: color-mix(in srgb, var(--item-accent) 75%, var(--item-surface-1)) !important;
+  --button-positive-text: var(--item-text-inverse) !important;
+
+  --button-secondary-background: var(--item-surface-3) !important;
+  --button-secondary-background-hover: var(--item-surface-2) !important;
+  --button-secondary-text: var(--item-text) !important;
+
+  --button-danger-background: var(--item-danger) !important;
+  --button-danger-background-hover: color-mix(in srgb, var(--item-danger) 85%, white) !important;
+  --button-danger-text: var(--item-text-inverse) !important;
+
+  /* Status */
+  --status-positive: var(--item-accent) !important;
+  --status-warning: var(--item-accent) !important;
+  --status-danger: var(--item-danger) !important;
+}
+
+body {
+  letter-spacing: var(--eh-letter-spacing);
+}
+
+/* Username color */
+[class*="username"] {
+  color: var(--item-username) !important;
+}
+
+/* Message text force */
+.theme-dark :is([class*="messageContent"], [class*="markup"]),
+.theme-darker :is([class*="messageContent"], [class*="markup"]),
+.theme-midnight :is([class*="messageContent"], [class*="markup"]),
+.visual-refresh :is([class*="messageContent"], [class*="markup"]) {
+  color: var(--item-message-text) !important;
+}
+
+/* Channel row accents */
+a[data-list-item-id^="channels___"][aria-selected="true"] {
+  background-color: var(--background-modifier-selected) !important;
+  box-shadow: inset 3px 0 0 0 var(--item-accent) !important;
+  border-radius: 10px !important;
+}
+
+a[data-list-item-id^="channels___"]:hover {
+  background-color: var(--background-modifier-hover) !important;
+  box-shadow: inset 3px 0 0 0 var(--item-danger) !important;
+  border-radius: 10px !important;
+}
+
+/* Channel icon base */
+a[data-list-item-id^="channels___"] svg,
+a[data-list-item-id^="channels___"] svg path {
+  fill: var(--item-accent-dim) !important;
+  color: var(--item-accent-dim) !important;
+}
+
+/* Unread channel icon */
+a[data-list-item-id^="channels___"][class*="modeUnread"] svg,
+a[data-list-item-id^="channels___"][class*="modeUnread"] svg path,
+[class*="modeUnread"] [class*="icon__"],
+[class*="modeUnread"] [class*="icon__"] path {
+  fill: var(--item-accent) !important;
+  color: var(--item-accent) !important;
+}
+
+/* Channel name states */
+a[data-list-item-id^="channels___"]:not([class*="modeUnread"]):not([aria-selected="true"]) [class*="name"] *,
+li[class*="containerDefault"]:not([class*="modeUnread"]):not([class*="selected"]):not([class*="modeSelected"]) [class*="name"] *,
+#channels [class*="name__"] {
+  color: var(--item-channel-name) !important;
+}
+
+a[data-list-item-id^="channels___"][class*="modeUnread"] [class*="name"] *,
+li[class*="containerDefault"][class*="modeUnread"] [class*="name"] *,
+#channels [class*="modeUnread"] [class*="name__"] {
+  color: var(--item-channel-name-unread) !important;
+}
+
+#channels [class*="modeSelected"] [class*="name__"] {
+  color: var(--item-channel-name-selected) !important;
+}
+
+/* Text input focus ring */
+[class*="channelTextArea"]:focus-within {
+  box-shadow: 0 0 0 1px var(--item-highlight) inset !important;
+  border-color: var(--item-highlight) !important;
+}
+
+[class*="channelTextArea"]:focus-within [class*="scrollableContainer"] {
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+/* Post style input padding */
+[class*="textAreaForPostCreation"] {
+  padding: 8px 10px !important;
+  box-sizing: border-box !important;
+}
+
+/* Post media button spacing */
+[class*="container__94439"] {
+  margin-left: 8px !important;
+}
+
+/* Mention highlight */
+div[class*="mentioned"],
+li[class*="mentioned"] {
+  background: var(--background-mentioned) !important;
+  box-shadow: none !important;
+  border-left: 3px solid var(--item-accent) !important;
+  border-radius: 10px !important;
+  position: relative;
+}
+
+div[class*="mentioned"]:hover,
+li[class*="mentioned"]:hover {
+  background: var(--background-mentioned-hover) !important;
+}
+
+div[class*="mentioned"]::before,
+li[class*="mentioned"]::before {
+  content: none !important;
+}
+
+/* Replying highlight */
+div[class*="replying"],
+li[class*="replying"] {
+  background: var(--background-mentioned) !important;
+  box-shadow: none !important;
+  border-left: 3px solid var(--item-unread) !important;
+  border-radius: 10px !important;
+  position: relative;
+}
+
+div[class*="replying"]:hover,
+li[class*="replying"]:hover {
+  background: var(--background-mentioned-hover) !important;
+}
+
+div[class*="replying"]::before,
+li[class*="replying"]::before {
+  content: none !important;
+}
+
+/* Message hover rounding */
+[id^="chat-messages-"] [class*="messageListItem"]:hover,
+[id^="chat-messages-"] [class*="messageListItem"]:hover > [class*="message"],
+[id^="chat-messages-"] [class*="messageListItem"]:hover [class*="contents"] {
+  background: var(--background-modifier-hover) !important;
+  border-radius: 10px !important;
+}
+
+/* Unread indicators and badges */
+div[class*="unreadBar"],
+span[class*="unreadBar"],
+div[class*="unreadPill"],
+span[class*="unreadPill"],
+div[class*="numberBadge"],
+span[class*="numberBadge"],
+div[class*="textBadge"],
+span[class*="textBadge"],
+div.unread__2ea32.unreadImportant__2ea32 {
+  background-color: var(--item-unread) !important;
+  color: var(--item-surface-1) !important;
+}
+
+/* New messages bar (scoped) */
+div#---new-messages-bar.divider__5126c {
+  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar.divider__5126c.hasContent__5126c {
+  background: color-mix(in srgb, var(--item-unread) 18%, var(--item-surface-1)) !important;
+  border-radius: 12px !important;
+  padding: 4px 54px 4px 10px !important;
+  margin: 14px 0 6px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 {
+  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .content__908e2 {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: var(--item-unread) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--item-unread) 25%, transparent), 0 6px 18px rgba(0, 0, 0, 0.25) !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPill__908e2 {
+  background: color-mix(in srgb, var(--item-unread) 32%, var(--item-surface-1)) !important;
+  color: var(--item-mention-text) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  padding: 0 6px !important;
+  height: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 10px !important;
+  transform: translateY(2px) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--item-unread) 35%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.22) !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2,
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2 * {
+  display: none !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .content__908e2 {
+  background: color-mix(in srgb, var(--item-unread) 18%, var(--item-surface-1)) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  padding: 3px 8px !important;
+  letter-spacing: 0.08em !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCapStroke__908e2 {
+  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2,
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2 path {
+  fill: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2,
+div#---new-messages-bar.divider__908e2.isUnread__908e2 .unreadPillCap__908e2 * {
+  display: none !important;
+}
+
+/* Unread mentions footer pill */
+div[class*="unreadMentionsIndicatorBottom"] > div {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  color: var(--item-unread) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+/* Jump to present / new messages pill */
+button[class*="jumpToPresentBar"],
+div[class*="jumpToPresentBar"] {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  border-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: var(--item-unread) !important;
+}
+
+/* Mention count pills */
+span[class*="mention"],
+span[class*="mention"] span {
+  background-color: var(--item-unread) !important;
+  color: var(--item-surface-1) !important;
+}
+
+/* Inline @mention pills */
+.theme-dark :is([class*="messageContent"], [class*="markup"]) [class*="mention"],
+.theme-darker :is([class*="messageContent"], [class*="markup"]) [class*="mention"],
+.theme-midnight :is([class*="messageContent"], [class*="markup"]) [class*="mention"],
+.visual-refresh :is([class*="messageContent"], [class*="markup"]) [class*="mention"] {
+  background: color-mix(in srgb, var(--item-accent) 22%, var(--item-surface-1)) !important;
+  color: var(--item-mention-text) !important;
+  border: 0 !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--item-accent) 35%, transparent) !important;
+  border-radius: 2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1.4 !important;
+  padding: 0.08em 0.35em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  vertical-align: baseline !important;
+  text-shadow: none !important;
+}
+
+.theme-dark :is([class*="messageContent"], [class*="markup"]) [class*="mention"]:hover,
+.theme-darker :is([class*="messageContent"], [class*="markup"]) [class*="mention"]:hover,
+.theme-midnight :is([class*="messageContent"], [class*="markup"]) [class*="mention"]:hover,
+.visual-refresh :is([class*="messageContent"], [class*="markup"]) [class*="mention"]:hover {
+  background: color-mix(in srgb, var(--item-accent) 32%, var(--item-surface-1)) !important;
+  border-color: color-mix(in srgb, var(--item-unread) 75%, transparent) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--item-accent) 55%, transparent) !important;
+}
+
+/* Thread/voice active indicators */
+span[class*="live"],
+span[class*="live"] span,
+div[class*="activity"] span[class*="dot"] {
+  background-color: var(--item-unread) !important;
+  color: var(--item-surface-1) !important;
+}
+
+/* ______   __       ______
+* /_____/\ /_/\     /_____/\                                      
+* \:::_ \ \\:\ \    \:::_ \ \                                     
+*  \:\ \ \ \\:\ \    \:\ \ \ \                                    
+*   \:\ \ \ \\:\ \____\:\ \ \ \                                   
+*    \:\_\ \ \\:\/___/\\:\/.:| |                                  
+*  ___\_____\/_\_____\/ \____/_/  ______    _______   ______      
+* /________/\/_____/\ /_______/\ /_____/\ /_______/\ /_____/\     
+* \__.::.__\/\:::_ \ \\::: _  \ \\:::_ \ \\::: _  \ \\:::_ \ \    
+*   /_\::\ \  \:\ \ \ \\::(_)  \/_\:\ \ \ \\::(_)  \/_\:\ \ \ \   
+*   \:.\::\ \  \:\ \ \ \\::  _  \ \\:\ \ \ \\::  _  \ \\:\ \ \ \  
+*    \: \  \ \  \:\_\ \ \\::(_)  \ \\:\_\ \ \\::(_)  \ \\:\_\ \ \ 
+*     \_____\/   \_____\/ \_______\/ \_____\/ \_______\/ \_____\/ 
+*
+*/

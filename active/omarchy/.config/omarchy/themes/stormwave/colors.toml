@@ -1,0 +1,25 @@
+accent = "#6F8F92"
+cursor = "#DCE4E6"
+foreground = "#DCE4E6"
+background = "#101214"
+
+selection_foreground = "#DCE4E6"
+selection_background = "#262A2D"
+
+color0  = "#101214" # neutral background
+color1  = "#7A5F66" # muted storm error
+color2  = "#5E7E78" # muted sea-green
+color3  = "#8FA6A8" # warning / accent
+color4  = "#5E748A" # storm blue info
+color5  = "#6E7A84" # special slate
+color6  = "#6F8F92" # prompt / teal-gray
+color7  = "#DCE4E6" # foreground
+
+color8  = "#262A2D" # secondary background
+color9  = "#9B737A" # bright danger
+color10 = "#7FA29B" # bright success
+color11 = "#B8C9CB" # active highlight
+color12 = "#89A6C0" # bright info
+color13 = "#96A5AF" # bright special
+color14 = "#A8C9C9" # seafoam cyan
+color15 = "#F2F6F6" # bright foreground

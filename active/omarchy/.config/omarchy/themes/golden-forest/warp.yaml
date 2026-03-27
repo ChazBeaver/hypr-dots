@@ -1,0 +1,26 @@
+name: Golden-Forest
+accent: "#B8A15A"
+cursor: "#E9E6D8"
+background: "#101214"
+foreground: "#E9E6D8"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#101214"
+    red:     "#7A5C4C"
+    green:   "#4F6F43"
+    yellow:  "#B8A15A"
+    blue:    "#6F8878"
+    magenta: "#7C6E63"
+    cyan:    "#8EA06F"
+    white:   "#E9E6D8"
+  bright:
+    black:   "#262A2D"
+    red:     "#9A7464"
+    green:   "#6F925D"
+    yellow:  "#D4C27A"
+    blue:    "#9BB1A5"
+    magenta: "#A08F84"
+    cyan:    "#B8C9A5"
+    white:   "#F6F3E8"

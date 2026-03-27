@@ -1,0 +1,26 @@
+name: Jellyfish
+accent: "#d94a74"
+cursor: "#f6a3a9"
+background: "#101214"
+foreground: "#f6a3a9"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#101214"
+    red:     "#F66F9B"
+    green:   "#91AFDE"
+    yellow:  "#FDCED0"
+    blue:    "#C669C0"
+    magenta: "#FFAB77"
+    cyan:    "#FF9C3A"
+    white:   "#5A3C8A"
+  bright:
+    black:   "#262a2d"
+    red:     "#e46a7a"
+    green:   "#f6a3a9"
+    yellow:  "#ff9c3a"
+    blue:    "#6b6ecf"
+    magenta: "#d94a74"
+    cyan:    "#5a3c8a"
+    white:   "#ffffff"

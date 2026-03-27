@@ -1,0 +1,25 @@
+accent = "#E39A3B"
+cursor = "#F2E9DC"
+foreground = "#F2E9DC"
+background = "#0F1113"
+
+selection_foreground = "#F2E9DC"
+selection_background = "#262A2D"
+
+color0  = "#0F1113" # background
+color1  = "#A65A3A" # ember red
+color2  = "#5F7A52" # muted forest green
+color3  = "#7E8F78" # soft moss
+color4  = "#6C7A86" # smoke blue-gray
+color5  = "#8A6A5A" # wood tone
+color6  = "#E39A3B" # flame / accent
+color7  = "#F2E9DC" # foreground
+
+color8  = "#262A2D" # secondary background
+color9  = "#D0714A" # bright ember
+color10 = "#7FA36B" # bright green
+color11 = "#F2C572" # bright flame highlight
+color12 = "#9FB0BD" # bright info
+color13 = "#A58A7B" # bright wood
+color14 = "#B7C9B2" # pale moss
+color15 = "#FFF8EE" # bright foreground

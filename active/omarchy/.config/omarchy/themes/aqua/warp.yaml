@@ -1,0 +1,26 @@
+name: Aqua
+accent: "#7FAFAE"
+cursor: "#D7E0DA"
+background: "#101214"
+foreground: "#EAE6E1"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#141917"
+    red:     "#3F6B57"
+    green:   "#5F8F7A"
+    yellow:  "#7FAFAE"
+    blue:    "#4C7A94"
+    magenta: "#7A8F6D"
+    cyan:    "#5FA3A1"
+    white:   "#D7E0DA"
+  bright:
+    black:   "#2B3935"
+    red:     "#7C4D57"
+    green:   "#8FBFA7"
+    yellow:  "#A9C77B"
+    blue:    "#78A9C0"
+    magenta: "#8F7FB5"
+    cyan:    "#6FC7C4"
+    white:   "#F1F5EF"

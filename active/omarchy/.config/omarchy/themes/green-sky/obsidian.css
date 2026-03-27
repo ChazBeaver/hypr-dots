@@ -1,0 +1,81 @@
+.theme-dark,
+.theme-light {
+  --background-primary: #1A1515;
+  --background-primary-alt: #1A1515;
+  --background-secondary: #171212;
+  --background-secondary-alt: #2D2424;
+  --text-normal: #DCC9BC;
+
+  --text-selection: #DCC9BC;
+  --text-highlight-bg: #453636;
+
+  --background-modifier-border: #453636;
+
+  --text-title-h1: #F07342;
+  --text-title-h2: #959A6B;
+  --text-title-h3: #E39C45;
+  --text-title-h4: #756D94;
+  --text-title-h5: #7B3D79;
+  --text-title-h6: #9C8181;
+
+  --text-link: #E39C45;
+  --text-accent: #E39C45;
+  --text-accent-hover: #F07342;
+  --interactive-accent: #E39C45;
+  --interactive-accent-hover: #F07342;
+
+  --text-muted: #9C8181;
+  --text-faint: #725A5A;
+
+  --code-normal: #768F80;
+  --text-error: #F07342;
+  --text-error-hover: #CF223E;
+  --text-success: #768F80;
+
+  --tag-color: #E39C45;
+  --tag-background: #453636;
+
+  --graph-line: #453636;
+  --graph-node: #E39C45;
+  --graph-node-focused: #F07342;
+  --graph-node-tag: #7B3D79;
+  --graph-node-attachment: #959A6B;
+}
+
+.cm-header-1, .markdown-rendered h1 { color: var(--text-title-h1); }
+.cm-header-2, .markdown-rendered h2 { color: var(--text-title-h2); }
+.cm-header-3, .markdown-rendered h3 { color: var(--text-title-h3); }
+.cm-header-4, .markdown-rendered h4 { color: var(--text-title-h4); }
+.cm-header-5, .markdown-rendered h5 { color: var(--text-title-h5); }
+.cm-header-6, .markdown-rendered h6 { color: var(--text-title-h6); }
+
+.markdown-rendered code {
+  color: var(--code-normal);
+}
+
+.cm-s-obsidian span.cm-keyword { color: #F07342; }
+.cm-s-obsidian span.cm-string { color: #768F80; }
+.cm-s-obsidian span.cm-number { color: #E39C45; }
+.cm-s-obsidian span.cm-comment { color: #725A5A; }
+.cm-s-obsidian span.cm-operator { color: #756D94; }
+.cm-s-obsidian span.cm-def { color: #756D94; }
+
+.markdown-rendered a {
+  color: var(--text-link);
+}
+
+.markdown-rendered blockquote {
+  border-left-color: #E39C45;
+}
+
+.workspace-leaf.mod-active .workspace-leaf-header-title {
+  color: var(--interactive-accent);
+}
+
+.nav-file-title.is-active {
+  color: var(--interactive-accent);
+}
+
+.search-result-file-title {
+  color: var(--interactive-accent);
+}

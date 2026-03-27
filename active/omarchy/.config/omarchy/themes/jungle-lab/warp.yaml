@@ -1,0 +1,26 @@
+name: Jungle-Lab
+accent: "#3fa36b"
+cursor: "#d6e2dc"
+background: "#0f1111"
+foreground: "#d6e2dc"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#0f1111"
+    red:     "#7a3e2b"
+    green:   "#3a6f73"
+    yellow:  "#B08052"
+    blue:    "#5B7B5C"
+    magenta: "#5c6f66"
+    cyan:    "#A6AC9F"
+    white:   "#d6e2dc"
+  bright:
+    black:   "#1c1f1f"
+    red:     "#a35a3a"
+    green:   "#4fd18f"
+    yellow:  "#c2a070"
+    blue:    "#4aa3a8"
+    magenta: "#7a8f86"
+    cyan:    "#8cf5c4"
+    white:   "#f0fffa"

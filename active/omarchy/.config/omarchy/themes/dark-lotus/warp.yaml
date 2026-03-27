@@ -1,0 +1,26 @@
+name: Dark-Lotus
+accent: "#59B6C6"
+cursor: "#F3EAF6"
+background: "#14111B"
+foreground: "#F3EAF6"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#14111B"
+    red:     "#9A5E5B"
+    green:   "#59B6C6"
+    yellow:  "#F6B36B"
+    blue:    "#8D6CCF"
+    magenta: "#6BD3DB"
+    cyan:    "#F77689"
+    white:   "#F3EAF6"
+  bright:
+    black:   "#2A2233"
+    red:     "#FF8D9E"
+    green:   "#8EDFD3"
+    yellow:  "#FFD98A"
+    blue:    "#78D8FF"
+    magenta: "#D75ACF"
+    cyan:    "#90E1E1"
+    white:   "#FFF6FF"

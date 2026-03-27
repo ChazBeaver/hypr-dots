@@ -1,0 +1,25 @@
+accent = "#59B6C6"
+cursor = "#F3EAF6"
+foreground = "#F3EAF6"
+background = "#14111B"
+
+selection_foreground = "#F3EAF6"
+selection_background = "#2A2233"
+
+color0  = "#14111B" # Terminal background (inky violet-black)
+color1  = "#9A5E5B" # Errors, failures, stderr (muted bark-red)
+color2  = "#59B6C6" # Success / calm positive states (teal-cyan)
+color3  = "#F6B36B" # Warnings, highlights, warm lotus glow
+color4  = "#8D6CCF" # Commands, functions, executables (violet)
+color5  = "#6BD3DB" # Secondary emphasis / pink lotus petals
+color6  = "#f77689" # Prompt / active cyan glow
+color7  = "#F3EAF6" # Default terminal text (soft bloom white)
+
+color8  = "#2A2233" # Secondary background (selection, panels, inactive UI)
+color9  = "#FF8D9E" # Critical errors / danger states
+color10 = "#8EDFD3" # Bright success
+color11 = "#FFD98A" # Strong warnings / active highlights
+color12 = "#78D8FF" # Links, paths, directories, bright info
+color13 = "#D75ACF" # Special highlights / magenta bloom
+color14 = "#90E1E1" # Diff changes / secondary cyan info
+color15 = "#FFF6FF" # High-contrast text / standout output

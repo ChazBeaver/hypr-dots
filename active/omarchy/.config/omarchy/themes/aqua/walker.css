@@ -1,0 +1,139 @@
+/* @import url("./colors.css"); */
+
+/* Walker-style generic aliases */
+@define-color selected-text      #7FAFAE;
+@define-color text               #EAE6E1;
+@define-color base               #101214;
+@define-color border             #262A2D;
+@define-color foreground         #101214;
+@define-color background         #101214;
+
+/* Reset Walker defaults so your theme is in control */
+window * {
+  all: unset;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+  color: @text;
+}
+
+/* Fullscreen area outside the actual menu */
+window {
+  background: transparent;
+}
+
+/* Hide icons for a clean text-only menu */
+window .normal-icons,
+window .large-icons,
+window .item-image,
+window .symbols {
+  -gtk-icon-size: 18px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+/* Visible menu box */
+window .box-wrapper {
+  background: alpha(@base, 0.97);
+  border: 1px solid alpha(@text, 0.95);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 0;
+  box-shadow: 0 2px 12px alpha(black, 0.75);
+  backdrop-filter: blur(1px);
+  color: @text;
+}
+
+/* Search bar container */
+window .search-container {
+  border: 1px solid alpha(@border, 1);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 0 0 12px 0;
+  background: alpha(@border, 0.30);
+  box-shadow: inset 0 0 6px alpha(@border, 0.10);
+  backdrop-filter: blur(1px);
+  line-height: 1em;
+  color: @selected-text;
+}
+
+/* Search field text */
+window .search-container text,
+window .search-container label {
+  color: @text;
+  caret-color: @text;
+}
+
+/* Typed input text */
+window .input {
+  background: transparent;
+  color: @text;
+}
+
+/* Optional preview panel */
+window .preview {
+  border: 1px solid alpha(@border, 0.35);
+  border-radius: 2px;
+  background: alpha(@border, 0.82);
+  color: @text;
+  padding: 5px;
+  margin: 0 0;
+}
+
+/* Default menu items */
+window .item {
+  background: transparent;
+  color: @text;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 4px 0;
+}
+
+/* Default item text */
+window .item label,
+window .item text,
+window .item .text {
+  color: @text;
+}
+
+/* Hovered item */
+window .item:hover {
+  background: alpha(@border, 0.78);
+}
+
+/* Hovered item text */
+window .item:hover label,
+window .item:hover text,
+window .item:hover .text {
+  color: @text;
+}
+
+/* Selected / active item */
+window .item:selected,
+window .item.active,
+window .selected {
+  background: transparent;
+  border: 1px solid transparent;
+  color: @selected-text;
+}
+
+/* Force all selected descendants to the accent */
+window .item:selected *,
+window .item.active *,
+window .selected * {
+  color: @selected-text;
+}
+
+/* Common possible match/highlight nodes */
+window .match,
+window .matching,
+window .highlight,
+window .selected-text {
+  color: @selected-text;
+}

@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "name": "Jellyfish",
+    "slug": "jellyfish",
+    "variant": "dark"
+  },
+  "core": {
+    "bg": "#101214",
+    "bg_alt": "#262A2D",
+    "bg_alt2": "#353A3E",
+    "bg_panel": "#141618",
+    "bg_panel_alt": "#1A1D20",
+    "bg_accent": "#301C2B",
+    "bg_prompt": "#2A1E33",
+    "bg_hint": "#111315",
+
+    "fg": "#f6a3a9",
+    "fg_alt": "#ffffff",
+    "fg_muted": "#5A3C8A",
+    "comment": "#8B6A96",
+
+    "black": "#000000",
+    "grey": "#262A2D",
+    "grey_alt": "#353A3E",
+    "grey_bright": "#4F565B",
+    "white": "#FFFFFF"
+  },
+  "accents": {
+    "red": "#F66F9B",
+    "red_dark": "#B63B5E",
+    "rose": "#e46a7a",
+    "green": "#91AFDE",
+    "green_strong": "#6F90C5",
+    "yellow": "#FDCED0",
+    "yellow_bright": "#ff9c3a",
+    "yellow_soft": "#FFE2E4",
+    "gold": "#FF9C3A",
+    "olive": "#FFAB77",
+    "purple": "#5A3C8A",
+    "magenta": "#d94a74",
+    "violet": "#C669C0",
+    "blue": "#91AFDE"
+  },
+  "cool_accents": {
+    "cyan": "#C669C0",
+    "teal": "#6b6ecf",
+    "cyan_bright": "#d94a74",
+    "blue_bright": "#6b6ecf",
+    "blue_neon": "#B8C7EB",
+    "pink": "#F66F9B",
+    "pink_bright": "#d94a74",
+    "lavender": "#C669C0",
+    "sky": "#91AFDE"
+  },
+  "support": {
+    "green_soft": "#f6a3a9",
+    "red_soft": "#e46a7a",
+    "success": "#91AFDE",
+    "ok": "#FDCED0"
+  },
+  "semantic": {
+    "border": "#f6a3a9",
+    "border_subtle": "#262A2D",
+    "selection": "#262A2D",
+    "selection_alt": "#353A3E",
+    "search_bg": "#d94a74",
+    "search_fg": "#101214",
+    "incsearch_bg": "#FF9C3A",
+    "incsearch_fg": "#101214",
+    "cursor_bg": "#f6a3a9",
+    "cursor_fg": "#101214",
+    "diag_error": "#F66F9B",
+    "diag_warn": "#FF9C3A",
+    "diag_info": "#91AFDE",
+    "diag_hint": "#C669C0",
+    "diff_add": "#91AFDE",
+    "diff_delete": "#d94a74",
+    "diff_change": "#6b6ecf",
+    "diff_text": "#f6a3a9"
+  }
+}

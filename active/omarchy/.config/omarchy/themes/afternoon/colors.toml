@@ -1,0 +1,41 @@
+# ============================================================
+# CORE UI COLORS
+# Neutral black foundation, no tint
+# ============================================================
+
+accent = "#C89A56"
+
+cursor = "#EAE6E1"
+
+foreground = "#EAE6E1"
+background = "#101214"
+
+selection_foreground = "#EAE6E1"
+selection_background = "#262A2D"
+
+# ============================================================
+# TERMINAL PALETTE
+# Inspired by warm sunset café / city overlook wallpaper
+# ============================================================
+
+color0  = "#101214" # neutral black background
+color1  = "#B85C4A" # brick red / warm error
+color2  = "#5F7A52" # leafy green
+color3  = "#C89A56" # warm gold / highlight
+color4  = "#7A92B8" # soft sky blue
+color5  = "#8F7A94" # dusty mauve-violet
+color6  = "#D8A37C" # warm peach / prompt
+color7  = "#EAE6E1" # foreground
+
+# ============================================================
+# BRIGHT VARIANTS
+# ============================================================
+
+color8  = "#262A2D" # neutral panel
+color9  = "#D67A67" # bright red
+color10 = "#7F9A6F" # bright green
+color11 = "#E2B873" # bright gold
+color12 = "#9CB7DE" # bright blue
+color13 = "#B39ABD" # bright violet
+color14 = "#F0BE97" # bright peach
+color15 = "#F7F3EE" # bright foreground

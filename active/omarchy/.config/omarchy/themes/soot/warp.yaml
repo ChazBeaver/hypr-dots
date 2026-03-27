@@ -1,0 +1,26 @@
+name: Soot
+accent: "#8E8576"
+cursor: "#CFC7BB"
+background: "#111111"
+foreground: "#CFC7BB"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#111111"
+    red:     "#6E4B45"
+    green:   "#5F6B60"
+    yellow:  "#8E8576"
+    blue:    "#6C7482"
+    magenta: "#7B6A72"
+    cyan:    "#8A7D74"
+    white:   "#CFC7BB"
+  bright:
+    black:   "#2A2A2A"
+    red:     "#8A5A5A"
+    green:   "#7C8A7D"
+    yellow:  "#B2A58A"
+    blue:    "#8A96A3"
+    magenta: "#9B8792"
+    cyan:    "#8EA29C"
+    white:   "#EEE7DC"

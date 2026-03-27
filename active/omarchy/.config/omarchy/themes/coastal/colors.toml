@@ -1,0 +1,41 @@
+# ============================================================
+# CORE UI COLORS
+# Neutral black foundation, no tint
+# ============================================================
+
+accent = "#D8A33D"
+
+cursor = "#ECE7DF"
+
+foreground = "#ECE7DF"
+background = "#101214"
+
+selection_foreground = "#ECE7DF"
+selection_background = "#262A2D"
+
+# ============================================================
+# TERMINAL PALETTE
+# Inspired by sunlit coastal street / yellow stucco / aqua doors
+# ============================================================
+
+color0  = "#101214" # neutral black background
+color1  = "#C96A4A" # terracotta / warm error
+color2  = "#5E8A4B" # plant green
+color3  = "#D8A33D" # golden awning / highlight
+color4  = "#2FA7C8" # turquoise / sea-blue info
+color5  = "#8A7A9C" # muted violet shadow accent
+color6  = "#5FC7C2" # aqua prompt / shutters / doors
+color7  = "#ECE7DF" # foreground
+
+# ============================================================
+# BRIGHT VARIANTS
+# ============================================================
+
+color8  = "#262A2D" # neutral panel
+color9  = "#E08763" # bright terracotta
+color10 = "#7EAD63" # bright green
+color11 = "#E7C15B" # bright gold
+color12 = "#73C7E6" # bright sky / aqua
+color13 = "#A99ABC" # bright violet
+color14 = "#8EE3DA" # bright aqua
+color15 = "#F8F4EE" # bright foreground
