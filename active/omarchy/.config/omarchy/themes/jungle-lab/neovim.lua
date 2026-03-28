@@ -1,6 +1,6 @@
 return {
   {
-    dir = "/home/chaz/Projects/home/themes/jungle-lab.nvim",
+    dir = "/home/chaz/Projects/home/themes_nvim/jungle-lab.nvim",
     name = "jungle-lab",
     priority = 1000,
     config = function()

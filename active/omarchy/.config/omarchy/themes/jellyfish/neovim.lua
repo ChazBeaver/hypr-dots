@@ -1,6 +1,6 @@
 return {
   {
-    dir = "/home/chaz/Projects/home/themes/jellyfish.nvim",
+    dir = "/home/chaz/Projects/home/themes_nvim/jellyfish.nvim",
     name = "jellyfish",
     priority = 1000,
     config = function()

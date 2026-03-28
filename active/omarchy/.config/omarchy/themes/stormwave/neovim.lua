@@ -1,6 +1,6 @@
 return {
   {
-    dir = "/home/chaz/Projects/home/themes/stormwave.nvim",
+    dir = "/home/chaz/Projects/home/themes_nvim/stormwave.nvim",
     name = "stormwave",
     priority = 1000,
     config = function()

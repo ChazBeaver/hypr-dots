@@ -1,6 +1,6 @@
 return {
   {
-    dir = "/home/chaz/Projects/home/themes/soot.nvim",
+    dir = "/home/chaz/Projects/home/themes_nvim/soot.nvim",
     name = "soot",
     priority = 1000,
     config = function()
