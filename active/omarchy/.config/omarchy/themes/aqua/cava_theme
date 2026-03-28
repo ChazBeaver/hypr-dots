@@ -15,7 +15,7 @@ channels = mono
 mono_option = average
 
 [color]
-background = '#101214'
+background = '#050A0B'
 foreground = '#EAE6E1'
 
 gradient = 1

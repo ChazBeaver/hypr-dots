@@ -7,7 +7,7 @@ background = "#050A0B"
 selection_foreground = "#EAE6E1"
 selection_background = "#262A2D"
 
-color0  = "#141917" # background
+color0  = "#050A0B" # background
 color1  = "#3F6B57" # error / deep green-brown
 color2  = "#5F8F7A" # success
 color3  = "#7FAFAE" # accent / cyan-teal

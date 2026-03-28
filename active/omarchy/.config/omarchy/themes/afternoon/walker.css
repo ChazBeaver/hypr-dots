@@ -46,6 +46,7 @@ window .box-wrapper {
   margin: 0;
   box-shadow: 0 2px 12px alpha(black, 0.75);
   backdrop-filter: blur(1px);
+  line-height: 70%;
   color: @text;
 }
 
