@@ -1,8 +1,8 @@
 /* @import url("./colors.css"); */
 
 /* Walker-style generic aliases */
-@define-color selected-text      #6F8F92;
-@define-color text               #DCE4E6;
+@define-color selected-text      #DCE4E6;
+@define-color text               #5E908F;
 @define-color base               #101214;
 @define-color border             #262A2D;
 @define-color foreground         #101214;
