@@ -1,6 +1,6 @@
 return {
   {
-    dir = "/home/chaz/Projects/home/themes/campfire.nvim",
+    dir = "/home/chaz/Projects/home/themes_nvim/campfire.nvim",
     name = "campfire",
     priority = 1000,
     config = function()
