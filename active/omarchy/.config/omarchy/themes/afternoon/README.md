@@ -1,90 +1,58 @@
-# Clay
+# Afternoon for Omarchy
 
-Clay is a warm, earthy dark theme for Omarchy built around low-glare backgrounds, soft tan foregrounds, and restrained accents of clay gold, ember orange, olive, and muted violet.
+Afternoon is an Omarchy theme package built to coordinate the wider desktop theme with the Neovim theme **`afternoon`**.
 
-It is designed to pair with the Clay Neovim colorscheme so your editor and desktop feel like one cohesive environment.
+This repo is the Omarchy-side theme bundle. It provides the files Omarchy uses for desktop and application styling, while Neovim itself is styled by the separate Neovim colorscheme named `afternoon`.
 
----
+## Relationship to the Neovim theme
 
-## Preview
+This Omarchy theme is designed to pair with the Neovim theme:
 
-![Theme preview](preview.png)
+- **Neovim theme name:** `afternoon`
+- **Omarchy theme repo:** `omarchy-afternoon-theme`
 
----
+The Omarchy theme and the Neovim theme are meant to visually match. In practice, this means:
 
-## Install
+- Omarchy handles the broader desktop/app theme files
+- Neovim loads the `afternoon` colorscheme
+- both share the same palette direction so the full environment feels consistent
 
-Use the Omarchy theme installer:
+## What this repo contains
 
-```bash
-omarchy-theme-install https://github.com/YOUR_GITHUB_USERNAME/clay
-```
+Typical files in this Omarchy theme bundle include:
 
----
+- `colors.toml` — source palette used across the theme
+- `colors.css` — shared CSS color definitions
+- `btop.theme`
+- `cava_theme`
+- `chromium.theme`
+- `mako.ini`
+- `walker.css`
+- `warp.yaml`
+- `palette.json`
+- wallpapers / previews / supporting assets
 
-## Included
+## How it works with Omarchy
 
-Clay currently includes theme support for:
+Omarchy reads the theme files in this repo to style supported applications and desktop components.
 
-- Hyprland
-- Hyprlock
-- Waybar
-- Wofi
-- Walker
-- Mako
-- SwayOSD
-- btop
-- Warp
-- Base16 exports
-- Neovim integration for Omarchy
+Neovim is not styled directly by this Omarchy repo alone. Instead, the Omarchy theme is intended to be used alongside the Neovim theme `afternoon`, so the editor matches the rest of the system.
 
----
+## Naming convention
 
-## Palette Notes
+This repo is named after the Omarchy theme package:
 
-Clay uses a warm, grounded palette built around:
+- `omarchy-afternoon-theme`
 
-- deep brown-black backgrounds
-- soft tan foregrounds
-- clay gold as the primary accent
-- ember orange for stronger emphasis
-- olive and muted green for support
-- violet and plum as secondary accents
+The Neovim theme it is built around is:
 
-The shared palette is centered in:
+- `afternoon`
 
-- `colors.css`
-- `colors.toml`
+That separation is intentional:
 
-These files act as the cross-application palette bridge for the rest of the theme bundle.
+- **Omarchy theme repo** = full desktop/app bundle
+- **Neovim theme** = editor colorscheme
 
----
+## Goal
 
-## Wallpapers
-
-Place Clay-compatible wallpapers in the `backgrounds/` directory.
-
-Warm, earthy, muted, evening, desert, firelit, rustic, low-glare, and ambient scenes tend to match Clay best.
-
----
-
-## Notes
-
-- `hyprland.conf` provides Clay border and decoration colors intended to layer cleanly on top of your existing Omarchy setup.
-- `hyprlock.conf` provides a matching lockscreen palette.
-- `neovim.lua` targets the Clay Neovim theme and applies Omarchy-specific popup and completion highlight overrides.
-- This bundle is designed to complement an existing Omarchy configuration rather than fully replace all app configs.
-
----
-
-## Attribution
-
-- Clay theme design and packaging: Chaz Beaver
-- Omarchy theme structure inspiration from the Omarchy theme ecosystem
-- Cava theme file may require additional Clay-specific tuning if you want it fully aligned
-
----
-
-## License
-
-Use, adapt, and modify freely for your personal setup.
+The goal of this theme is to make Omarchy and Neovim feel like one unified environment rather than two separate themes.

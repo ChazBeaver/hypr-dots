@@ -1,90 +1,48 @@
-# Clay
+# Campfire for Omarchy
 
-Clay is a warm, earthy dark theme for Omarchy built around low-glare backgrounds, soft tan foregrounds, and restrained accents of clay gold, ember orange, olive, and muted violet.
+Campfire is an Omarchy theme package built to coordinate the wider desktop theme with the Neovim theme **`campfire`**.
 
-It is designed to pair with the Clay Neovim colorscheme so your editor and desktop feel like one cohesive environment.
+This repo is the Omarchy-side theme bundle. It provides the files Omarchy uses for desktop and application styling, while Neovim itself is styled by the separate Neovim colorscheme named `campfire`.
 
----
+## Relationship to the Neovim theme
 
-## Preview
+This Omarchy theme is designed to pair with the Neovim theme:
 
-![Theme preview](preview.png)
+- **Neovim theme name:** `campfire`
+- **Omarchy theme repo:** `omarchy-campfire-theme`
 
----
+The Omarchy theme and the Neovim theme are meant to visually match. In practice, this means:
 
-## Install
+- Omarchy handles the broader desktop/app theme files
+- Neovim loads the `campfire` colorscheme
+- both share the same palette direction so the full environment feels consistent
 
-Use the Omarchy theme installer:
+## What this repo contains
 
-```bash
-omarchy-theme-install https://github.com/YOUR_GITHUB_USERNAME/clay
-```
+Typical files in this Omarchy theme bundle include:
 
----
-
-## Included
-
-Clay currently includes theme support for:
-
-- Hyprland
-- Hyprlock
-- Waybar
-- Wofi
-- Walker
-- Mako
-- SwayOSD
-- btop
-- Warp
-- Base16 exports
-- Neovim integration for Omarchy
-
----
-
-## Palette Notes
-
-Clay uses a warm, grounded palette built around:
-
-- deep brown-black backgrounds
-- soft tan foregrounds
-- clay gold as the primary accent
-- ember orange for stronger emphasis
-- olive and muted green for support
-- violet and plum as secondary accents
-
-The shared palette is centered in:
-
-- `colors.css`
 - `colors.toml`
+- `colors.css`
+- `btop.theme`
+- `cava_theme`
+- `chromium.theme`
+- `mako.ini`
+- `walker.css`
+- `warp.yaml`
+- `palette.json`
+- wallpapers / previews / supporting assets
 
-These files act as the cross-application palette bridge for the rest of the theme bundle.
+## How it works with Omarchy
 
----
+Omarchy reads the theme files in this repo to style supported applications and desktop components.
 
-## Wallpapers
+Neovim is intended to load the separate `campfire` theme so that the editor and the Omarchy theme remain aligned.
 
-Place Clay-compatible wallpapers in the `backgrounds/` directory.
+## Naming convention
 
-Warm, earthy, muted, evening, desert, firelit, rustic, low-glare, and ambient scenes tend to match Clay best.
+- **Omarchy repo:** `omarchy-campfire-theme`
+- **Neovim theme:** `campfire`
 
----
+## Goal
 
-## Notes
-
-- `hyprland.conf` provides Clay border and decoration colors intended to layer cleanly on top of your existing Omarchy setup.
-- `hyprlock.conf` provides a matching lockscreen palette.
-- `neovim.lua` targets the Clay Neovim theme and applies Omarchy-specific popup and completion highlight overrides.
-- This bundle is designed to complement an existing Omarchy configuration rather than fully replace all app configs.
-
----
-
-## Attribution
-
-- Clay theme design and packaging: Chaz Beaver
-- Omarchy theme structure inspiration from the Omarchy theme ecosystem
-- Cava theme file may require additional Clay-specific tuning if you want it fully aligned
-
----
-
-## License
-
-Use, adapt, and modify freely for your personal setup.
+Campfire is meant to provide a consistent look across Omarchy, terminal tools, and Neovim.
