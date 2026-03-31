@@ -1,71 +1,57 @@
 @import url("./colors.css");
 
-/* Color palette used by this Waybar theme */
-@define-color clay-bg            rgba(26, 21, 21, 0.86);
-@define-color clay-bg-solid      #1A1515;
-@define-color clay-bg-alt        #2D2424;
-@define-color clay-bg-alt2       #453636;
-@define-color clay-panel         #171212;
-@define-color clay-panel-alt     #161616;
-@define-color clay-accent-bg     #3E3030;
+@define-color bg            #000000;
+@define-color fg            #ffffff;
+@define-color fg-alt        #d9d9d9;
+@define-color fg-muted      #a0a0a0;
+@define-color comment       #6f6f6f;
 
-@define-color clay-fg            #DCC9BC;
-@define-color clay-fg-alt        #D0D0D0;
-@define-color clay-fg-muted      #9C8181;
-@define-color clay-comment       #725A5A;
+@define-color red           #CF223E;
+@define-color orange        #F07342;
+@define-color green         #768F80;
+@define-color yellow        #E39C45;
+@define-color olive         #959A6B;
+@define-color purple        #756D94;
 
-@define-color clay-red           #F07342;
-@define-color clay-rose          #CF223E;
-@define-color clay-green         #768F80;
-@define-color clay-green-strong  #136D2E;
-@define-color clay-yellow        #E39C45;
-@define-color clay-gold          #D99542;
-@define-color clay-olive         #959A6B;
-@define-color clay-purple        #756D94;
-@define-color clay-violet        #7B3D79;
-
-@define-color clay-border        #453636;
-@define-color clay-border-strong #DCC9BC;
-
-/* Global defaults for all Waybar items */
+/* Global defaults */
 * {
   border: none;
   border-radius: 0;
   min-height: 0;
+  box-shadow: none;
+  text-shadow: none;
   font-family: "FiraCode Nerd Font Mono", "FiraCode Mono", "Symbols Nerd Font", sans-serif;
   font-size: 13px;
   font-weight: 600;
 }
 
-/* The main bar that stretches across the screen */
+/* One single seamless bar */
 window#waybar {
-  background: @clay-bg;
-  color: @clay-fg;
-  border-bottom: 1px solid alpha(@clay-border-strong, 0.18);
+  background: @bg;
+  color: @fg;
+  border: none;
 }
 
-/* The little popup boxes that appear when hovering modules */
+/* Tooltips */
 tooltip {
-  background: @clay-panel;
-  color: @clay-fg;
-  border: 1px solid @clay-border;
+  background: @bg;
+  color: @fg;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
 }
 
-/* Text inside tooltips */
 tooltip label {
-  color: @clay-fg;
+  color: @fg;
 }
 
-/* Spacing around the left, center, and right module groups */
+/* Group spacing only */
 .modules-left,
 .modules-center,
 .modules-right {
-  margin: 6px 8px;
+  margin: 0 8px;
 }
 
-/* Shared card style for most modules:
-   gives them their box shape, spacing, and background */
+/* Make all modules transparent so the bar shows through */
 #workspaces,
 #clock,
 #window,
@@ -83,61 +69,59 @@ tooltip label {
 #idle_inhibitor,
 #bluetooth,
 #language {
-  background: alpha(@clay-panel-alt, 0.96);
-  color: @clay-panel-alt;
-  border: 1px solid alpha(@clay-panel-alt, 0.75);
-  border-radius: 12px;
-  margin: 4px 5px;
-  padding: 0 12px;
-}
-
-/* The active window title area in the middle of the bar */
-#window {
-  color: @clay-panel-alt;
-  padding-left: 14px;
-  padding-right: 14px;
-}
-
-/* The workspace section container */
-#workspaces {
-  padding: 0 6px;
-}
-
-/* Each individual workspace button */
-#workspaces button {
-  color: @clay-fg-muted;
   background: transparent;
-  border-radius: 9px;
+  color: @fg;
+  border: none;
+  box-shadow: none;
+  margin: 0 6px;
   padding: 0 8px;
-  margin: 4px 3px;
-  transition: all 0.15s ease-in-out;
 }
 
-/* Workspace button when your mouse is over it */
+/* Window title */
+#window {
+  color: @fg;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Workspace row */
+#workspaces {
+  padding: 0;
+  margin: 0 6px;
+}
+
+/* Workspace buttons */
+#workspaces button {
+  background: transparent;
+  color: @fg-muted;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 6px;
+  margin: 0 2px;
+  transition: none;
+}
+
+/* Hover */
 #workspaces button:hover {
-  background: alpha(@clay-panel-alt, 0.75);
-  color: @clay-panel-alt;
+  background: transparent;
+  color: @fg;
 }
 
-/* The workspace you are currently on */
+/* Active workspace */
 #workspaces button.active {
-  background: @clay-panel-alt;
-  color: @clay-panel-alt;
-  border: 1px solid alpha(@clay-panel-alt, 0.5);
+  background: transparent;
+  color: @fg;
+  border: none;
 }
 
-/* A workspace that needs attention */
+/* Urgent */
 #workspaces button.urgent {
-  background: @clay-rose;
-  color: @clay-fg;
+  background: transparent;
+  color: @red;
 }
 
-/* The clock text */
-#clock {
-  color: @clay-fg;
-}
-
-/* General information modules on the bar */
+/* General info modules */
 #cpu,
 #memory,
 #disk,
@@ -146,67 +130,64 @@ tooltip label {
 #bluetooth,
 #language,
 #idle_inhibitor {
-  color: @clay-fg-alt;
+  color: @fg-alt;
 }
 
-/* Media, brightness, and battery modules */
+/* Media/brightness/battery */
 #pulseaudio,
 #backlight,
 #battery {
-  color: @clay-fg;
+  color: @fg;
 }
 
-/* System tray spacing */
+/* Tray */
 #tray {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
-/* Weather module color */
+/* Weather */
 #custom-weather {
-  color: @clay-olive;
+  color: @olive;
 }
 
-/* Power button / logout / shutdown area */
+/* Power */
 #custom-power {
-  color: @clay-red;
-  padding-right: 14px;
+  color: @orange;
+  padding-right: 8px;
 }
 
-/* Battery is getting low */
+/* Battery states */
 #battery.warning:not(.charging) {
-  color: @clay-yellow;
+  color: @yellow;
 }
 
-/* Battery is critically low */
 #battery.critical:not(.charging) {
-  color: @clay-rose;
+  color: @red;
 }
 
-/* Battery is currently charging */
 #battery.charging {
-  color: @clay-green;
+  color: @green;
 }
 
-/* Dimmed state for modules that are inactive or unavailable */
+/* Inactive/unavailable */
 #network.disconnected,
 #pulseaudio.muted,
 #bluetooth.disabled,
 #bluetooth.off {
-  color: @clay-comment;
+  color: @comment;
 }
 
-/* CPU/GPU or system temperature is too high */
+/* Temperature critical */
 #temperature.critical {
-  color: @clay-red;
+  color: @orange;
 }
 
-/* Idle inhibitor is turned on */
+/* Idle inhibitor */
 #idle_inhibitor.activated {
-  color: @clay-purple;
+  color: @purple;
 }
 
-/* Idle inhibitor is off */
 #idle_inhibitor {
-  color: @clay-comment;
+  color: @comment;
 }
