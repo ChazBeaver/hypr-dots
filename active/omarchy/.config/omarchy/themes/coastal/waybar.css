@@ -6,8 +6,8 @@
 @define-color fg-muted      #a0a0a0;
 @define-color comment       #6f6f6f;
 
-@define-color red           #F07342;
-@define-color rose          #CF223E;
+@define-color red           #CF223E;
+@define-color orange        #F07342;
 @define-color green         #768F80;
 @define-color yellow        #E39C45;
 @define-color olive         #959A6B;
@@ -118,7 +118,7 @@ tooltip label {
 /* Urgent */
 #workspaces button.urgent {
   background: transparent;
-  color: @rose;
+  color: @red;
 }
 
 /* General info modules */
@@ -153,7 +153,7 @@ tooltip label {
 
 /* Power */
 #custom-power {
-  color: @red;
+  color: @orange;
   padding-right: 8px;
 }
 
@@ -163,7 +163,7 @@ tooltip label {
 }
 
 #battery.critical:not(.charging) {
-  color: @rose;
+  color: @red;
 }
 
 #battery.charging {
@@ -180,7 +180,7 @@ tooltip label {
 
 /* Temperature critical */
 #temperature.critical {
-  color: @red;
+  color: @orange;
 }
 
 /* Idle inhibitor */

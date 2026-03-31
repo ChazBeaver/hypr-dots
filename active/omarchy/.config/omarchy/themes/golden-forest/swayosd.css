@@ -1,49 +1,58 @@
 @import url("./colors.css");
 
-@define-color clay-bg            rgba(23, 18, 18, 0.96);
-@define-color clay-panel         #171212;
-@define-color clay-accent-bg     #3E3030;
-@define-color clay-fg            #DCC9BC;
-@define-color clay-fg-muted      #9C8181;
-@define-color clay-border        #453636;
-@define-color clay-yellow        #E39C45;
-@define-color clay-purple        #756D94;
+@define-color bg         #171212;
+@define-color panel      #1F1818;
+@define-color accent_bg  #3E3030;
+@define-color fg         #DCC9BC;
+@define-color border     #453636;
+@define-color accent     #E39C45;
+@define-color accent_alt #756D94;
 
-window {
-  background: transparent;
+/* Whole OSD surface */
+window#osd {
+  background-color: @bg;
+  background-image: none;
+  border: 2px solid @border;
+  border-radius: 16px;
+  box-shadow: none;
+  opacity: 1;
 }
 
-.osd-window {
-  background: @clay-bg;
-  border: 2px solid @clay-border;
-  border-radius: 14px;
+/* Main content container */
+window#osd box {
+  background-color: @panel;
+  background-image: none;
+  border-radius: 12px;
   padding: 12px 16px;
 }
 
-.osd-label {
-  color: @clay-fg;
-  font-size: 15px;
-  font-weight: 700;
+/* Icon + percentage text */
+window#osd image,
+window#osd label {
+  color: @fg;
+  background: transparent;
 }
 
-.osd-image {
-  color: @clay-yellow;
+/* Progress widget */
+window#osd progressbar {
+  min-width: 160px;
+  min-height: 10px;
+  background: transparent;
+  background-image: none;
 }
 
-.osd-progress {
-  min-height: 8px;
+/* Track */
+window#osd trough {
+  min-height: 10px;
   border-radius: 999px;
-  background: @clay-accent-bg;
+  background-color: @accent_bg;
+  background-image: none;
 }
 
-.osd-progress trough {
-  min-height: 8px;
+/* Fill */
+window#osd progress {
+  min-height: 10px;
   border-radius: 999px;
-  background: @clay-accent-bg;
-}
-
-.osd-progress progress {
-  min-height: 8px;
-  border-radius: 999px;
-  background: @clay-purple;
+  background-color: @accent_alt;
+  background-image: none;
 }
