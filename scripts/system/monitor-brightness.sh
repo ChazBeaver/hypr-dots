@@ -5,8 +5,8 @@ action="${1:-}"
 amount="${2:-10}"
 
 current="$(
-  ddcutil getvcp 10 --terse \
-    | awk -F'[=,]' '{gsub(/ /, "", $2); print $2}'
+  ddcutil getvcp 10 2>/dev/null \
+    | sed -n 's/.*current value = *\([0-9]\+\).*/\1/p'
 )"
 
 if [[ -z "$current" ]]; then
