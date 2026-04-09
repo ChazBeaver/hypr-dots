@@ -11,6 +11,7 @@ IFS=$'\n\t'
 #     3) nixos (if nixos detected AND active/nixos exists)
 #     4) linux (if exists)  [future-friendly fallback]
 # - HOME bucket behavior matches appdots.
+# - Syncs scripts/system/* into ~/.local/bin (without .sh suffix)
 # ============================================================================
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")" &>/dev/null && pwd)"
@@ -192,5 +193,8 @@ if [[ -n "$LAYER" ]]; then
 else
   echo "ℹ️  No OS layer matched/found under active/. (Only shared applied.)"
 fi
+
+echo "🔧 Syncing hyprdots system scripts into ~/.local/bin"
+"$SCRIPT_DIR/scripts/install/sync-system-bin.sh"
 
 echo "✅ Finished installing hyprdots."
