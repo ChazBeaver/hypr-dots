@@ -8,8 +8,8 @@ selection_foreground = "#EAE6E1"
 selection_background = "#262A2D"
 
 color0  = "#050A0B" # background
-color1  = "#3F6B57" # error / deep green-brown
-color2  = "#5F8F7A" # success
+color1  = "#A0462E" # error 
+color2  = "#467148" # success
 color3  = "#7FAFAE" # accent / cyan-teal
 color4  = "#4C7A94" # blue info
 color5  = "#7A8F6D" # olive support

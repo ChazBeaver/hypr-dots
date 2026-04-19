@@ -15,7 +15,7 @@
 @define-color accent_dim #7A8F6D;
 
 /* Extended warm/cool roles */
-@define-color accent_red_deep #365847;
+@define-color accent_red_deep #365847; /* #a0462e */
 @define-color accent_rose #7C4D57;
 @define-color accent_rust #4A6F5D;
 @define-color accent_ember #5B7D6D;
@@ -70,7 +70,7 @@
 
 /* Base terminal-style palette */
 @define-color color0  #141917;
-@define-color color1  #3F6B57;
+@define-color color1  #a0462e; /* #a0462e */
 @define-color color2  #5F8F7A;
 @define-color color3  #7FAFAE;
 @define-color color4  #4C7A94;
