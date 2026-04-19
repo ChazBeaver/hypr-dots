@@ -53,17 +53,14 @@
     "signal": 7,
     "interval": 21600
   },
-
   "cpu": {
     "interval": 5,
     "format": "󰍛",
     "on-click": "omarchy-launch-or-focus-tui btop"
   },
   "clock": {
-    "format": "{:L%A   |   %B %d, %Y   |   %I:%M %p}",
+    "format": "{:L%A     |     %B %d, %Y     |     %I:%M %p}",
     "format-alt": "{:%I:%M %p}",
-    // "format": "{:%I:%M %p}",
-    // "format-alt": "{:L%A %B %d, %Y}",
     "tooltip": false,
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
