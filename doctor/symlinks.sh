@@ -97,14 +97,28 @@ check_config_scope() {
 
 check_bin_scope() {
   local bin_dir="$1"
+  local os="$2"
   [ -d "$bin_dir" ] || return 0
 
-  find "$bin_dir" -mindepth 1 -maxdepth 1 -type f | sort | while read -r item; do
-    local name
-    name="$(basename "$item")"
-    name="${name%.sh}"
-    check_link "$item" "$HOME/.local/bin/$name"
-  done
+  # Cross-platform scripts under bin/shared/
+  if [ -d "$bin_dir/shared" ]; then
+    find "$bin_dir/shared" -mindepth 1 -maxdepth 1 -type f | sort | while read -r item; do
+      local name
+      name="$(basename "$item")"
+      name="${name%.sh}"
+      check_link "$item" "$HOME/.local/bin/$name"
+    done
+  fi
+
+  # OS-specific scripts under bin/<os>/
+  if [ -d "$bin_dir/$os" ]; then
+    find "$bin_dir/$os" -mindepth 1 -maxdepth 1 -type f | sort | while read -r item; do
+      local name
+      name="$(basename "$item")"
+      name="${name%.sh}"
+      check_link "$item" "$HOME/.local/bin/$name"
+    done
+  fi
 }
 
 check_scope() {
@@ -124,7 +138,7 @@ check_scope "$ACTIVE_DIR/omarchy"
 check_scope "$ACTIVE_DIR/shared"
 
 log_step "Checking: $HYPRDOTS_DIR/bin"
-check_bin_scope "$HYPRDOTS_DIR/bin"
+check_bin_scope "$HYPRDOTS_DIR/bin" "linux"
 
 echo
 if [ "$DRIFT" -eq 0 ] && [ "$EXTERNAL" -eq 0 ]; then

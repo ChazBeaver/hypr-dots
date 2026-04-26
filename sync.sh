@@ -24,15 +24,13 @@ assert_linux
 
 cat <<'EOF'
 
-
- _   ___   ___________________ _____ _____ _____ 
-| | | \ \ / / ___ \ ___ \  _  \  _  |_   _/  ___|
-| |_| |\ V /| |_/ / |_/ / | | | | | | | | \ `--. 
-|  _  | \ / |  __/|    /| | | | | | | | |  `--. \
-| | | | | | | |   | |\ \| |/ /\ \_/ / | | /\__/ /
-\_| |_/ \_/ \_|   \_| \_|___/  \___/  \_/ \____/ 
-                                                 
-                Syncing Hyprdots
+ _                      _       _
+| |__  _   _ _ __  _ __| | ___ | |_ ___
+| '_ \| | | | '_ \| '__| |/ _ \| __/ __|
+| | | | |_| | |_) | |  | | (_) | |_\__ \
+|_| |_|\__, | .__/|_|  |_|\___/ \__|___/
+       |___/|_|
+       Syncing Hyprdots
 
 EOF
 
@@ -62,7 +60,7 @@ log_step "Linking shared configs..."
 install_scope "$ACTIVE_DIR/shared"
 
 # ---- Bin sync ----
-install_bin_scope "$SCRIPT_DIR/bin"
+install_bin_scope "$SCRIPT_DIR/bin" "linux"
 
 echo
 log_ok "Sync complete."

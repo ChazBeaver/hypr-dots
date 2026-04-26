@@ -3,8 +3,9 @@
 # Symlink creation logic. Source this; do not execute.
 # Depends on: lib/log.sh
 #
-# hyprdots manages only ~/.config/* entries.
+# hyprdots manages ~/.config/* entries and bin/ scripts.
 # Scopes: active/omarchy/.config  active/shared/.config
+#         bin/shared/             bin/linux/
 
 # link_item SOURCE TARGET
 # Create a symlink at TARGET pointing to SOURCE.
@@ -34,7 +35,7 @@ link_item() {
 }
 
 # install_config_scope CONFIG_PATH
-# 1:1 mirror: .config/<entry> → ~/.config/<entry>
+# 1:1 mirror: .config/<entry> -> ~/.config/<entry>
 install_config_scope() {
   local config_path="$1"
   [ -d "$config_path" ] || return 0
@@ -47,20 +48,33 @@ install_config_scope() {
   done
 }
 
-# install_bin_scope BIN_DIR
-# Symlinks bin/* -> ~/.local/bin/<name>
+# install_bin_scope BIN_DIR OS
+# Symlinks bin/shared/* -> ~/.local/bin/<n>   (cross-platform)
+#          bin/<OS>/*   -> ~/.local/bin/<n>   (OS-specific)
 # Strips trailing .sh from the link name so scripts run as bare commands.
 install_bin_scope() {
   local bin_dir="$1"
+  local os="$2"
   [ -d "$bin_dir" ] || return 0
 
   mkdir -p "$HOME/.local/bin"
   log_sync "Syncing bin into ~/.local/bin"
 
   local -a files=()
-  while IFS= read -r f; do
-    files+=("$f")
-  done < <(find "$bin_dir" -mindepth 1 -maxdepth 1 -type f | sort)
+
+  # Cross-platform scripts under bin/shared/
+  if [ -d "$bin_dir/shared" ]; then
+    while IFS= read -r f; do
+      files+=("$f")
+    done < <(find "$bin_dir/shared" -mindepth 1 -maxdepth 1 -type f | sort)
+  fi
+
+  # OS-specific scripts under bin/<os>/
+  if [ -d "$bin_dir/$os" ]; then
+    while IFS= read -r f; do
+      files+=("$f")
+    done < <(find "$bin_dir/$os" -mindepth 1 -maxdepth 1 -type f | sort)
+  fi
 
   for src in "${files[@]}"; do
     local name
