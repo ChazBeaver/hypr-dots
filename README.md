@@ -1,71 +1,116 @@
-# Hypr-Dots
+# Hyprdots
 
-A modular, future-proof dotfiles system for managing Hyprland and Wayland desktop environment configurations.
+A modular dotfiles system for managing Hyprland and Omarchy configurations on Arch Linux.
 
-Hypr-Dots uses a pure Bash install script to cleanly symlink configs into your `$HOME/.config/` directory — no dependencies, no extra tools required.
-
----
-
-## 📦 What's Included
-
-| Application / Tool | Config Location |
-|:-------------------|:----------------|
-| AGS                 | `.config/ags/` |
-| Autostart           | `.config/autostart/` |
-| Btop                | `.config/btop/` |
-| Cava                | `.config/cava/` |
-| Fastfetch           | `.config/fastfetch/` |
-| Fontconfig          | `.config/fontconfig/` |
-| Hyprland            | `.config/hypr/` |
-| Kitty               | `.config/kitty/` |
-| Kvantum             | `.config/Kvantum/` |
-| Mousepad            | `.config/Mousepad/` |
-| MPV                 | `.config/mpv/` |
-| NWG-Look            | `.config/nwg-look/` |
-| Qt5ct               | `.config/qt5ct/` |
-| Qt6ct               | `.config/qt6ct/` |
-| Rofi                | `.config/rofi/` |
-| Swappy              | `.config/swappy/` |
-| Swaync              | `.config/swaync/` |
-| Thunar              | `.config/Thunar/` |
-| Wallust             | `.config/wallust/` |
-| Waybar              | `.config/waybar/` |
-| WezTerm             | `.config/wezterm/` |
-| Wlogout             | `.config/wlogout/` |
-| XFCE4               | `.config/xfce4/` |
-| Xsettingsd          | `.config/xsettingsd/` |
+Uses pure Bash to symlink configs cleanly into `~/.config/`. No dependencies beyond what Omarchy provides.
 
 ---
 
-## 🚀 Install
+## 📦 What's Inside
 
-The install script will:
+| Scope | What it manages |
+|:------|:----------------|
+| `active/omarchy/` | Hyprland, Hyprlock, Hypridle, Waybar, Walker, Mako, Ghostty, Alacritty, IMV, font config, Omarchy themes |
+| `active/shared/` | Cava, KeePassXC |
 
-- Set the `HYPR_DOTS_DIR` environment variable (saved in `~/.dotfiles-env.sh`).
-- Symlink configs from `active/.config/` into `$HOME/.config/`, preserving app structure.
-- Skip anything already correctly linked.
-
----
-
-## 🛠 How It Works
-
-- **active/.config/** — Top-level configs and folders for Hyprland and related apps.
-- **inactive/** — Configs stored for later, but not installed.
-
-Move files between `active/.config/` and `inactive/` as needed, then re-run `install.sh`.
-
-The script only links top-level folders and files inside `.config/` — no deep recursion.
+All entries under each scope's `.config/` are symlinked 1:1 into `~/.config/`.
 
 ---
 
-## ✨ Coming Soon
+## 🚀 Quick Start
 
-- Optional backups for conflicting configs.
-- Install summary report (e.g., number of links created, skipped).
-- Bootstrap integration for multi-repo setups (e.g., app-dots + hypr-dots).
+### Fresh machine (first time)
+
+```bash
+git clone <repo-url> ~/hyprdots
+cd ~/hyprdots
+./bootstrap.sh
+```
+
+`bootstrap.sh` will:
+1. Back up any existing `~/.config` entries that would be replaced
+2. Install declared packages via `pacman` / `yay`
+3. Symlink all configs
+
+### After a git pull
+
+```bash
+./sync.sh
+```
+
+Idempotent — safe to run as many times as you like.
 
 ---
 
-## 📜 License
+## 🔍 Diagnostics
 
-MIT License
+```bash
+./doctor.sh
+```
+
+Runs two checks:
+
+- **symlinks.sh** — verifies every symlink exists and points correctly
+- **packages.sh** — compares installed packages against `packages/linux/core.sh`
+
+Exit code is non-zero if drift is detected. External targets (e.g. aether shader symlinks requiring the `aether` package) are reported as info, not errors.
+
+---
+
+## 🗂 Backup Before Sync
+
+```bash
+./backup.sh
+```
+
+Renames any real (non-symlink) `~/.config` entries that sync would replace by appending `.bak`. Run this manually before your first sync on a machine with existing configs.
+
+---
+
+## 🔧 Environment
+
+`sync.sh` writes `HYPR_DOTS_DIR` and an `alias hyprdots` to `~/.dotfiles-env.sh`. Source this in your shell rc if you want the alias available everywhere:
+
+```bash
+# in ~/.zshrc or ~/.bashrc
+[ -f ~/.dotfiles-env.sh ] && source ~/.dotfiles-env.sh
+```
+
+This file is also read by `appdots/doctor/packages.sh` so it can filter hyprdots' package declarations from its own drift report, and vice versa.
+
+---
+
+## 📁 Repo Layout
+
+```
+hyprdots/
+├── active/
+│   ├── omarchy/         # Omarchy/Hyprland configs → ~/.config/
+│   └── shared/          # Shared configs          → ~/.config/
+├── doctor/
+│   ├── packages.sh      # Package drift check
+│   └── symlinks.sh      # Symlink drift check
+├── lib/
+│   ├── backup.sh        # Backup helpers
+│   ├── detect.sh        # OS detection
+│   ├── link.sh          # Symlink creation logic
+│   └── log.sh           # Emoji logging helpers
+├── packages/
+│   └── linux/
+│       └── core.sh      # Declared pacman / AUR packages
+├── scripts/
+│   └── misc/
+│       └── check-drift.sh
+├── backup.sh            # Back up before sync
+├── bootstrap.sh         # Cold-boot: backup + packages + sync
+├── doctor.sh            # Run all diagnostics
+└── sync.sh              # Symlink sync (run after git pull)
+```
+
+---
+
+## 🔄 Relationship with Appdots
+
+`hyprdots` and `appdots` are sibling repos. They share `~/.dotfiles-env.sh` to advertise their locations to each other's `doctor/packages.sh` scripts, so package drift reports correctly exclude the other repo's declared packages.
+
+Both repos use the same `lib/` architecture and shell conventions.
