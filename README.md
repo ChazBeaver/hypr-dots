@@ -2,7 +2,7 @@
 
 A modular dotfiles system for managing Hyprland and Omarchy configurations on Arch Linux.
 
-Uses pure Bash to symlink configs cleanly into `~/.config/`. No dependencies beyond what Omarchy provides.
+Pure Bash — no dependencies beyond what Omarchy provides. Symlinks configs cleanly into `~/.config/`, installs declared packages, and keeps everything verifiable with a built-in doctor.
 
 ---
 
@@ -10,7 +10,7 @@ Uses pure Bash to symlink configs cleanly into `~/.config/`. No dependencies bey
 
 | Scope | What it manages |
 |:------|:----------------|
-| `active/omarchy/` | Hyprland, Hyprlock, Hypridle, Waybar, Walker, Mako, Ghostty, Alacritty, IMV, font config, Omarchy themes |
+| `active/omarchy/` | Hyprland, Hyprlock, Hypridle, Hyprsunset, Waybar, Walker, Mako, Ghostty, Alacritty, IMV, font config, Omarchy themes and shaders |
 | `active/shared/` | Cava, KeePassXC |
 
 All entries under each scope's `.config/` are symlinked 1:1 into `~/.config/`.
@@ -27,10 +27,10 @@ cd ~/hyprdots
 ./bootstrap.sh
 ```
 
-`bootstrap.sh` will:
-1. Back up any existing `~/.config` entries that would be replaced
-2. Install declared packages via `pacman` / `yay`
-3. Symlink all configs
+`bootstrap.sh` runs in order:
+1. **Backup** — renames any conflicting real `~/.config` entries to `.bak`
+2. **Packages** — installs declared packages via `pacman` / `yay`
+3. **Sync** — symlinks all configs and bin scripts into place
 
 ### After a git pull
 
@@ -42,6 +42,16 @@ Idempotent — safe to run as many times as you like.
 
 ---
 
+## 🗂 Backup Before Sync
+
+```bash
+./backup.sh
+```
+
+Renames any real (non-symlink) `~/.config` entries that sync would replace, appending `.bak`. Run this manually before your first sync on a machine with existing configs.
+
+---
+
 ## 🔍 Diagnostics
 
 ```bash
@@ -50,33 +60,56 @@ Idempotent — safe to run as many times as you like.
 
 Runs two checks:
 
-- **symlinks.sh** — verifies every symlink exists and points correctly
-- **packages.sh** — compares installed packages against `packages/linux/core.sh`
+- **`doctor/symlinks.sh`** — verifies every symlink and `~/.local/bin/` entry exists and points correctly. Aether shader symlinks that point to missing external paths are reported as info rather than errors — these are environment issues, not sync drift.
+- **`doctor/packages.sh`** — compares installed packages against `packages/linux/core.sh`, filtering out Omarchy base packages, arch-base essentials, and sibling repo (appdots) declarations to avoid false positives.
 
-Exit code is non-zero if drift is detected. External targets (e.g. aether shader symlinks requiring the `aether` package) are reported as info, not errors.
+Exit code is non-zero if drift is detected. Run `./sync.sh` to fix symlink drift.
 
 ---
 
-## 🗂 Backup Before Sync
+## 🔧 How It Works
 
-```bash
-./backup.sh
-```
+### Scopes
 
-Renames any real (non-symlink) `~/.config` entries that sync would replace by appending `.bak`. Run this manually before your first sync on a machine with existing configs.
+Each `active/<scope>/` directory mirrors into `~/.config/`:
+
+| Path in repo | Symlinked to |
+|:-------------|:-------------|
+| `active/omarchy/.config/<entry>` | `~/.config/<entry>` |
+| `active/shared/.config/<entry>` | `~/.config/<entry>` |
+
+`sync.sh` processes `omarchy/` first, then `shared/`.
+
+### bin/
+
+Scripts in `bin/` are symlinked into `~/.local/bin/` with `.sh` stripped from the name, making them available as bare commands:
+
+| Path | Symlinked as |
+|:-----|:------------|
+| `bin/shared/<script>.sh` | `~/.local/bin/<script>` |
+| `bin/linux/<script>.sh` | `~/.local/bin/<script>` |
+
+**Current bin scripts:**
+
+| Script | Command | Purpose |
+|:-------|:--------|:--------|
+| `bin/linux/monitor-brightness.sh` | `monitor-brightness` | Control external monitor brightness via DDC/CI (`up`, `down`, `set`) |
+| `bin/linux/webcam-launch.sh` | `webcam-launch` | Launch webcam |
 
 ---
 
 ## 🔧 Environment
 
-`sync.sh` writes `HYPR_DOTS_DIR` and an `alias hyprdots` to `~/.dotfiles-env.sh`. Source this in your shell rc if you want the alias available everywhere:
+`sync.sh` writes `HYPR_DOTS_DIR` and an `alias hyprdots` to `~/.dotfiles-env.sh`. This file is shared with appdots so both repos can filter each other's package declarations from drift reports.
+
+Make sure it's sourced in your shell rc:
 
 ```bash
-# in ~/.zshrc or ~/.bashrc
+# ~/.zshrc or ~/.bashrc
 [ -f ~/.dotfiles-env.sh ] && source ~/.dotfiles-env.sh
 ```
 
-This file is also read by `appdots/doctor/packages.sh` so it can filter hyprdots' package declarations from its own drift report, and vice versa.
+The `hyprdots` alias drops you into the repo directory from anywhere.
 
 ---
 
@@ -86,18 +119,20 @@ This file is also read by `appdots/doctor/packages.sh` so it can filter hyprdots
 hyprdots/
 ├── active/
 │   ├── omarchy/         # Omarchy/Hyprland configs → ~/.config/
-│   └── shared/          # Shared configs          → ~/.config/
+│   └── shared/          # Shared configs           → ~/.config/
+├── bin/
+│   ├── shared/          # Cross-platform scripts   → ~/.local/bin/
+│   └── linux/           # Linux scripts            → ~/.local/bin/
 ├── doctor/
 │   ├── packages.sh      # Package drift check
 │   └── symlinks.sh      # Symlink drift check
 ├── lib/
 │   ├── backup.sh        # Backup helpers
-│   ├── detect.sh        # OS detection
+│   ├── detect.sh        # OS detection + assert_linux
 │   ├── link.sh          # Symlink creation logic
 │   └── log.sh           # Emoji logging helpers
 ├── packages/
-│   └── linux/
-│       └── core.sh      # Declared pacman / AUR packages
+│   └── linux/core.sh    # Declared pacman / AUR packages
 ├── scripts/
 │   └── misc/
 │       └── check-drift.sh
@@ -111,6 +146,12 @@ hyprdots/
 
 ## 🔄 Relationship with Appdots
 
-`hyprdots` and `appdots` are sibling repos. They share `~/.dotfiles-env.sh` to advertise their locations to each other's `doctor/packages.sh` scripts, so package drift reports correctly exclude the other repo's declared packages.
+`hyprdots` and `appdots` are sibling repos. Both write their install path to `~/.dotfiles-env.sh` so each repo's `doctor/packages.sh` can filter out the other's declared packages from drift reports, preventing false positives.
 
-Both repos use the same `lib/` architecture and shell conventions.
+Both repos share the same `lib/` architecture and shell conventions. Appdots handles application configs (Neovim, Zsh, Git, etc.) across Linux and macOS. Hyprdots handles Hyprland and Omarchy configs on Linux only.
+
+---
+
+## 📜 License
+
+MIT License
