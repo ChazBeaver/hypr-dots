@@ -1,5 +1,5 @@
 accent = "#7FAFAE"
-cursor = "#D7E0DA"
+cursor = "#6ED4D6"
 
 foreground = "#EAE6E1"
 background = "#050A0B"
@@ -8,8 +8,8 @@ selection_foreground = "#EAE6E1"
 selection_background = "#262A2D"
 
 color0  = "#050A0B" # background
-color1  = "#A0462E" # error 
-color2  = "#467148" # success
+color1  = "#7C4D57" # error 
+color2  = "#547d54" # success
 color3  = "#7FAFAE" # accent / cyan-teal
 color4  = "#4C7A94" # blue info
 color5  = "#7A8F6D" # olive support
@@ -17,7 +17,7 @@ color6  = "#5FA3A1" # prompt / teal
 color7  = "#D7E0DA" # default foreground
 
 color8  = "#2B3935" # secondary background
-color9  = "#7C4D57" # danger / muted rose-bark
+color9  = "#4B2A26" # danger / muted rose-bark
 color10 = "#8FBFA7" # bright success
 color11 = "#A9C77B" # active highlight
 color12 = "#78A9C0" # link / path / directory

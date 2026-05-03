@@ -3,8 +3,7 @@
 # ============================================================
 
 accent = "#d94a74"
-
-cursor = "#E6F1FF"
+cursor = "#FF9C3A"
 
 foreground = "#CDD5ED"
 background = "#101214"
@@ -22,7 +21,7 @@ color2  = "#91AFDE"
 color3  = "#FDCED0"
 color4  = "#C669C0"
 color5  = "#FFAB77"
-color6  = "#FF9C3A"
+color6  = "#6B6ECF"
 color7  = "#5A3C8A"
 
 # ============================================================
@@ -33,7 +32,7 @@ color8  = "#262a2d"
 color9  = "#e46a7a"
 color10 = "#f6a3a9"
 color11 = "#ff9c3a"
-color12 = "#6b6ecf"
+color12 = "#E6F1FF"
 color13 = "#d94a74"
 color14 = "#5a3c8a"
 color15 = "#ffffff"

@@ -4,8 +4,7 @@
 # ============================================================
 
 accent = "#C89A56"
-
-cursor = "#EAE6E1"
+cursor = "#FFFFEB"
 
 foreground = "#EAE6E1"
 background = "#101214"
