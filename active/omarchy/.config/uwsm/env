@@ -1,10 +1,4 @@
-# Changes require a restart to take effect.
-# Ensure Omarchy bins are in the path
 export OMARCHY_PATH=$HOME/.local/share/omarchy
-
-# This is ordered so that personal path wins in a collision against omarchy's path for scripts
-export PATH=$HOME/.local/bin:$OMARCHY_PATH/bin:$PATH
-# Set default terminal and editor
+export PATH=$OMARCHY_PATH/bin:$PATH
 source ~/.config/uwsm/default
-# Activate mise if present on the system
 omarchy-cmd-present mise && eval "$(mise activate bash --shims)"
