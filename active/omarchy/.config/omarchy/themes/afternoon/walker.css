@@ -103,31 +103,51 @@ window .item .text {
   color: @text;
 }
 
-/* Hovered item */
-window .item:hover {
+/* Hovered item — only when not also selected */
+window .item:hover:not(:selected):not(.active) {
   background: alpha(@border, 0.78);
 }
 
-/* Hovered item text */
-window .item:hover label,
-window .item:hover text,
-window .item:hover .text {
-  color: @text;
+/* Kill GTK's default row selection */
+window row,
+window row:selected,
+window row:hover,
+window row:selected:hover,
+window row:focus,
+window row:active,
+window list > row,
+window list > row:selected,
+window listview > row,
+window listview > row:selected,
+window .activatable,
+window .activatable:selected,
+window .activatable:hover,
+window .activatable:active {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
 }
 
-/* Selected / active item */
+/* Selected item — your styling */
 window .item:selected,
 window .item.active,
-window .selected {
+window .selected,
+window .item:selected:hover,
+window .item.active:hover {
   background: transparent;
+  background-color: transparent;
   border: 1px solid transparent;
+  box-shadow: none;
   color: @selected-text;
 }
 
-/* Force all selected descendants to the orange/yellow */
+/* All children of selected go white */
 window .item:selected *,
 window .item.active *,
 window .selected * {
+  background: transparent;
+  background-color: transparent;
   color: @selected-text;
 }
 

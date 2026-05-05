@@ -19,10 +19,12 @@ window * {
   color: @text;
 }
 
+/* Fullscreen area outside the actual menu */
 window {
   background: transparent;
 }
 
+/* Hide icons for a clean text-only menu */
 window .normal-icons,
 window .large-icons,
 window .item-image,
@@ -35,6 +37,7 @@ window .symbols {
   display: none;
 }
 
+/* Visible menu box */
 window .box-wrapper {
   background: alpha(@base, 0.97);
   border: 1px solid alpha(@text, 0.95);
@@ -47,6 +50,7 @@ window .box-wrapper {
   color: @text;
 }
 
+/* Search bar container */
 window .search-container {
   border: 1px solid alpha(@border, 1);
   border-radius: 10px;
@@ -59,17 +63,20 @@ window .search-container {
   color: @selected-text;
 }
 
+/* Search field text */
 window .search-container text,
 window .search-container label {
   color: @text;
   caret-color: @text;
 }
 
+/* Typed input text */
 window .input {
   background: transparent;
   color: @text;
 }
 
+/* Optional preview panel */
 window .preview {
   border: 1px solid alpha(@border, 0.35);
   border-radius: 2px;
@@ -79,6 +86,7 @@ window .preview {
   margin: 0 0;
 }
 
+/* Default menu items */
 window .item {
   background: transparent;
   color: @text;
@@ -88,36 +96,62 @@ window .item {
   margin: 4px 0;
 }
 
+/* Default item text */
 window .item label,
 window .item text,
 window .item .text {
   color: @text;
 }
 
-window .item:hover {
+/* Hovered item — only when not also selected */
+window .item:hover:not(:selected):not(.active) {
   background: alpha(@border, 0.78);
 }
 
-window .item:hover label,
-window .item:hover text,
-window .item:hover .text {
-  color: @text;
+/* Kill GTK's default row selection */
+window row,
+window row:selected,
+window row:hover,
+window row:selected:hover,
+window row:focus,
+window row:active,
+window list > row,
+window list > row:selected,
+window listview > row,
+window listview > row:selected,
+window .activatable,
+window .activatable:selected,
+window .activatable:hover,
+window .activatable:active {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
 }
 
+/* Selected item — your styling */
 window .item:selected,
 window .item.active,
-window .selected {
+window .selected,
+window .item:selected:hover,
+window .item.active:hover {
   background: transparent;
+  background-color: transparent;
   border: 1px solid transparent;
+  box-shadow: none;
   color: @selected-text;
 }
 
+/* All children of selected go white */
 window .item:selected *,
 window .item.active *,
 window .selected * {
+  background: transparent;
+  background-color: transparent;
   color: @selected-text;
 }
 
+/* Common possible match/highlight nodes */
 window .match,
 window .matching,
 window .highlight,
