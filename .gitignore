@@ -1,6 +1,9 @@
 # Hyprland runtime state
 active/omarchy/.config/hypr/state/
 
+# Monitor Scaling Preference
+active/omarchy/.config/hypr/monitors.conf
+
 # KeePassXC Settings
 active/shared/.config/keepassxc/keepassxc.ini
 
