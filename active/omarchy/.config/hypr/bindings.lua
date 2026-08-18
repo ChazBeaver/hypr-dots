@@ -40,6 +40,8 @@ o.bind("SUPER + ALT + CTRL + PERIOD", "Move grouped window right", hl.dsp.group.
 -- Notification controls use omarchy-shell instead of the retired Mako daemon.
 hl.unbind("SUPER + SHIFT + ALT + M")
 o.bind("SUPER + SHIFT + ALT + M", "Dismiss all notifications", "omarchy-shell notifications dismissAll")
+hl.unbind("SUPER + SHIFT + ALT + N")
+o.bind("SUPER + SHIFT + ALT + N", "Show last notification", "omarchy-shell notifications invokeLast")
 hl.unbind("SUPER + CTRL + comma")
 hl.unbind("SUPER + SHIFT + ALT + PERIOD")
 o.bind_toggle("SUPER + SHIFT + ALT + PERIOD", "Toggle silencing notifications", "notification-silencing")
