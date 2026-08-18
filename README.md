@@ -30,6 +30,16 @@ Run read-only diagnostics at any time with:
 ./doctor.sh
 ```
 
+## Environment
+
+`bootstrap.sh` creates or repairs `HYPR_DOTS_DIR` and the `hyprdots` alias in
+`~/.dotfiles-env.sh` before installation begins. `sync.sh` converges the same
+entries on later runs, including when the repository has moved.
+
+The shared environment file is sourced by the appdots-managed shell startup.
+After opening a new shell (or sourcing `~/.dotfiles-env.sh`), running
+`hyprdots` changes the working directory to `$HYPR_DOTS_DIR` from anywhere.
+
 ## Ownership
 
 The exact source-to-target contract is [`config/links.tsv`](config/links.tsv).
@@ -37,7 +47,8 @@ Hyprdots manages only:
 
 - Personal Hyprland Lua bindings, opacity, privacy, and square corners.
 - Hyprsunset and Hyprland portal configuration, which still use `.conf` files.
-- Minimal Omarchy shell settings and the `chaz.lock` / `chaz.idle` plugins.
+- The default Omarchy bar layout with an AM/PM clock, plus the `chaz.lock` /
+  `chaz.idle` plugins and their idle settings.
 - The `hypr-opacity-cycle` helper.
 
 It deliberately does not manage Ghostty, Neovim, Zsh, Git, Yazi, Starship,
@@ -79,6 +90,10 @@ Run `./sync.sh` and `./doctor.sh`. The two plugin `UPSTREAM` files record the
 Omarchy version they were cloned from; doctor warns when the installed version
 has changed. Rebase the clones against the matching directories under
 `/usr/share/omarchy/shell/plugins/`, never by editing packaged files directly.
+Doctor also requires the repo-managed bar to contain exactly the widgets from
+the installed Quattro default and retain the intentional AM/PM clock. Widget
+reordering and bar-edge changes remain allowed, while a partial or stale widget
+set fails visibly instead of silently replacing the default bar.
 
 ## Privacy boundary
 

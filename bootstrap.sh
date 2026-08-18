@@ -5,8 +5,11 @@ IFS=$'\n\t'
 REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")" &>/dev/null && pwd)"
 source "$REPO_DIR/lib/log.sh"
 source "$REPO_DIR/lib/detect.sh"
+source "$REPO_DIR/lib/env.sh"
 
 assert_linux
+ensure_hyprdots_env "$REPO_DIR"
+log_info "HYPR_DOTS_DIR: $HYPR_DOTS_DIR"
 
 if [[ ! -d /usr/share/omarchy || ! -f /usr/share/omarchy/default/hypr/bootstrap.lua ]]; then
   log_err "Install Omarchy Quattro before bootstrapping hyprdots"

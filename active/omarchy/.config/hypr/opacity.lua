@@ -2,8 +2,8 @@ local state_home = os.getenv("XDG_STATE_HOME") or ((os.getenv("HOME") or "") .. 
 local state_path = state_home .. "/hyprdots/opacity-mode"
 
 local modes = {
-  transparent = { blur = true, size = 1, passes = 1, active = 0.75, inactive = 0.65, fullscreen = 0.75 },
-  blur = { blur = true, size = 4, passes = 2, active = 0.85, inactive = 0.75, fullscreen = 0.85 },
+  transparent = { blur = true, size = 4, passes = 2, active = 0.85, inactive = 0.75, fullscreen = 0.85 },
+  blur = { blur = true, size = 6, passes = 3, active = 0.95, inactive = 0.90, fullscreen = 0.95 },
   opaque = { blur = false, size = 1, passes = 1, active = 1.00, inactive = 1.00, fullscreen = 1.00 },
 }
 

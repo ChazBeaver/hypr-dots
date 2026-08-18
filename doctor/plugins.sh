@@ -4,6 +4,19 @@ set -euo pipefail
 REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")/.." &>/dev/null && pwd)"
 source "$REPO_DIR/lib/log.sh"
 
+shell_config="$REPO_DIR/active/omarchy/.config/omarchy/shell.json"
+shell_defaults="/usr/share/omarchy/config/omarchy/shell.json"
+
+if ! jq -e --slurpfile defaults "$shell_defaults" '
+  def widget_ids($layout):
+    [$layout.left[], $layout.center[], $layout.right[] | .id] | sort;
+  widget_ids(.bar.layout) == widget_ids($defaults[0].bar.layout)
+    and any(.bar.layout.center[]; .id == "omarchy.clock" and .format == "dddd h:mm AP")
+' "$shell_config" >/dev/null; then
+  log_err "Omarchy bar widget set or AM/PM clock drifted from the Quattro baseline: $shell_config"
+  exit 1
+fi
+
 plugin_root="$REPO_DIR/active/omarchy/.config/omarchy/plugins"
 for plugin in chaz.lock chaz.idle; do
   manifest="$plugin_root/$plugin/manifest.json"
@@ -36,4 +49,4 @@ if [[ "${HYPRDOTS_OFFLINE:-0}" != "1" ]] && omarchy-shell shell ping >/dev/null 
   done
 fi
 
-log_ok "Personal Quattro plugins are valid"
+log_ok "Repo-managed Quattro bar and personal plugins are valid"
