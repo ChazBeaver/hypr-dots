@@ -59,7 +59,9 @@ package tooling. Packages already owned by Quattro or appdots must not be
 duplicated here.
 
 The current personal set includes Terraform, 1Password and its CLI, GitHub CLI,
-Signal, Spotify, Typora, Rust, and fwupd.
+Signal, Spotify, Typora, Rust, fwupd, and KeePassXC. KeePassXC is deliberately
+also listed by appdots so either repository's bootstrap can install the app;
+neither repository persists its vault or sensitive settings.
 
 ## Personal behavior
 

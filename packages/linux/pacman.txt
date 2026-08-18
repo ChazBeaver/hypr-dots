@@ -8,3 +8,4 @@ spotify
 typora
 rust
 fwupd
+keepassxc

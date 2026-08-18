@@ -47,7 +47,11 @@ if [[ -n "$appdots_dir" && -r "$appdots_dir/packages/linux/core.sh" ]]; then
     /^\)/ { active=0 }
     active { sub(/#.*/, ""); gsub(/[[:space:]]/, ""); if (length) print }
   ' "$appdots_dir/packages/linux/core.sh" | sort -u)"
-  overlap="$(comm -12 <(printf '%s\n' "${declared[@]}" | sort -u) <(printf '%s\n' "$appdots_packages"))"
+  allowed_overlap="$(read_manifest "$REPO_DIR/packages/linux/appdots-overlap.txt" | sort -u)"
+  overlap="$(
+    comm -12 <(printf '%s\n' "${declared[@]}" | sort -u) <(printf '%s\n' "$appdots_packages") \
+      | comm -23 - <(printf '%s\n' "$allowed_overlap")
+  )"
   if [[ -n "$overlap" ]]; then
     log_err "Packages also owned by appdots:"
     sed 's/^/  /' <<< "$overlap"
