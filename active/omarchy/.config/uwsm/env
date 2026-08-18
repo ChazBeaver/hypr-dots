@@ -1,4 +1,0 @@
-export OMARCHY_PATH=$HOME/.local/share/omarchy
-export PATH=$HOME/.local/bin:$OMARCHY_PATH/bin:$PATH
-source ~/.config/uwsm/default
-omarchy-cmd-present mise && eval "$(mise activate bash --shims)"

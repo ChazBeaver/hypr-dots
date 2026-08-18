@@ -1,96 +1,87 @@
 #!/usr/bin/env bash
-# hyprdots/lib/link.sh
-# Symlink creation logic. Source this; do not execute.
-# Depends on: lib/log.sh
-#
-# hyprdots manages ~/.config/* entries and bin/ scripts.
-# Scopes: active/omarchy/.config  active/shared/.config
-#         bin/shared/             bin/linux/
+# Safe, manifest-driven link installation. Depends on lib/log.sh.
 
-# link_item SOURCE TARGET
-# Create a symlink at TARGET pointing to SOURCE.
-# Replaces stale symlinks or real files. Never touches protected paths.
+path_points_into_repo() {
+  local path="$1" resolved
+  [[ -L "$path" ]] || return 1
+  resolved="$(readlink -f -- "$path" 2>/dev/null || true)"
+  [[ "$resolved" == "$REPO_DIR" || "$resolved" == "$REPO_DIR/"* ]]
+}
+
+prepare_managed_parent() {
+  local target="$1"
+  if [[ -L "$target" ]]; then
+    if path_points_into_repo "$target"; then
+      unlink "$target"
+      mkdir -p "$target"
+      log_replace "Materialized legacy repository link: $target"
+    else
+      log_err "Refusing foreign parent symlink: $target -> $(readlink "$target")"
+      return 1
+    fi
+  elif [[ -e "$target" && ! -d "$target" ]]; then
+    log_err "Expected a directory but found a file: $target"
+    return 1
+  else
+    mkdir -p "$target"
+  fi
+}
+
+prepare_config_roots() {
+  prepare_managed_parent "$HOME/.config"
+  prepare_managed_parent "$HOME/.config/hypr"
+  prepare_managed_parent "$HOME/.config/omarchy"
+  prepare_managed_parent "$HOME/.config/omarchy/plugins"
+  prepare_managed_parent "$HOME/.local"
+  prepare_managed_parent "$HOME/.local/bin"
+}
+
+remove_retired_repo_links() {
+  local target_rel target
+  [[ -f "$RETIRED_LINKS" ]] || return 0
+  while IFS= read -r target_rel; do
+    [[ -n "$target_rel" && "$target_rel" != \#* ]] || continue
+    target="$HOME/$target_rel"
+    if path_points_into_repo "$target"; then
+      unlink "$target"
+      log_clean "Retired repository link: $target"
+    fi
+  done < "$RETIRED_LINKS"
+}
+
 link_item() {
-  local source="$1"
-  local target="$2"
+  local source="$1" target="$2" actual
 
-  # Already linked correctly? No-op.
-  if [ -L "$target" ] && [ "$(readlink "$target" 2>/dev/null || true)" = "$source" ]; then
-    log_ok "Already linked: $target"
-    return 0
+  if [[ ! -e "$source" && ! -L "$source" ]]; then
+    log_err "Manifest source is missing: $source"
+    return 1
   fi
 
-  # Exists but wrong symlink? Remove and relink.
-  if [ -L "$target" ]; then
-    rm -f "$target"
-    log_replace "Replacing symlink: $target"
-  elif [ -e "$target" ]; then
-    rm -rf "$target"
-    log_clean "Removed existing file/dir: $target"
+  if [[ -L "$target" ]]; then
+    actual="$(readlink "$target")"
+    if [[ "$actual" == "$source" ]]; then
+      log_ok "Already linked: $target"
+      return 0
+    fi
+    if path_points_into_repo "$target"; then
+      unlink "$target"
+      log_replace "Replacing stale hyprdots link: $target"
+    else
+      log_err "Refusing foreign symlink: $target -> $actual"
+      return 1
+    fi
+  elif [[ -e "$target" ]]; then
+    log_err "Refusing real path: $target (run ./backup.sh first)"
+    return 1
   fi
 
   mkdir -p "$(dirname "$target")"
   ln -s "$source" "$target"
-  log_link "$source → $target"
+  log_link "$source -> $target"
 }
 
-# install_config_scope CONFIG_PATH
-# 1:1 mirror: .config/<entry> -> ~/.config/<entry>
-install_config_scope() {
-  local config_path="$1"
-  [ -d "$config_path" ] || return 0
-
-  log_config "Installing .config from: $config_path"
-  find "$config_path" -mindepth 1 -maxdepth 1 | while read -r item; do
-    local name
-    name="$(basename "$item")"
-    link_item "$item" "$HOME/.config/$name"
-  done
-}
-
-# install_bin_scope BIN_DIR OS
-# Symlinks bin/shared/* -> ~/.local/bin/<n>   (cross-platform)
-#          bin/<OS>/*   -> ~/.local/bin/<n>   (OS-specific)
-# Strips trailing .sh from the link name so scripts run as bare commands.
-install_bin_scope() {
-  local bin_dir="$1"
-  local os="$2"
-  [ -d "$bin_dir" ] || return 0
-
-  mkdir -p "$HOME/.local/bin"
-  log_sync "Syncing bin into ~/.local/bin"
-
-  local -a files=()
-
-  # Cross-platform scripts under bin/shared/
-  if [ -d "$bin_dir/shared" ]; then
-    while IFS= read -r f; do
-      files+=("$f")
-    done < <(find "$bin_dir/shared" -mindepth 1 -maxdepth 1 -type f | sort)
-  fi
-
-  # OS-specific scripts under bin/<os>/
-  if [ -d "$bin_dir/$os" ]; then
-    while IFS= read -r f; do
-      files+=("$f")
-    done < <(find "$bin_dir/$os" -mindepth 1 -maxdepth 1 -type f | sort)
-  fi
-
-  for src in "${files[@]}"; do
-    local name
-    name="$(basename "$src")"
-    name="${name%.sh}"
-    chmod +x "$src"
-    link_item "$src" "$HOME/.local/bin/$name"
-  done
-}
-
-# install_scope SCOPE_DIR
-# Entry point. Dispatches .config scope for a given active/<layer>/ directory.
-install_scope() {
-  local scope_dir="$1"
-  [ -d "$scope_dir" ] || return 0
-
-  log_step "Processing scope: $scope_dir"
-  install_config_scope "$scope_dir/.config"
+install_manifest() {
+  prepare_config_roots
+  remove_retired_repo_links
+  manifest_each link_item
 }

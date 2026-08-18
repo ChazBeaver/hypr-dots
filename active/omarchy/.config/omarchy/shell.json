@@ -1,0 +1,19 @@
+{
+  "disabledPlugins": [
+    "omarchy.idle",
+    "omarchy.lock"
+  ],
+  "idle": {
+    "lock": 1800,
+    "suspend": 2700
+  },
+  "plugins": [
+    {
+      "id": "chaz.idle"
+    },
+    {
+      "id": "chaz.lock"
+    }
+  ],
+  "version": 1
+}

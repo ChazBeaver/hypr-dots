@@ -1,59 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-# hyprdots/bootstrap.sh
-# One-time cold-boot orchestrator for a fresh Omarchy/Arch machine.
-# Runs: backup → packages → sync
-#
-# Run this ONCE on a new machine.
-# For ongoing updates (after git pull) run ./sync.sh instead.
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")" &>/dev/null && pwd)"
-
-# shellcheck source=lib/log.sh
-source "$SCRIPT_DIR/lib/log.sh"
-# shellcheck source=lib/detect.sh
-source "$SCRIPT_DIR/lib/detect.sh"
+REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")" &>/dev/null && pwd)"
+source "$REPO_DIR/lib/log.sh"
+source "$REPO_DIR/lib/detect.sh"
 
 assert_linux
 
-cat <<'EOF'
-
-
- _   ___   ___________________ _____ _____ _____ 
-| | | \ \ / / ___ \ ___ \  _  \  _  |_   _/  ___|
-| |_| |\ V /| |_/ / |_/ / | | | | | | | | \ `--. 
-|  _  | \ / |  __/|    /| | | | | | | | |  `--. \
-| | | | | | | |   | |\ \| |/ /\ \_/ / | | /\__/ /
-\_| |_/ \_/ \_|   \_| \_|___/  \___/  \_/ \____/ 
-                                                 
-               Cold-boot bootstrap
-
-EOF
-
-log_info "OS: $(uname -s)"
-echo
-
-# ---- 1. Backup ----
-log_step "Step 1/3: Backup existing Hyprland configs"
-"$SCRIPT_DIR/backup.sh"
-echo
-
-# ---- 2. Packages ----
-pkg_script="$SCRIPT_DIR/packages/linux/core.sh"
-if [ -x "$pkg_script" ]; then
-  log_step "Step 2/3: Install packages"
-  "$pkg_script"
-else
-  log_warn "Step 2/3: No package script at $pkg_script — skipping"
+if [[ ! -d /usr/share/omarchy || ! -f /usr/share/omarchy/default/hypr/bootstrap.lua ]]; then
+  log_err "Install Omarchy Quattro before bootstrapping hyprdots"
+  exit 1
 fi
-echo
 
-# ---- 3. Sync ----
-log_step "Step 3/3: Symlink sync"
-"$SCRIPT_DIR/sync.sh"
-echo
+log_step "1/4 Backing up conflicting owned paths"
+"$REPO_DIR/backup.sh"
 
-log_ok "Bootstrap complete."
-log_info "From now on, just run ./sync.sh after git pull."
-log_info "To reload Hyprland config: hyprctl reload"
+log_step "2/4 Installing declared personal packages"
+"$REPO_DIR/packages/linux/install.sh"
+
+log_step "3/4 Installing configuration"
+"$REPO_DIR/sync.sh"
+
+log_step "4/4 Validating installation"
+"$REPO_DIR/doctor.sh"
+
+log_ok "Fresh Omarchy Quattro bootstrap complete"

@@ -1,61 +1,25 @@
-# Hyprland runtime state
-active/omarchy/.config/hypr/state/
+# Local backups and migration artifacts
+*.bak
+*.bak.*
+*.omarchy-upgrade-to-*
+*.hyprdots-backup.*
 
-# KeePassXC Settings
-active/shared/.config/keepassxc/keepassxc.ini
+# Secrets and private application state must never enter this repository.
+.env
+.env.*
+*.kdbx
+*.keyx
+active/**/.config/keepassxc/
+active/**/.config/1Password/
+active/**/.config/chromium/
+active/**/.config/google-chrome/
+active/**/.config/BraveSoftware/
+active/**/.mozilla/
+active/**/.ssh/
+active/**/.config/NetworkManager/
 
-# Omarchy runtime/current state
-active/omarchy/.config/omarchy/current/
-active/omarchy/.config/hypr/shaders/
-
-# Ignore all themes
-active/omarchy/.config/omarchy/themes/*
-# But do not ignore the custom default themes
-# And do not ignore anything inside custom default themes
-!active/omarchy/.config/omarchy/themes/afternoon/
-!active/omarchy/.config/omarchy/themes/afternoon/**
-!active/omarchy/.config/omarchy/themes/aqua/
-!active/omarchy/.config/omarchy/themes/aqua/**
-!active/omarchy/.config/omarchy/themes/campfire/
-!active/omarchy/.config/omarchy/themes/campfire/**
-!active/omarchy/.config/omarchy/themes/coastal/
-!active/omarchy/.config/omarchy/themes/coastal/**
-!active/omarchy/.config/omarchy/themes/dark-lotus/
-!active/omarchy/.config/omarchy/themes/dark-lotus/**
-!active/omarchy/.config/omarchy/themes/golden-forest/
-!active/omarchy/.config/omarchy/themes/golden-forest/**
-!active/omarchy/.config/omarchy/themes/green-sky/
-!active/omarchy/.config/omarchy/themes/green-sky/**
-!active/omarchy/.config/omarchy/themes/jellyfish/
-!active/omarchy/.config/omarchy/themes/jellyfish/**
-!active/omarchy/.config/omarchy/themes/jungle-lab/
-!active/omarchy/.config/omarchy/themes/jungle-lab/**
-!active/omarchy/.config/omarchy/themes/purple-dusk/
-!active/omarchy/.config/omarchy/themes/purple-dusk/**
-!active/omarchy/.config/omarchy/themes/soot/
-!active/omarchy/.config/omarchy/themes/soot/**
-!active/omarchy/.config/omarchy/themes/stormwave/
-!active/omarchy/.config/omarchy/themes/stormwave/**
-!active/omarchy/.config/omarchy/themes/mars/
-!active/omarchy/.config/omarchy/themes/mars/**
-!active/omarchy/.config/omarchy/themes/batou/
-!active/omarchy/.config/omarchy/themes/batou/**
-!active/omarchy/.config/omarchy/themes/ethereal/
-!active/omarchy/.config/omarchy/themes/ethereal/**
-!active/omarchy/.config/omarchy/themes/biscuit-de-mar-dark/
-!active/omarchy/.config/omarchy/themes/biscuit-de-mar-dark/**
-!active/omarchy/.config/omarchy/themes/event-horizon/
-!active/omarchy/.config/omarchy/themes/event-horizon/**
-!active/omarchy/.config/omarchy/themes/greek-noir/
-!active/omarchy/.config/omarchy/themes/greek-noir/**
-!active/omarchy/.config/omarchy/themes/midnight/
-!active/omarchy/.config/omarchy/themes/midnight/**
-!active/omarchy/.config/omarchy/themes/neo-sploosh/
-!active/omarchy/.config/omarchy/themes/neo-sploosh/**
-!active/omarchy/.config/omarchy/themes/vesper/
-!active/omarchy/.config/omarchy/themes/vesper/**
-
-
-# Cava
-active/shared/.config/cava/themes/
-active/shared/.config/cava/shaders/
+# Runtime and machine-local state
+active/**/.config/omarchy/current/
+active/**/.config/omarchy/themes/
+active/**/.config/hypr/state/
+active/**/.config/hypr/shaders/
