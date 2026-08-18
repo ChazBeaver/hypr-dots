@@ -47,8 +47,8 @@ Hyprdots manages only:
 
 - Personal Hyprland Lua bindings, opacity, privacy, and square corners.
 - Hyprsunset and Hyprland portal configuration, which still use `.conf` files.
-- The default Omarchy bar layout with an AM/PM clock, plus the `chaz.lock` /
-  `chaz.idle` plugins and their idle settings.
+- The default Omarchy bar layout with an AM/PM clock, a 14px Omarchy Shell
+  font base, plus the `chaz.lock` / `chaz.idle` plugins and their idle settings.
 - The `hypr-opacity-cycle` helper.
 
 It deliberately does not manage Ghostty, Neovim, Zsh, Git, Yazi, Starship,

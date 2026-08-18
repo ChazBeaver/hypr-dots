@@ -7,6 +7,7 @@ active/omarchy/.config/hypr/opacity.lua	.config/hypr/opacity.lua
 active/omarchy/.config/hypr/hyprsunset.conf	.config/hypr/hyprsunset.conf
 active/omarchy/.config/hypr/xdph.conf	.config/hypr/xdph.conf
 active/omarchy/.config/omarchy/shell.json	.config/omarchy/shell.json
+active/omarchy/.config/omarchy/shell.toml	.config/omarchy/shell.toml
 active/omarchy/.config/omarchy/plugins/chaz.lock	.config/omarchy/plugins/chaz.lock
 active/omarchy/.config/omarchy/plugins/chaz.idle	.config/omarchy/plugins/chaz.idle
 bin/linux/hypr-opacity-cycle.sh	.local/bin/hypr-opacity-cycle
