@@ -21,9 +21,12 @@ Item {
   property string weatherText: ""
 
   readonly property string placeholderText: "Enter Password"
-  readonly property int fieldWidth: 381
-  readonly property int fieldHeight: 67
-  readonly property int outlineThickness: 3
+  readonly property string lockFontFamily: "FiraCode Nerd Font Mono"
+  // This installed Fira Code build uses the default form for a slashed zero;
+  // enabling the OpenType `zero` alternate selects the dotted form instead.
+  readonly property var lockFontFeatures: ({ "zero": 0 })
+  readonly property int fieldWidth: 320
+  readonly property int fieldHeight: 54
   readonly property int fieldFontSize: Math.round(Style.font.heading * 1.125)
   readonly property int passwordDotFontSize: Math.round(Style.font.heading * 1.33)
   readonly property int passwordDotLetterSpacing: Math.round(Style.font.heading * 0.19)
@@ -37,9 +40,6 @@ Item {
     : 1
   readonly property bool showPasswordCursor: inputEnabled && !authenticatingPassword && failureMessage.length === 0
   readonly property bool errorState: failureMessage.length > 0
-  readonly property var inputBorderSpec: errorState
-    ? Border.surfaceSpec("lock", "border-error", Color.lock.borderError, root.outlineThickness, "border-alpha")
-    : Border.surfaceSpec("lock", "border-active", Color.lock.borderActive, root.outlineThickness, "border-alpha")
 
   signal submitPassword(string password)
   signal passwordTextEdited(string password)
@@ -83,7 +83,8 @@ Item {
   // against the field width to decide how far the dots must shrink to fit.
   TextMetrics {
     id: dotMetrics
-    font.family: Style.font.family
+    font.family: root.lockFontFamily
+    font.features: root.lockFontFeatures
     font.pixelSize: root.passwordDotFontSize
     font.letterSpacing: root.passwordDotLetterSpacing
     text: "●".repeat(passwordInput.text.length)
@@ -122,27 +123,33 @@ Item {
       onPositionChanged: root.wakeRequested()
     }
 
-    BorderSurface {
+    Rectangle {
       id: inputField
       width: root.fieldWidth
       height: root.fieldHeight
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.verticalCenter: parent.verticalCenter
       anchors.verticalCenterOffset: Math.min(300, root.height * 0.3)
-      color: Color.lock.background
-      borderSpec: root.inputBorderSpec
-      radius: Style.cornerRadius
-      clip: true
+      color: "transparent"
+      border.color: root.errorState ? Color.lock.borderError : Color.lock.borderActive
+      border.width: 2
+      radius: 12
+      antialiasing: true
+      opacity: passwordInput.text.length > 0 || root.authenticatingPassword || root.failureMessage.length > 0 ? 1 : 0
+
+      Behavior on opacity {
+        NumberAnimation { duration: 140 }
+      }
 
       TextInput {
         id: passwordInput
         anchors.fill: parent
-        anchors.topMargin: inputField.borderTop
+        anchors.topMargin: inputField.border.width
         // Reserve the fingerprint icon's width on both sides so the centered
         // dots stay symmetric and never slide under the icon as they grow.
-        anchors.rightMargin: inputField.borderRight + 18 + root.fingerprintReserve
-        anchors.bottomMargin: inputField.borderBottom
-        anchors.leftMargin: inputField.borderLeft + 18 + root.fingerprintReserve
+        anchors.rightMargin: inputField.border.width + 18 + root.fingerprintReserve
+        anchors.bottomMargin: inputField.border.width
+        anchors.leftMargin: inputField.border.width + 18 + root.fingerprintReserve
         verticalAlignment: TextInput.AlignVCenter
         horizontalAlignment: TextInput.AlignHCenter
         activeFocusOnPress: true
@@ -155,7 +162,8 @@ Item {
         color: Color.lock.text
         selectionColor: Color.lock.selection
         selectedTextColor: Color.lock.text
-        font.family: Style.font.family
+        font.family: root.lockFontFamily
+        font.features: root.lockFontFeatures
         font.pixelSize: text.length > 0 ? Math.max(1, Math.floor(root.passwordDotFontSize * root.passwordDotScale)) : root.fieldFontSize
         font.letterSpacing: text.length > 0 ? root.passwordDotLetterSpacing * root.passwordDotScale : 0
         cursorVisible: activeFocus && root.showPasswordCursor && text.length > 0
@@ -193,7 +201,8 @@ Item {
         text: root.authenticatingPassword ? "Checking…" : (root.failureMessage.length > 0 ? root.failureMessage : root.placeholderText)
         visible: passwordInput.text.length === 0
         color: root.authenticatingPassword ? Color.lock.text : (root.failureMessage.length > 0 ? Color.lock.textError : Color.lock.placeholder)
-        font.family: Style.font.family
+        font.family: root.lockFontFamily
+        font.features: root.lockFontFeatures
         font.pixelSize: root.fieldFontSize
         font.italic: !root.authenticatingPassword && root.failureMessage.length > 0
         horizontalAlignment: Text.AlignHCenter
@@ -208,11 +217,12 @@ Item {
         id: fingerprintIcon
         objectName: "fingerprintIndicator"
         anchors.right: parent.right
-        anchors.rightMargin: inputField.borderRight + 18
+        anchors.rightMargin: inputField.border.width + 18
         anchors.verticalCenter: parent.verticalCenter
         visible: root.fingerprintConfigured
         text: "󰈷"
         color: Color.lock.placeholder
+        // Keep the Nerd Font here because this character is an icon glyph.
         font.family: Style.font.family
         font.pixelSize: Math.round(root.fieldFontSize * 1.1)
         horizontalAlignment: Text.AlignHCenter
@@ -230,8 +240,9 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         text: Qt.formatDateTime(lockClock.date, "hh:mmAP")
         color: "white"
-        font.family: Style.font.family
-        font.pixelSize: Math.min(250, root.height * 0.2)
+        font.family: root.lockFontFamily
+        font.features: root.lockFontFeatures
+        font.pixelSize: Math.min(360, root.height * 0.3)
         font.weight: Font.Light
       }
 
@@ -239,7 +250,8 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         text: Qt.formatDateTime(lockClock.date, "dddd, MMMM d")
         color: Color.lock.text
-        font.family: Style.font.family
+        font.family: root.lockFontFamily
+        font.features: root.lockFontFeatures
         font.pixelSize: Math.min(50, root.height * 0.046)
       }
 
@@ -248,7 +260,8 @@ Item {
         visible: root.weatherText.length > 0
         text: root.weatherText
         color: Color.lock.placeholder
-        font.family: Style.font.family
+        font.family: root.lockFontFamily
+        font.features: root.lockFontFeatures
         font.pixelSize: Math.min(30, root.height * 0.03)
       }
     }
