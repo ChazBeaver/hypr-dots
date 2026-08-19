@@ -231,6 +231,7 @@ Item {
     }
 
     Column {
+      id: clockAndDate
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.verticalCenter: parent.verticalCenter
       anchors.verticalCenterOffset: -Math.min(90, root.height * 0.09)
@@ -255,15 +256,21 @@ Item {
         font.pixelSize: Math.min(50, root.height * 0.046)
       }
 
-      Text {
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: root.weatherText.length > 0
-        text: root.weatherText
-        color: Color.lock.placeholder
-        font.family: root.lockFontFamily
-        font.features: root.lockFontFeatures
-        font.pixelSize: Math.min(30, root.height * 0.03)
-      }
+    }
+
+    Text {
+      id: weather
+      anchors.horizontalCenter: parent.horizontalCenter
+      // Place the weather almost halfway from the date to the password field.
+      y: clockAndDate.y + clockAndDate.height
+        + ((inputField.y - (clockAndDate.y + clockAndDate.height)) * 0.45)
+        - (height / 2)
+      visible: root.weatherText.length > 0
+      text: root.weatherText
+      color: Color.lock.placeholder
+      font.family: root.lockFontFamily
+      font.features: root.lockFontFeatures
+      font.pixelSize: Math.min(30, root.height * 0.03)
     }
   }
 
