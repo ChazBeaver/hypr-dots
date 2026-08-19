@@ -6,6 +6,10 @@ hl.unbind("SUPER + ALT + CTRL + H")
 o.bind("SUPER + ALT + CTRL + H", "Suspend", "systemctl suspend")
 o.bind("SUPER + ALT + CTRL + P", "Power off", "systemctl poweroff")
 
+-- Theme menu uses a personal modifier chord.
+hl.unbind("SUPER + SHIFT + CTRL + SPACE")
+o.bind("SUPER + ALT + CTRL + SPACE", "Theme menu", "omarchy-menu toggle theme")
+
 -- Focused-display brightness via Quattro's native hardware abstraction.
 hl.unbind("SUPER + CTRL + UP")
 o.bind("SUPER + CTRL + UP", "Brightness up", "omarchy brightness display +20%")
