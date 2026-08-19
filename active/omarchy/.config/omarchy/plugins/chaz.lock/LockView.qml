@@ -25,14 +25,14 @@ Item {
   // This installed Fira Code build uses the default form for a slashed zero;
   // enabling the OpenType `zero` alternate selects the dotted form instead.
   readonly property var lockFontFeatures: ({ "zero": 0 })
-  readonly property int fieldWidth: 320
-  readonly property int fieldHeight: 54
-  readonly property int fieldFontSize: Math.round(Style.font.heading * 1.125)
-  readonly property int passwordDotFontSize: Math.round(Style.font.heading * 1.33)
-  readonly property int passwordDotLetterSpacing: Math.round(Style.font.heading * 0.19)
+  readonly property int fieldWidth: 160
+  readonly property int fieldHeight: 27
+  readonly property int fieldFontSize: Math.round(Style.font.heading * 0.5625)
+  readonly property int passwordDotFontSize: Math.round(Style.font.heading * 0.665)
+  readonly property int passwordDotLetterSpacing: Math.round(Style.font.heading * 0.095)
   // Space to keep clear on each side of the field for the fingerprint icon
   // (icon width plus a gap) so the centered dots never run under it.
-  readonly property real fingerprintReserve: fingerprintConfigured ? Math.round(fingerprintIcon.implicitWidth + 12) : 0
+  readonly property real fingerprintReserve: fingerprintConfigured ? Math.round(fingerprintIcon.implicitWidth + 6) : 0
   // Shrink the dots to fit once the password outgrows the field, so every
   // keystroke stays visible — otherwise long passwords clip with no feedback.
   readonly property real passwordDotScale: dotMetrics.advanceWidth > 0
@@ -132,8 +132,8 @@ Item {
       anchors.verticalCenterOffset: Math.min(300, root.height * 0.3)
       color: "transparent"
       border.color: root.errorState ? Color.lock.borderError : Color.lock.borderActive
-      border.width: 2
-      radius: 12
+      border.width: 1
+      radius: 6
       antialiasing: true
       opacity: passwordInput.text.length > 0 || root.authenticatingPassword || root.failureMessage.length > 0 ? 1 : 0
 
@@ -147,9 +147,9 @@ Item {
         anchors.topMargin: inputField.border.width
         // Reserve the fingerprint icon's width on both sides so the centered
         // dots stay symmetric and never slide under the icon as they grow.
-        anchors.rightMargin: inputField.border.width + 18 + root.fingerprintReserve
+        anchors.rightMargin: inputField.border.width + 9 + root.fingerprintReserve
         anchors.bottomMargin: inputField.border.width
-        anchors.leftMargin: inputField.border.width + 18 + root.fingerprintReserve
+        anchors.leftMargin: inputField.border.width + 9 + root.fingerprintReserve
         verticalAlignment: TextInput.AlignVCenter
         horizontalAlignment: TextInput.AlignHCenter
         activeFocusOnPress: true
@@ -217,7 +217,7 @@ Item {
         id: fingerprintIcon
         objectName: "fingerprintIndicator"
         anchors.right: parent.right
-        anchors.rightMargin: inputField.border.width + 18
+        anchors.rightMargin: inputField.border.width + 9
         anchors.verticalCenter: parent.verticalCenter
         visible: root.fingerprintConfigured
         text: "󰈷"
