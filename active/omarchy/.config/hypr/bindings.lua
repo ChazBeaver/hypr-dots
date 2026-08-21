@@ -1,10 +1,10 @@
 -- Personal keybindings layered over Omarchy Quattro defaults.
 
 -- System actions.
-o.bind("SUPER + R", "Reload Hyprland", "hyprctl reload")
+o.bind("SUPER + R", "Restart Omarchy Shell", "omarchy restart shell")
 hl.unbind("SUPER + ALT + CTRL + H")
-o.bind("SUPER + ALT + CTRL + H", "Suspend", "systemctl suspend")
-o.bind("SUPER + ALT + CTRL + P", "Power off", "systemctl poweroff")
+o.bind("SUPER + ALT + CTRL + H", "Suspend System", "systemctl suspend")
+o.bind("SUPER + ALT + CTRL + P", "Power Off System", "systemctl poweroff")
 
 -- Theme menu uses a personal modifier chord.
 hl.unbind("SUPER + SHIFT + CTRL + SPACE")
@@ -70,5 +70,5 @@ o.bind("SUPER + SHIFT + D", "Discord", { launch = "gtk-launch Discord" })
 
 o.bind("SUPER + ALT + N", "Projects editor", "omarchy-launch-editor $HOME/Projects/home")
 o.bind("SUPER + ALT + D", "Docker", { tui = "lazydocker" })
-o.bind("SUPER + ALT + Y", "Yazi tasks", [[ghostty -e yazi "$HOME/Documents/notes/To-Do list"]])
+o.bind("SUPER + ALT + Y", "Yazi tasks", [[ghostty -e yazi "$HOME/Documents/notes"]])
 o.bind("SUPER + ALT + CTRL + Y", "Yazi projects", [[ghostty -e yazi "$HOME/Projects/home"]])
