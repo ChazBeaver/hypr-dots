@@ -17,6 +17,7 @@ Item {
   property bool inputEnabled: true
   property bool loadBackground: true
   property string passwordText: ""
+  property bool passwordVisible: false
   property bool syncingPasswordText: false
   property string weatherText: ""
 
@@ -63,6 +64,10 @@ Item {
     passwordTextEdited("")
   }
 
+  function togglePasswordVisible() {
+    passwordVisible = !passwordVisible
+  }
+
   function syncPasswordText() {
     if (passwordInput.text === passwordText) return
     syncingPasswordText = true
@@ -70,7 +75,10 @@ Item {
     syncingPasswordText = false
   }
 
-  onPasswordTextChanged: syncPasswordText()
+  onPasswordTextChanged: {
+    syncPasswordText()
+    if (passwordText.length === 0) passwordVisible = false
+  }
   onInputEnabledChanged: {
     if (inputEnabled) Qt.callLater(forcePasswordFocus)
   }
@@ -156,7 +164,7 @@ Item {
         clip: true
         enabled: root.inputEnabled && !root.authenticatingPassword
         readOnly: root.authenticatingPassword
-        echoMode: TextInput.Password
+        echoMode: root.passwordVisible ? TextInput.Normal : TextInput.Password
         passwordCharacter: "\u25CF"
         passwordMaskDelay: 0
         color: Color.lock.text
@@ -164,8 +172,8 @@ Item {
         selectedTextColor: Color.lock.text
         font.family: root.lockFontFamily
         font.features: root.lockFontFeatures
-        font.pixelSize: text.length > 0 ? Math.max(1, Math.floor(root.passwordDotFontSize * root.passwordDotScale)) : root.fieldFontSize
-        font.letterSpacing: text.length > 0 ? root.passwordDotLetterSpacing * root.passwordDotScale : 0
+        font.pixelSize: text.length > 0 && !root.passwordVisible ? Math.max(1, Math.floor(root.passwordDotFontSize * root.passwordDotScale)) : root.fieldFontSize
+        font.letterSpacing: text.length > 0 && !root.passwordVisible ? root.passwordDotLetterSpacing * root.passwordDotScale : 0
         cursorVisible: activeFocus && root.showPasswordCursor && text.length > 0
         cursorDelegate: Rectangle {
           width: 2
@@ -191,6 +199,9 @@ Item {
           root.wakeRequested()
           if (event.key === Qt.Key_Escape || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_U)) {
             root.passwordTextEdited("")
+            event.accepted = true
+          } else if ((event.modifiers & Qt.ControlModifier) && event.key === Qt.Key_E) {
+            root.togglePasswordVisible()
             event.accepted = true
           }
         }

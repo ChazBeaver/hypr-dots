@@ -25,16 +25,13 @@
           "id": "omarchy.indicators"
         },
         {
-          "id": "omarchy.clock",
-          "format": "dddd h:mm AP",
-          "formatAlt": "d MMMM 'W'ww yyyy",
-          "verticalFormat": "HH\n—\nmm"
-        },
-        {
           "id": "omarchy.keyboard-layout"
         },
         {
           "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.clock"
         },
         {
           "id": "omarchy.system-update"
@@ -45,7 +42,16 @@
           "id": "omarchy.tray"
         },
         {
-          "id": "omarchy.agents"
+          "id": "akitaonrails.ai-usagebar",
+          "lastSelectedEntryId": "anthropic",
+          "showProvider": false,
+          "showValue": false
+        },
+        {
+          "id": "jankeesvw.herdr"
+        },
+        {
+          "id": "omaplug"
         },
         {
           "id": "omarchy.bluetooth"
