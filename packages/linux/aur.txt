@@ -1,2 +1,2 @@
-# One AUR package per line. Currently empty: all declared packages are
-# available from repositories configured by Omarchy Quattro.
+# One AUR package per line.
+meteobar-bin

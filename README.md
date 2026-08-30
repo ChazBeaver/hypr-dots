@@ -47,8 +47,9 @@ Hyprdots manages only:
 
 - Personal Hyprland Lua bindings, opacity, privacy, and square corners.
 - Hyprsunset and Hyprland portal configuration, which still use `.conf` files.
-- The default Omarchy bar layout with an AM/PM clock, a 14px Omarchy Shell
-  font base, plus the `chaz.lock` / `chaz.idle` plugins and their idle settings.
+- The default Omarchy bar layout with an AM/PM clock, imperial `chaz.meteobar`,
+  a 14px Omarchy Shell font base, plus the `chaz.lock` / `chaz.idle` plugins
+  and their idle settings.
 - The `hypr-opacity-cycle` helper.
 
 It deliberately does not manage Ghostty, Neovim, Zsh, Git, Yazi, Starship,
@@ -82,6 +83,8 @@ neither repository persists its vault or sensitive settings.
   wallpaper, large clock, date, weather, and lower password field.
 - Idle locking occurs after 30 minutes and suspend after 45 minutes. Quattro's
   stay-awake toggle suppresses both.
+- `SUPER+ALT+CTRL+W` toggles the repo-owned Meteobar panel. Temperatures use
+  Fahrenheit, and forecast and update times use AM/PM labels.
 - Monitor scaling and input behavior inherit portable Quattro defaults.
 
 ## After an Omarchy upgrade
@@ -91,9 +94,20 @@ Omarchy version they were cloned from; doctor warns when the installed version
 has changed. Rebase the clones against the matching directories under
 `/usr/share/omarchy/shell/plugins/`, never by editing packaged files directly.
 Doctor also requires the repo-managed bar to contain exactly the widgets from
-the installed Quattro default and retain the intentional AM/PM clock. Widget
-reordering and bar-edge changes remain allowed, while a partial or stale widget
-set fails visibly instead of silently replacing the default bar.
+the installed Quattro default and retain the intentional AM/PM clock, with
+`chaz.meteobar` accepted as the personal replacement for `omarchy.weather` and
+the configured AI usage widget accepted as the replacement for `omarchy.agents`.
+Rebase `chaz.meteobar` manually from the installed `mryll.meteobar` plugin when
+adopting upstream frontend changes. Widget reordering and bar-edge changes
+remain allowed, while a partial or stale widget set fails visibly instead of
+silently replacing the default bar.
+
+The Meteobar clone's `UPSTREAM` file records its source tag, immutable commit,
+and structured JSON schema. Doctor warns when the installed backend version
+moves while retaining a compatible schema and fails when the schema changes.
+For an update, compare upstream from the recorded commit, bring over only the
+wanted frontend changes, validate the panel against the new backend, and then
+advance the tag, commit, and schema record together.
 
 ## Privacy boundary
 

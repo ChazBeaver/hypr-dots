@@ -6,6 +6,10 @@ hl.unbind("SUPER + ALT + CTRL + H")
 o.bind("SUPER + ALT + CTRL + H", "Suspend System", "systemctl suspend")
 o.bind("SUPER + ALT + CTRL + P", "Power Off System", "systemctl poweroff")
 
+-- Replace Omarchy's legacy weather notification with Meteobar's panel.
+hl.unbind("SUPER + CTRL + ALT + W")
+o.bind("SUPER + CTRL + ALT + W", "Toggle Meteobar", "omarchy-shell shell toggle chaz.meteobar")
+
 -- Theme menu uses a personal modifier chord.
 hl.unbind("SUPER + SHIFT + CTRL + SPACE")
 o.bind("SUPER + ALT + CTRL + SPACE", "Theme menu", "omarchy-menu toggle theme")
