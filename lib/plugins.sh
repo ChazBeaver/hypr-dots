@@ -2,6 +2,39 @@
 # Reconcile enabled third-party Omarchy plugins to config/plugins.lock.tsv.
 # Depends on lib/log.sh and PLUGINS_LOCK. Source this file; do not execute it.
 
+run_omarchy() {
+  local omarchy_bin
+
+  omarchy_bin="$(command -v omarchy 2>/dev/null || true)"
+  if [[ -z "$omarchy_bin" && -x /usr/share/omarchy/bin/omarchy ]]; then
+    omarchy_bin="/usr/share/omarchy/bin/omarchy"
+  fi
+  [[ -n "$omarchy_bin" ]] || {
+    log_err "Omarchy command is unavailable"
+    return 1
+  }
+  "$omarchy_bin" "$@"
+}
+
+validate_locked_plugin_url() {
+  local repository="$1" checker
+
+  checker="$(command -v omarchy-git-url-check 2>/dev/null || true)"
+  if [[ -z "$checker" && -x /usr/share/omarchy/bin/omarchy-git-url-check ]]; then
+    checker="/usr/share/omarchy/bin/omarchy-git-url-check"
+  fi
+  if [[ -n "$checker" ]]; then
+    "$checker" "$repository" >/dev/null
+    return
+  fi
+
+  # Compatibility fallback for Omarchy versions without the shared checker.
+  # The lockfile currently permits only ordinary credential-free GitHub HTTPS
+  # repository URLs, never git options or transport helpers.
+  [[ "$repository" =~ ^https://github\.com/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+\.git$ &&
+     "$repository" != *..* ]]
+}
+
 locked_plugins_each() {
   local callback="$1"
   local id repository commit extra
@@ -30,7 +63,7 @@ verify_locked_plugin_contents() {
     log_err "Locked plugin id mismatch: expected $id, found ${manifest_id:-<empty>}"
     return 1
   }
-  omarchy plugin validate "$directory" >/dev/null || {
+  run_omarchy plugin validate "$directory" >/dev/null || {
     log_err "Locked plugin failed validation: $id"
     return 1
   }
@@ -91,7 +124,7 @@ install_locked_plugin() {
     log_err "Locked plugin is missing and cannot be cloned offline: $id"
     return 1
   fi
-  omarchy-git-url-check "$repository" >/dev/null || {
+  validate_locked_plugin_url "$repository" || {
     log_err "Unsafe locked plugin repository URL: $repository"
     return 1
   }
