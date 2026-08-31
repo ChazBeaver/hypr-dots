@@ -54,9 +54,29 @@ Hyprdots manages only:
 - The `hypr-opacity-cycle` helper.
 
 It deliberately does not manage Ghostty, Neovim, Zsh, Git, Yazi, Starship,
-KeePassXC settings, browser profiles, themes, Waybar, UWSM, Alacritty, or broad
+KeePassXC settings, browser profiles, Waybar, UWSM, Alacritty, or broad
 Omarchy configuration. Appdots-owned and other foreign links are never
 replaced.
+
+## Theme persistence
+
+Hyprdots installs selected Omarchy themes from exact Git commits recorded in
+`config/themes.lock.tsv`. Theme source repositories are checked out under
+`~/.local/share/hyprdots/theme-sources/`, and their theme directories are
+linked into `~/.config/omarchy/themes/`. Routine sync never changes the active
+theme; select one manually with `omarchy theme set <name>`.
+
+Draft personal themes share the private `omarchy-theme-drafts` repository.
+A stable, rights-cleared theme should be promoted to its own public repository
+named `omarchy-<name>-theme`, then have its lock entry changed to that canonical
+source. Wallpaper provenance belongs in each theme's `WALLPAPERS.md`; images
+with unknown redistribution rights remain private.
+
+To update a pin, fetch and review the source, replace its 40-character commit
+in `config/themes.lock.tsv`, and run `./sync.sh` followed by `./doctor.sh`.
+Existing unmanaged directories at a newly locked theme path are moved into a
+timestamped `~/.local/state/hyprdots/backups/.../themes/` directory before the
+managed link is created.
 
 ## Personal packages
 
