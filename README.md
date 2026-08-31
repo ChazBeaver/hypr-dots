@@ -16,7 +16,8 @@ Clone the repository anywhere under your home directory, then run:
 
 Bootstrap is the one-time convergence command. It verifies Quattro, backs up
 conflicting paths owned by this repository, installs declared packages, links
-configuration, reloads active services when possible, and runs diagnostics.
+configuration, offers to install safe dependencies for enabled plugins,
+reloads active services when possible, and runs diagnostics.
 
 After pulling future changes, apply them without sudo or package work:
 
@@ -75,6 +76,11 @@ Signal, Spotify, Typora, Rust, fwupd, and KeePassXC. KeePassXC is deliberately
 also listed by appdots so either repository's bootstrap can install the app;
 neither repository persists its vault or sensitive settings.
 
+Packages needed only by shell plugins are declared separately in
+`config/plugin-requirements.json`. This keeps plugin ownership visible and
+prevents those dependencies from being duplicated in the general package
+manifests.
+
 ## Personal behavior
 
 - `SUPER+BACKSPACE` cycles transparent, blur, and opaque modes. The selected
@@ -107,6 +113,20 @@ avoids duplicating activation state. Doctor requires every configured
 third-party plugin to be present in the lockfile and, when the shell is
 running, confirms that installed plugins match the enabled state in
 `shell.json`.
+
+`config/plugin-requirements.json` describes what an enabled plugin needs after
+its checkout exists. `./setup-plugins.sh` checks only enabled plugins, offers
+once to install validated Arch/AUR packages, and prints any remaining manual
+steps. Use `--yes` to accept safe package installation without a prompt or
+`--no` to print the commands without installing. Declining a hard dependency
+leaves bootstrap incomplete and returns a nonzero status.
+
+Authentication, OAuth, payment enrollment, hardware enrollment, tokens,
+plugin-provided setup scripts, and user-service creation are never launched
+automatically. The helper displays those instructions, and doctor fails only
+for a missing runtime requirement while warning about optional integrations.
+`sync.sh` remains the routine, non-interactive convergence command and never
+installs packages.
 
 Pinned plugins are upgraded deliberately. Fetch and review upstream without
 moving the checkout, replace its commit in `config/plugins.lock.tsv`, then run

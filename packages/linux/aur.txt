@@ -1,2 +1,1 @@
 # One AUR package per line.
-meteobar-bin

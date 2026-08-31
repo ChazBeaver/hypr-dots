@@ -16,16 +16,26 @@ if [[ ! -d /usr/share/omarchy || ! -f /usr/share/omarchy/default/hypr/bootstrap.
   exit 1
 fi
 
-log_step "1/4 Backing up conflicting owned paths"
+log_step "1/5 Backing up conflicting owned paths"
 "$REPO_DIR/backup.sh"
 
-log_step "2/4 Installing declared personal packages"
+log_step "2/5 Installing declared personal packages"
 "$REPO_DIR/packages/linux/install.sh"
 
-log_step "3/4 Installing configuration"
+log_step "3/5 Installing configuration"
 "$REPO_DIR/sync.sh"
 
-log_step "4/4 Validating installation"
-"$REPO_DIR/doctor.sh"
+log_step "4/5 Preparing enabled plugin dependencies"
+plugin_setup_status=0
+"$REPO_DIR/setup-plugins.sh" || plugin_setup_status=$?
+
+log_step "5/5 Validating installation"
+doctor_status=0
+"$REPO_DIR/doctor.sh" || doctor_status=$?
+
+if (( plugin_setup_status != 0 || doctor_status != 0 )); then
+  log_err "Bootstrap completed its safe changes, but the installation is incomplete"
+  exit 1
+fi
 
 log_ok "Fresh Omarchy Quattro bootstrap complete"
