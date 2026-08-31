@@ -24,10 +24,69 @@ if ! jq -e --slurpfile defaults "$shell_defaults" '
 fi
 
 plugin_root="$REPO_DIR/active/omarchy/.config/omarchy/plugins"
+PLUGINS_LOCK="$REPO_DIR/config/plugins.lock.tsv"
+source "$REPO_DIR/lib/plugins.sh"
 for plugin in chaz.lock chaz.idle; do
   manifest="$plugin_root/$plugin/manifest.json"
   jq -e --arg id "$plugin" '.schemaVersion == 1 and .id == $id and .keepLoaded == true and .omarchy.clonedFrom' "$manifest" >/dev/null || {
     log_err "Invalid plugin manifest: $manifest"
+    exit 1
+  }
+done
+
+check_locked_plugin() {
+  local id="$1" repository="$2" commit="$3"
+  local directory="$HOME/.config/omarchy/plugins/$id"
+  local actual_repository actual_commit
+
+  [[ ! -L "$directory" && -d "$directory/.git" ]] || {
+    log_err "Locked plugin is not an installed git checkout: $id"
+    return 1
+  }
+  actual_repository="$(git -C "$directory" remote get-url origin 2>/dev/null || true)"
+  [[ "$actual_repository" == "$repository" ]] || {
+    log_err "Locked plugin origin drifted: $id ($actual_repository)"
+    return 1
+  }
+  actual_commit="$(git -C "$directory" rev-parse HEAD 2>/dev/null || true)"
+  [[ "$actual_commit" == "$commit" ]] || {
+    log_err "Locked plugin commit drifted: $id (${actual_commit:-<missing>})"
+    return 1
+  }
+  [[ -z "$(git -C "$directory" status --porcelain)" ]] || {
+    log_err "Locked plugin has local changes: $id"
+    return 1
+  }
+  verify_locked_plugin_contents "$id" "$directory"
+}
+
+locked_plugins_each check_locked_plugin
+
+locked_plugin_ids=()
+collect_locked_plugin_id() { locked_plugin_ids+=("$1"); }
+locked_plugins_each collect_locked_plugin_id
+
+mapfile -t configured_third_party_ids < <(jq -r '
+  [
+    .bar.id?,
+    .bar.layout.left[]?.id,
+    .bar.layout.center[]?.id,
+    .bar.layout.right[]?.id,
+    .plugins[]?.id
+  ]
+  | unique[]
+  | select(. != null and (startswith("omarchy.") | not) and (startswith("chaz.") | not))
+' "$shell_config")
+for configured_id in "${configured_third_party_ids[@]}"; do
+  found=false
+  for locked_id in "${locked_plugin_ids[@]}"; do
+    if [[ "$configured_id" == "$locked_id" ]]; then
+      found=true
+      break
+    fi
+  done
+  [[ "$found" == true ]] || {
+    log_err "Enabled third-party plugin is not pinned: $configured_id"
     exit 1
   }
 done
@@ -95,6 +154,21 @@ if [[ "${HYPRDOTS_OFFLINE:-0}" != "1" ]] && omarchy-shell shell ping >/dev/null 
   for plugin in chaz.lock chaz.idle chaz.meteobar; do
     jq -e --arg id "$plugin" 'any(.[]; .id == $id and .enabled == true)' <<< "$catalog" >/dev/null || {
       log_err "Omarchy shell plugin is not enabled: $plugin"
+      exit 1
+    }
+  done
+
+  for plugin in "${locked_plugin_ids[@]}"; do
+    expected=false
+    for configured_id in "${configured_third_party_ids[@]}"; do
+      if [[ "$plugin" == "$configured_id" ]]; then
+        expected=true
+        break
+      fi
+    done
+    jq -e --arg id "$plugin" --argjson enabled "$expected" \
+      'any(.[]; .id == $id and .enabled == $enabled)' <<< "$catalog" >/dev/null || {
+      log_err "Omarchy shell plugin enabled state drifted: $plugin (expected $expected)"
       exit 1
     }
   done

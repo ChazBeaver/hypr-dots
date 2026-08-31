@@ -87,6 +87,41 @@ neither repository persists its vault or sensitive settings.
   Fahrenheit, and forecast and update times use AM/PM labels.
 - Monitor scaling and input behavior inherit portable Quattro defaults.
 
+## Plugin persistence
+
+Plugins have three ownership tiers:
+
+1. Personal `chaz.*` plugins are source-controlled directly under
+   `active/omarchy/.config/omarchy/plugins/`. They are part of the desktop and
+   are linked into place by `bootstrap.sh` and `sync.sh`.
+2. Selected third-party plugins are recorded by repository and exact commit in
+   `config/plugins.lock.tsv`, whether currently enabled or merely kept for
+   future use. Sync installs missing checkouts and restores clean checkouts to
+   those pins; doctor verifies their origin, commit, and manifest.
+3. Any other downloaded plugins are experiments. They remain machine-local and
+   are neither removed nor reproduced by this repository.
+
+The lockfile owns installation; `active/omarchy/.config/omarchy/shell.json`
+independently owns enabled state, bar placement, and plugin settings. This
+avoids duplicating activation state. Doctor requires every configured
+third-party plugin to be present in the lockfile and, when the shell is
+running, confirms that installed plugins match the enabled state in
+`shell.json`.
+
+Pinned plugins are upgraded deliberately. Fetch and review upstream without
+moving the checkout, replace its commit in `config/plugins.lock.tsv`, then run
+`./sync.sh` and `./doctor.sh`. A blanket `omarchy plugin update` can move a
+managed checkout, but doctor reports the drift and sync restores the recorded
+pin. Local edits inside a locked community checkout are never overwritten.
+
+Keep a new personal plugin here while its behavior is specific to this desktop.
+If it becomes reusable and stable, promote it to one public repository with a
+globally unique id, root manifest, README, license, dependency documentation,
+tests, and an optional preview. Verify the source plugin's license and
+attribution before publishing a customized clone. Marketplace submission is an
+optional discovery step after that extraction; the plugin repository remains
+its source of truth.
+
 ## After an Omarchy upgrade
 
 Run `./sync.sh` and `./doctor.sh`. The two plugin `UPSTREAM` files record the

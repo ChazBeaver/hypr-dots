@@ -5,12 +5,14 @@ IFS=$'\n\t'
 REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-${(%):-%N}}")" &>/dev/null && pwd)"
 LINKS_MANIFEST="$REPO_DIR/config/links.tsv"
 RETIRED_LINKS="$REPO_DIR/config/retired-links.txt"
+PLUGINS_LOCK="$REPO_DIR/config/plugins.lock.tsv"
 
 source "$REPO_DIR/lib/log.sh"
 source "$REPO_DIR/lib/detect.sh"
 source "$REPO_DIR/lib/env.sh"
 source "$REPO_DIR/lib/manifest.sh"
 source "$REPO_DIR/lib/link.sh"
+source "$REPO_DIR/lib/plugins.sh"
 
 assert_linux
 ensure_hyprdots_env "$REPO_DIR"
@@ -23,6 +25,9 @@ fi
 
 log_step "Installing explicitly owned configuration"
 install_manifest
+
+log_step "Reconciling pinned community plugins"
+reconcile_locked_plugins
 
 if [[ "${HYPRDOTS_OFFLINE:-0}" == "1" ]]; then
   log_info "Offline mode: service reloads skipped"
