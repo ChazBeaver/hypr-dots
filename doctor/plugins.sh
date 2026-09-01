@@ -98,12 +98,20 @@ jq -e '.schemaVersion == 1 and .id == "chaz.meteobar" and .barWidget and .omarch
 }
 
 qmllint_bin="$(command -v qmllint || printf '%s' /usr/lib/qt6/bin/qmllint)"
-"$qmllint_bin" -I /usr/share/omarchy/shell \
+qml_lint_output="$(mktemp)"
+trap 'rm -f -- "$qml_lint_output"' EXIT
+if ! "$qmllint_bin" --ignore-settings --max-warnings -1 -I /usr/share/omarchy/shell \
   "$plugin_root/chaz.lock/LockView.qml" \
   "$plugin_root/chaz.lock/Service.qml" \
   "$plugin_root/chaz.idle/Service.qml" \
   "$plugin_root/chaz.meteobar/omarchy/BarWidget.qml" \
-  "$plugin_root/chaz.meteobar/omarchy/Panel.qml"
+  "$plugin_root/chaz.meteobar/omarchy/Panel.qml" >"$qml_lint_output" 2>&1; then
+  log_err "QML syntax validation failed"
+  sed 's/^/  /' "$qml_lint_output" >&2
+  exit 1
+fi
+rm -f -- "$qml_lint_output"
+trap - EXIT
 
 installed_version="$(pacman -Q omarchy 2>/dev/null | awk '{print $2}')"
 for plugin in chaz.lock chaz.idle; do
