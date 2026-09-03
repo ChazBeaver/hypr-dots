@@ -54,6 +54,13 @@ Panel {
   property var report: null
   property string errorMessage: ""
   readonly property int expectedSchemaVersion: 1
+  property bool diagnosticsMode: false
+  property var lastAttemptAt: null
+  property string backendVersion: "Not checked"
+  property bool versionProbePending: false
+  property string versionOutput: ""
+  property bool diagnosticsCopied: false
+  property bool weatherCopied: false
 
   readonly property bool hasData: !!(report && report.current)
   readonly property var current: hasData ? report.current : null
@@ -69,7 +76,8 @@ Panel {
     : ((cacheInfo && cacheInfo.stale_reason) ? String(cacheInfo.stale_reason) : "unknown")
 
   // Bar label pieces, read by BarWidget.qml.
-  readonly property string barIcon: current ? String(current.icon) : "󰖐"
+  readonly property string barIcon: current ? String(current.icon)
+    : (errorMessage !== "" ? "" : "󰖐")
   // The family's stale mark (nf-fa-pause), appended exactly the way the sibling
   // CLIs append theirs to the Waybar bar text: the reading keeps its own color
   // and staleness gets its own glyph, never a tint.
@@ -88,7 +96,7 @@ Panel {
 
   // ---- settings ------------------------------------------------------------
   readonly property int refreshMinutes: Math.max(1, parseInt(setting("refreshMinutes", 15), 10) || 15)
-  readonly property string unitsSetting: String(setting("units", "metric")) === "imperial" ? "imperial" : "metric"
+  readonly property string unitsSetting: String(setting("units", "imperial")) === "imperial" ? "imperial" : "metric"
   readonly property string locationSetting: String(setting("location", "")).trim()
   readonly property string iconSetSetting: {
     var v = String(setting("iconSet", "nerd"))
@@ -116,9 +124,20 @@ Panel {
 
   // Open with fresh data. open/close/toggle shadow the Panel base so every
   // path — bar click, IPC, summon routing, outside-click dismiss — lands here.
-  function open() {
+  function openForecast() {
+    diagnosticsMode = false
     root.controller.show()
     refresh()
+  }
+
+  function openDiagnostics() {
+    diagnosticsMode = true
+    root.controller.show()
+    testDiagnostics()
+  }
+
+  function open() {
+    openForecast()
   }
 
   function close() {
@@ -126,8 +145,13 @@ Panel {
   }
 
   function toggle() {
-    if (root.opened) root.close()
-    else root.open()
+    if (root.opened && !root.diagnosticsMode) root.close()
+    else root.openForecast()
+  }
+
+  function toggleDiagnostics() {
+    if (root.opened && root.diagnosticsMode) root.close()
+    else root.openDiagnostics()
   }
 
   // The shell's base handler covers open/close/show/hide/toggle; this one adds
@@ -143,6 +167,7 @@ Panel {
     function hide(): void { root.close() }
     function toggle(): void { root.toggle() }
     function refresh(): void { root.refresh() }
+    function diagnostics(): void { root.openDiagnostics() }
   }
 
   // Entrance sweep for the daily range bars: each segment grows from its min
@@ -209,6 +234,18 @@ Panel {
     onTriggered: root.installCopied = false
   }
 
+  Timer {
+    id: diagnosticsCopiedReset
+    interval: 1500
+    onTriggered: root.diagnosticsCopied = false
+  }
+
+  Timer {
+    id: weatherCopiedReset
+    interval: 1500
+    onTriggered: root.weatherCopied = false
+  }
+
   function buildCmd() {
     var cmd = ["meteobar", "--output", "json", "--days", "6", "--hours", "12",
                "--units", unitsSetting, "--icons", iconSetSetting]
@@ -217,6 +254,142 @@ Panel {
       cmd.push(locationSetting)
     }
     return cmd
+  }
+
+  function diagnosticTime(value) {
+    if (!value) return "Not yet"
+    var d = value instanceof Date ? value : new Date(value)
+    if (isNaN(d.getTime())) return "Unknown"
+    return Qt.formatDateTime(d, "yyyy-MM-dd h:mm AP")
+  }
+
+  readonly property string diagnosticStatus: fetchBusy ? "Checking"
+    : notInstalled ? "Backend missing"
+    : (errorMessage !== "" && hasData) ? "Cached / refresh failed"
+    : errorMessage !== "" ? "Failed"
+    : stale ? "Cached / stale"
+    : hasData ? "Healthy"
+    : "Waiting for data"
+
+  readonly property color diagnosticStatusColor:
+    (diagnosticStatus === "Healthy") ? fg
+    : (diagnosticStatus === "Checking" || diagnosticStatus === "Waiting for data")
+      ? Qt.darker(fg, 1.4) : urgentColor
+
+  readonly property string locationMethod: locationSetting === ""
+    ? "Automatic by public IP (ipwho.is)" : "Manual"
+
+  readonly property string cacheState: !cacheInfo ? "No cache metadata"
+    : stale ? "Stale (" + staleReason + ")" : "Fresh"
+
+  readonly property var diagnosticRows: [
+    { label: "Forecast source", value: "Open-Meteo" },
+    { label: "Location method", value: locationMethod },
+    { label: "Configured location", value: locationSetting === "" ? "Automatic" : locationSetting },
+    { label: "Resolved location", value: locationName === "" ? "Unavailable" : locationName },
+    { label: "Last check", value: diagnosticTime(lastAttemptAt) },
+    { label: "Last success", value: cacheInfo && cacheInfo.fetched_at ? diagnosticTime(cacheInfo.fetched_at) : "Not yet" },
+    { label: "Cache", value: cacheState },
+    { label: "Units", value: unitsSetting === "imperial" ? "Imperial (°F, mph, in)" : "Metric (°C, km/h, mm)" },
+    { label: "Refresh interval", value: refreshMinutes + " minutes" },
+    { label: "Backend", value: backendVersion },
+    { label: "Last error", value: errorMessage === "" ? "None" : errorMessage.replace(/\s+/g, " ") }
+  ]
+
+  function diagnosticReport() {
+    var lines = ["Chaz Weather diagnostics", "Status: " + diagnosticStatus]
+    for (var i = 0; i < diagnosticRows.length; i++) {
+      lines.push(diagnosticRows[i].label + ": " + diagnosticRows[i].value)
+    }
+    lines.push("Privacy: no public IP, coordinates, raw response, paths, or environment data included")
+    return lines.join("\n")
+  }
+
+  function copyDiagnostics() {
+    Util.execArgv(["wl-copy", diagnosticReport()])
+    diagnosticsCopied = true
+    diagnosticsCopiedReset.restart()
+  }
+
+  function weatherSummary() {
+    if (!hasData) return "Chaz Weather\nWeather data unavailable."
+
+    var lines = ["Chaz Weather — " + (locationName || "Unknown location")]
+    var currentDescription = current.description ? String(current.description) : "Current conditions"
+    var currentLine = currentDescription + ", " + Math.round(current.temperature) + tempUnit
+    if (current.feels_like !== undefined && current.feels_like !== null)
+      currentLine += " (feels like " + Math.round(current.feels_like) + tempUnit + ")"
+    lines.push(currentLine)
+
+    var details = []
+    if (current.wind_speed !== undefined && current.wind_speed !== null) {
+      var wind = "Wind " + Math.round(current.wind_speed) + " " + windUnit
+      if (current.wind_direction) wind += " " + current.wind_direction
+      details.push(wind)
+    }
+    if (current.humidity_pct !== undefined && current.humidity_pct !== null)
+      details.push("Humidity " + Math.round(current.humidity_pct) + "%")
+    if (details.length > 0) lines.push(details.join(" · "))
+
+    if (hourlyEntries.length > 0) {
+      lines.push("", "Next " + hourlyEntries.length + " hours:")
+      for (var i = 0; i < hourlyEntries.length; i++) {
+        var hour = hourlyEntries[i]
+        var hourLine = hourLabel(hour.time) + ": " + Math.round(hour.temperature) + tempUnit
+        if (hour.description) hourLine += ", " + hour.description
+        if (hour.precip_pct !== undefined && hour.precip_pct !== null && hour.precip_pct >= 10)
+          hourLine += ", " + Math.round(hour.precip_pct) + "% precipitation"
+        lines.push(hourLine)
+      }
+    }
+
+    if (dailyEntries.length > 0) {
+      lines.push("", "Next " + dailyEntries.length + " days:")
+      for (var j = 0; j < dailyEntries.length; j++) {
+        var day = dailyEntries[j]
+        var dayLine = dayLabel(day.date) + ": "
+        if (day.description) dayLine += day.description + ", "
+        dayLine += Math.round(day.temperature_min) + "–" + Math.round(day.temperature_max) + tempUnit
+        if (day.precip_pct !== undefined && day.precip_pct !== null && day.precip_pct >= 10)
+          dayLine += ", " + Math.round(day.precip_pct) + "% precipitation"
+        lines.push(dayLine)
+      }
+    }
+
+    if (updatedText !== "") {
+      var freshness = "Updated " + updatedText
+      if (stale) freshness += " · stale (" + staleReason + ")"
+      lines.push("", freshness)
+    }
+    return lines.join("\n")
+  }
+
+  function copyWeather() {
+    if (!hasData) return
+    Util.execArgv(["wl-copy", weatherSummary()])
+    weatherCopied = true
+    weatherCopiedReset.restart()
+  }
+
+  function testDiagnostics() {
+    refresh()
+    probeBackend()
+  }
+
+  function probeBackend() {
+    if (versionProc.running || versionProbePending) return
+    backendVersion = "Checking…"
+    versionOutput = ""
+    versionProbePending = true
+    versionProc.running = true
+  }
+
+  function finishVersionProbe() {
+    if (!versionProbePending) return
+    versionProbeFallback.stop()
+    var text = versionOutput.trim()
+    backendVersion = text === "" ? "Unavailable" : text.replace(/^meteobar\s+/i, "")
+    versionProbePending = false
   }
 
   function refresh() {
@@ -234,6 +407,7 @@ Panel {
     sawExit = false
     tripwireFired = false
     exitCode = 0
+    lastAttemptAt = new Date()
     meteoProc.command = cmd
     meteoProc.running = true
   }
@@ -446,6 +620,29 @@ Panel {
     }
   }
 
+  Process {
+    id: versionProc
+    command: ["meteobar", "--version"]
+    onRunningChanged: {
+      if (!running && root.versionProbePending) versionProbeFallback.restart()
+    }
+    onExited: versionProbeFallback.restart()
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        root.versionOutput = text
+        root.finishVersionProbe()
+      }
+    }
+  }
+
+  Timer {
+    id: versionProbeFallback
+    interval: 300
+    repeat: false
+    onTriggered: root.finishVersionProbe()
+  }
+
   Timer {
     id: exitFallback
     interval: 300
@@ -494,6 +691,25 @@ Panel {
           id: contentColumn
           width: contentScroll.width
           spacing: Style.space(14)
+
+          DiagnosticsView {
+            width: parent.width
+            visible: root.diagnosticsMode
+            foreground: root.fg
+            statusColor: root.diagnosticStatusColor
+            fontFamily: root.fontFam
+            status: root.diagnosticStatus
+            rows: root.diagnosticRows
+            testing: root.fetchBusy || root.versionProbePending
+            copied: root.diagnosticsCopied
+            onTestRequested: root.testDiagnostics()
+            onCopyRequested: root.copyDiagnostics()
+          }
+
+          Column {
+            width: parent.width
+            visible: !root.diagnosticsMode
+            spacing: Style.space(14)
 
           // ---- Hero: big glyph + temperature left; location, condition, and
           //      stats stacked on the right.
@@ -960,12 +1176,12 @@ Panel {
 
           Item {
             width: parent.width
-            implicitHeight: Math.max(footerLabel.implicitHeight, refreshButton.implicitHeight)
+            implicitHeight: Math.max(footerLabel.implicitHeight, footerActions.implicitHeight)
 
             Row {
               id: footerLabel
               anchors.left: parent.left
-              anchors.right: refreshButton.left
+              anchors.right: footerActions.left
               anchors.rightMargin: Style.spacing.sm
               anchors.verticalCenter: parent.verticalCenter
               spacing: 0
@@ -988,22 +1204,40 @@ Panel {
               }
             }
 
-            PanelActionButton {
-              id: refreshButton
+            Row {
+              id: footerActions
               anchors.right: parent.right
               anchors.verticalCenter: parent.verticalCenter
-              // nf-md-refresh (U+F0450). Written literally: a JS "\\u" escape takes
-              // exactly FOUR hex digits, so "\\uf0450" is U+F045 followed by a "0".
-              iconText: "󰑐"
-              tooltipText: "Refresh now"
-              foreground: Qt.darker(root.fg, 1.55)
-              hoverColor: root.fg
-              fontFamily: root.fontFam
-              fontSize: Style.font.caption
-              size: Style.space(20)
-              enabled: !root.fetchBusy
-              onClicked: root.refresh()
+              spacing: Style.space(6)
+
+              PanelActionButton {
+                iconText: root.weatherCopied ? "󰄬" : "󰆏"
+                tooltipText: root.weatherCopied ? "Copied" : "Copy weather forecast"
+                foreground: Qt.darker(root.fg, 1.55)
+                hoverColor: root.fg
+                fontFamily: root.fontFam
+                fontSize: Style.font.caption
+                size: Style.space(20)
+                enabled: root.hasData
+                onClicked: root.copyWeather()
+              }
+
+              PanelActionButton {
+                id: refreshButton
+                // nf-md-refresh (U+F0450). Written literally: a JS "\\u" escape takes
+                // exactly FOUR hex digits, so "\\uf0450" is U+F045 followed by a "0".
+                iconText: "󰑐"
+                tooltipText: "Refresh now"
+                foreground: Qt.darker(root.fg, 1.55)
+                hoverColor: root.fg
+                fontFamily: root.fontFam
+                fontSize: Style.font.caption
+                size: Style.space(20)
+                enabled: !root.fetchBusy
+                onClicked: root.refresh()
+              }
             }
+          }
           }
         }
       }

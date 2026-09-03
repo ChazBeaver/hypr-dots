@@ -14,7 +14,7 @@
   },
   "barWidget": {
     "displayName": "Chaz Weather",
-    "description": "Click: forecast panel. Middle click: refresh.",
+    "description": "Left click: forecast. Middle click: refresh. Right click: diagnostics.",
     "category": "Status",
     "allowMultiple": false,
     "defaultSection": "right",

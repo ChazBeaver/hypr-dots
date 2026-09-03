@@ -25,6 +25,10 @@ BarWidget {
     if (panelLoader.item && panelLoader.item.toggle) panelLoader.item.toggle()
   }
 
+  function toggleDiagnostics() {
+    if (panelLoader.item && panelLoader.item.toggleDiagnostics) panelLoader.item.toggleDiagnostics()
+  }
+
   // Shape contract for shell.summon/hide/toggle routing (Bar.findPanelWidget
   // requires open/close/opened on the bar-widget root).
   readonly property bool opened: panelLoader.item ? panelLoader.item.opened === true : false
@@ -78,13 +82,17 @@ BarWidget {
     text: panelLoader.item
       ? (root.vertical ? panelLoader.item.barIcon : panelLoader.item.barText)
       : ""
-    dimmed: panelLoader.item ? !panelLoader.item.hasData : true
-    // Tooltip suppressed: the panel is the detail view.
-    tooltipText: ""
+    dimmed: panelLoader.item
+      ? (!panelLoader.item.hasData && panelLoader.item.errorMessage === "")
+      : true
+    tooltipText: panelLoader.item && panelLoader.item.errorMessage !== ""
+      ? "Weather unavailable — right-click for diagnostics"
+      : ""
 
     onPressed: function(b) {
       if (b === Qt.MiddleButton) root.refresh()
-      else if (b !== Qt.RightButton) root.togglePanel()
+      else if (b === Qt.RightButton) root.toggleDiagnostics()
+      else root.togglePanel()
     }
   }
 }

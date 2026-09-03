@@ -106,6 +106,7 @@ if ! "$qmllint_bin" --ignore-settings --max-warnings -1 -I /usr/share/omarchy/sh
   "$plugin_root/chaz.lock/Service.qml" \
   "$plugin_root/chaz.idle/Service.qml" \
   "$plugin_root/chaz-weather/omarchy/BarWidget.qml" \
+  "$plugin_root/chaz-weather/omarchy/DiagnosticsView.qml" \
   "$plugin_root/chaz-weather/omarchy/Panel.qml" >"$qml_lint_output" 2>&1; then
   log_err "QML syntax validation failed"
   sed 's/^/  /' "$qml_lint_output" >&2
