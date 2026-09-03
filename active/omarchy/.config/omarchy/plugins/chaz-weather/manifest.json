@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "chaz-weather",
-  "name": "chaz-weather",
+  "name": "Chaz Weather",
   "version": "0.5.1",
   "author": "mryll / Chaz",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "barWidget": "omarchy/BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Meteobar",
+    "displayName": "Chaz Weather",
     "description": "Click: forecast panel. Middle click: refresh.",
     "category": "Status",
     "allowMultiple": false,
