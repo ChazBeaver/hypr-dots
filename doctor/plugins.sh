@@ -11,13 +11,14 @@ if ! jq -e --slurpfile defaults "$shell_defaults" '
   def widget_ids($layout):
     [$layout.left[], $layout.center[], $layout.right[]
       | .id
-      | if . == "chaz.meteobar" then "omarchy.weather"
+      | if . == "chaz-weather" then "omarchy.weather"
         elif . == "akitaonrails.ai-usagebar" then "omarchy.agents"
         else . end
       | select(startswith("omarchy."))] | sort;
   widget_ids(.bar.layout) == widget_ids($defaults[0].bar.layout)
     and any(.bar.layout.center[]; .id == "omarchy.clock" and .format == "dddd h:mm AP")
-    and any(.bar.layout.center[]; .id == "chaz.meteobar" and .units == "imperial")
+    and any(.bar.layout.center[]; .id == "chaz-weather" and .units == "imperial")
+    and ([.bar.layout.center[].id] | index("chaz-weather") + 1 == index("omarchy.clock"))
 ' "$shell_config" >/dev/null; then
   log_err "Omarchy bar widgets, AM/PM clock, or imperial Meteobar settings drifted: $shell_config"
   exit 1
@@ -75,7 +76,7 @@ mapfile -t configured_third_party_ids < <(jq -r '
     .plugins[]?.id
   ]
   | unique[]
-  | select(. != null and (startswith("omarchy.") | not) and (startswith("chaz.") | not))
+  | select(. != null and (startswith("omarchy.") | not) and (startswith("chaz.") | not) and . != "chaz-weather")
 ' "$shell_config")
 for configured_id in "${configured_third_party_ids[@]}"; do
   found=false
@@ -91,8 +92,8 @@ for configured_id in "${configured_third_party_ids[@]}"; do
   }
 done
 
-meteobar_manifest="$plugin_root/chaz.meteobar/manifest.json"
-jq -e '.schemaVersion == 1 and .id == "chaz.meteobar" and .barWidget and .omarchy.clonedFrom == "mryll.meteobar"' "$meteobar_manifest" >/dev/null || {
+meteobar_manifest="$plugin_root/chaz-weather/manifest.json"
+jq -e '.schemaVersion == 1 and .id == "chaz-weather" and .barWidget and .omarchy.clonedFrom == "mryll.meteobar"' "$meteobar_manifest" >/dev/null || {
   log_err "Invalid plugin manifest: $meteobar_manifest"
   exit 1
 }
@@ -104,8 +105,8 @@ if ! "$qmllint_bin" --ignore-settings --max-warnings -1 -I /usr/share/omarchy/sh
   "$plugin_root/chaz.lock/LockView.qml" \
   "$plugin_root/chaz.lock/Service.qml" \
   "$plugin_root/chaz.idle/Service.qml" \
-  "$plugin_root/chaz.meteobar/omarchy/BarWidget.qml" \
-  "$plugin_root/chaz.meteobar/omarchy/Panel.qml" >"$qml_lint_output" 2>&1; then
+  "$plugin_root/chaz-weather/omarchy/BarWidget.qml" \
+  "$plugin_root/chaz-weather/omarchy/Panel.qml" >"$qml_lint_output" 2>&1; then
   log_err "QML syntax validation failed"
   sed 's/^/  /' "$qml_lint_output" >&2
   exit 1
@@ -122,7 +123,7 @@ for plugin in chaz.lock chaz.idle; do
   fi
 done
 
-meteobar_upstream="$plugin_root/chaz.meteobar/UPSTREAM"
+meteobar_upstream="$plugin_root/chaz-weather/UPSTREAM"
 upstream_repository="$(awk '$1 == "repository" { print $2 }' "$meteobar_upstream")"
 upstream_tag="$(awk '$1 == "tag" { print $2 }' "$meteobar_upstream")"
 upstream_commit="$(awk '$1 == "commit" { print $2 }' "$meteobar_upstream")"
@@ -159,7 +160,7 @@ fi
 
 if [[ "${HYPRDOTS_OFFLINE:-0}" != "1" ]] && omarchy-shell shell ping >/dev/null 2>&1; then
   catalog="$(omarchy plugin list --json 2>/dev/null || omarchy-plugin-list --json)"
-  for plugin in chaz.lock chaz.idle chaz.meteobar; do
+  for plugin in chaz.lock chaz.idle chaz-weather; do
     jq -e --arg id "$plugin" 'any(.[]; .id == $id and .enabled == true)' <<< "$catalog" >/dev/null || {
       log_err "Omarchy shell plugin is not enabled: $plugin"
       exit 1

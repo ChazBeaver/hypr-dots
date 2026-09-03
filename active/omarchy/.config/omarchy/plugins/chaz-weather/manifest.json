@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "chaz.meteobar",
-  "name": "Chaz Meteobar",
+  "id": "chaz-weather",
+  "name": "chaz-weather",
   "version": "0.5.1",
   "author": "mryll / Chaz",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "defaultSection": "right",
     "defaults": {
       "refreshMinutes": 15,
-      "units": "metric",
+      "units": "imperial",
       "location": "",
       "iconSet": "nerd",
       "colorMode": "full"
@@ -45,7 +45,7 @@
           "metric",
           "imperial"
         ],
-        "defaultValue": "metric"
+        "defaultValue": "imperial"
       },
       {
         "key": "location",

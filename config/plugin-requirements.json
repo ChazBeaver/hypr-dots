@@ -102,7 +102,7 @@
         { "title": "Connect Google Calendar interactively, or configure another writer for calendar-events.json", "command": "~/.config/omarchy/plugins/tmn73.calendar/sync/setup" }
       ]
     },
-    "chaz.meteobar": {
+    "chaz-weather": {
       "packages": [
         { "source": "aur", "name": "meteobar-bin" }
       ],

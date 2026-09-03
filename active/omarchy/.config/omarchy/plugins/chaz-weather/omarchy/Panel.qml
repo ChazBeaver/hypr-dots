@@ -9,8 +9,8 @@ import qs.Ui
 // `meteobar --output json` (structured, no markup); this file only renders.
 Panel {
   id: root
-  moduleName: "chaz.meteobar"
-  ipcTarget: "chaz.meteobar"
+  moduleName: "chaz-weather"
+  ipcTarget: "chaz-weather"
   manageIpc: false
 
   property var anchorItem: null

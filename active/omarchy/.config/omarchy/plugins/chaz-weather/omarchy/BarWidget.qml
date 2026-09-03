@@ -6,7 +6,7 @@ import qs.Ui
 // click), mirroring the structure of the first-party weather plugin.
 BarWidget {
   id: root
-  moduleName: "chaz.meteobar"
+  moduleName: "chaz-weather"
 
   function injectPanel() {
     var target = panelLoader.item
